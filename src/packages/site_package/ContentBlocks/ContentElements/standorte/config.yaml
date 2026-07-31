@@ -1,0 +1,85 @@
+name: lueg/standorte
+typeName: lueg_standorte
+group: default
+prefixFields: true
+prefixType: full
+basics:
+  - TYPO3/Appearance
+fields:
+  - identifier: header
+    useExistingField: true
+    label: 'Titel'
+    description: 'z. B. "Lueg – wo mir si"'
+  - identifier: bodytext
+    useExistingField: true
+    label: 'Einleitungstext'
+    enableRichtext: true
+    richtextConfiguration: site_package
+
+  - identifier: tab_pin1
+    type: Tab
+    label: 'PIN 1'
+  - identifier: pin1_image
+    type: File
+    label: 'Bild'
+    allowed: common-image-types
+  - identifier: pin1_title
+    type: Text
+    label: 'Titel'
+  - identifier: pin1_address
+    type: Textarea
+    label: 'Adresse (mehrzeilig)'
+  - identifier: pin1_link
+    type: Link
+    label: 'Google-Maps-Link'
+
+  - identifier: tab_pin2
+    type: Tab
+    label: 'PIN 2'
+  - identifier: pin2_image
+    type: File
+    label: 'Bild'
+    allowed: common-image-types
+  - identifier: pin2_title
+    type: Text
+    label: 'Titel'
+  - identifier: pin2_address
+    type: Textarea
+    label: 'Adresse (mehrzeilig)'
+  - identifier: pin2_link
+    type: Link
+    label: 'Google-Maps-Link'
+
+  - identifier: tab_pin3
+    type: Tab
+    label: 'PIN 3'
+  - identifier: pin3_image
+    type: File
+    label: 'Bild'
+    allowed: common-image-types
+  - identifier: pin3_title
+    type: Text
+    label: 'Titel'
+  - identifier: pin3_address
+    type: Textarea
+    label: 'Adresse (mehrzeilig)'
+  - identifier: pin3_link
+    type: Link
+    label: 'Google-Maps-Link'
+
+  - identifier: tab_pin4
+    type: Tab
+    label: 'PIN 4'
+  - identifier: pin4_image
+    type: File
+    label: 'Bild'
+    allowed: common-image-types
+  - identifier: pin4_title
+    type: Text
+    label: 'Titel'
+  - identifier: pin4_address
+    type: Textarea
+    label: 'Adresse (mehrzeilig)'
+  - identifier: pin4_link
+    type: Link
+    label: 'Google-Maps-Link'

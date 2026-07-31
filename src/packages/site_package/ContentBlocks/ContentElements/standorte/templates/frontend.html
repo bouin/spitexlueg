@@ -1,0 +1,94 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+
+<f:comment><!-- ============ Reusable pieces ============ --></f:comment>
+<f:section name="pin">
+    <f:if condition="{title}">
+        <button type="button" class="map__pin" style="left: {x}%; top: {y}%;"
+                data-map-pin="{n}" aria-label="{title}">
+            <svg class="map__pin-icon" viewBox="0 0 28 41" aria-hidden="true">
+                <path d="M28,14.5c0-2.29-.51-4.45-1.43-6.38-1.64-3.47-4.58-6.16-8.17-7.38-1.38-.48-2.86-.74-4.4-.74C9.69,0,5.83,2.02,3.27,5.2,1.23,7.71,0,10.96,0,14.5c0,2.29.52,4.45,1.44,6.38.23.51.5,1,.8,1.48h-.01s2.84,4.16,5.66,7.94c.43.58.86,1.15,1.28,1.7,2.74,3.55,3.54,6.59,3.77,8.06.09.54.53.94,1.06.94s.97-.4,1.06-.94c.23-1.47,1.03-4.51,3.77-8.06,3.17-4.11,6.94-9.64,6.94-9.64h-.01c1.41-2.27,2.24-4.96,2.24-7.86Z"/>
+            </svg>
+        </button>
+    </f:if>
+</f:section>
+
+<f:section name="card">
+    <f:if condition="{title}">
+        <article class="map__card" data-map-card="{n}" hidden>
+            <button type="button" class="map__card-close" data-map-close aria-label="Schliessen">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            </button>
+            <f:if condition="{image}">
+                <div class="map__card-media">
+                    <f:image image="{image}" alt="{title}" width="640c" height="380c"/>
+                </div>
+            </f:if>
+            <p class="map__card-title">{title}</p>
+            <div class="map__card-body">
+                <f:if condition="{address}">
+                    <address class="map__card-address"><f:format.nl2br>{address}</f:format.nl2br></address>
+                </f:if>
+                <f:if condition="{link}">
+                    <f:link.typolink parameter="{link}" class="map__gmaps">
+                        <span>Google Maps</span>
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </f:link.typolink>
+                </f:if>
+            </div>
+        </article>
+    </f:if>
+</f:section>
+
+<f:comment><!-- ============ Section ============ --></f:comment>
+<section class="section section--standorte">
+    <div class="section__inner">
+        <div class="intro">
+            <f:if condition="{data.header}">
+                <h2 class="section__title">{data.header}</h2>
+            </f:if>
+            <f:if condition="{data.bodytext}">
+                <div class="richtext">
+                    <f:format.html>{data.bodytext}</f:format.html>
+                </div>
+            </f:if>
+        </div>
+    </div>
+
+    <div class="map">
+        <div class="map__canvas">
+            <img class="map__svg"
+                 src="{f:uri.resource(path: 'Images/map-lueg.svg', extensionName: 'SitePackage')}"
+                 alt="Karte des Einzugsgebiets der Spitex Region Lueg">
+
+            <f:comment><!-- Gemeinde-Namen (Positionen in % aus dem SVG) --></f:comment>
+            <span class="map__label" style="left: 9.75%;  top: 21.95%;">Rumendingen</span>
+            <span class="map__label" style="left: 26.21%; top: 26.76%;">Wynigen</span>
+            <span class="map__label" style="left: 54.48%; top: 20.06%;">Walterswil</span>
+            <span class="map__label" style="left: 53.95%; top: 37.35%;">Dürrenroth</span>
+            <span class="map__label" style="left: 20.88%; top: 51.46%;">Heimwiswil</span>
+            <span class="map__label" style="left: 37.47%; top: 48.17%;">Affoltern i. E.</span>
+            <span class="map__label" style="left: 67.76%; top: 62.03%;">Sumiswald</span>
+            <span class="map__label" style="left: 25.72%; top: 68.62%;">Rüegsau</span>
+            <span class="map__label" style="left: 47.56%; top: 73.53%;">Trachselwald</span>
+            <span class="map__label" style="left: 33.60%; top: 83.77%;">Lützelflüh</span>
+            <span class="map__label" style="left: 12.11%; top: 89.90%;">Hasle b.B.</span>
+
+            <f:comment><!-- 4 Pins an festen Positionen (wo die roten Pins im SVG waren) --></f:comment>
+            <f:render section="pin" arguments="{n: 1, title: data.pin1_title, x: '30.97', y: '22.51'}"/>
+            <f:render section="pin" arguments="{n: 2, title: data.pin2_title, x: '58.21', y: '50.24'}"/>
+            <f:render section="pin" arguments="{n: 3, title: data.pin3_title, x: '74.08', y: '57.31'}"/>
+            <f:render section="pin" arguments="{n: 4, title: data.pin4_title, x: '21.01', y: '79.08'}"/>
+
+            <f:comment><!-- Info-Karte: fester Platz, Inhalt wird pro Pin getauscht --></f:comment>
+            <div class="map__cards" data-map-cards>
+                <f:render section="card" arguments="{n: 1, image: data.pin1_image.0, title: data.pin1_title, address: data.pin1_address, link: data.pin1_link}"/>
+                <f:render section="card" arguments="{n: 2, image: data.pin2_image.0, title: data.pin2_title, address: data.pin2_address, link: data.pin2_link}"/>
+                <f:render section="card" arguments="{n: 3, image: data.pin3_image.0, title: data.pin3_title, address: data.pin3_address, link: data.pin3_link}"/>
+                <f:render section="card" arguments="{n: 4, image: data.pin4_image.0, title: data.pin4_title, address: data.pin4_address, link: data.pin4_link}"/>
+            </div>
+        </div>
+    </div>
+</section>
+
+</html>

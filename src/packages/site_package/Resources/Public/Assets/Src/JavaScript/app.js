@@ -162,10 +162,47 @@ function initBenefitTiles() {
     });
 }
 
+/**
+ * Standorte map: clicking a pin shows its card in the fixed slot; clicking the
+ * active pin again (or the close button) hides it. Nothing is open initially.
+ */
+function initMaps() {
+    document.querySelectorAll('.map').forEach((map) => {
+        const pins = map.querySelectorAll('[data-map-pin]');
+        const cards = map.querySelectorAll('[data-map-card]');
+
+        const hideAll = () => {
+            cards.forEach((card) => { card.hidden = true; });
+            pins.forEach((pin) => pin.classList.remove('is-active'));
+        };
+
+        const show = (n) => {
+            cards.forEach((card) => { card.hidden = card.dataset.mapCard !== n; });
+            pins.forEach((pin) => pin.classList.toggle('is-active', pin.dataset.mapPin === n));
+        };
+
+        pins.forEach((pin) => {
+            pin.addEventListener('click', () => {
+                const n = pin.dataset.mapPin;
+                if (pin.classList.contains('is-active')) {
+                    hideAll();
+                } else {
+                    show(n);
+                }
+            });
+        });
+
+        map.querySelectorAll('[data-map-close]').forEach((btn) => {
+            btn.addEventListener('click', hideAll);
+        });
+    });
+}
+
 document.addEventListener('DOMContentLoaded', async () => {
     initHeroCarousel();
     initAccordions();
     initBenefitTiles();
+    initMaps();
     const players = await initPodcastPlayers();
     await initPodcastSliders(players);
 });

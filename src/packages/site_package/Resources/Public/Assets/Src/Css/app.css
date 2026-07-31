@@ -22,6 +22,8 @@
     --color-purple: #c9a0dd;
     --color-pink: #ef9dc0;
     --color-tile-teal: #5cc4bd;
+    --color-peach: #fce3cd;
+    --color-coral: #f76b6b;
 
     /* Shared inset: elements that sit NARROWER than the full section width
        (e.g. the accordion) pull in by this much on each side. Reuse this in
@@ -512,6 +514,136 @@
         .tile__text,
         .tile__button-label,
         .tile__button-arrow { transition-duration: 0.01ms; }
+    }
+
+    /* ---- Standorte map --------------------------------------------------- */
+    /* Peach band; the map canvas is centred inside it. */
+    .map {
+        background-color: var(--color-peach);
+        padding-block: clamp(2rem, 5vw, 5rem);
+        margin-top: var(--space-l);
+    }
+
+    /* container-type gives us cqw units, so labels and pins scale with the map
+       instead of the viewport. aspect-ratio matches the SVG viewBox. */
+    .map__canvas {
+        @apply relative mx-auto w-full;
+        max-width: 60rem;
+        aspect-ratio: 642.52 / 537.43;
+        container-type: inline-size;
+    }
+
+    .map__svg {
+        @apply absolute inset-0 h-full w-full;
+        object-fit: contain;
+    }
+
+    /* Gemeinde labels — positioned in %, sized in cqw (baseline sits on the y). */
+    .map__label {
+        @apply pointer-events-none absolute font-normal;
+        color: var(--color-blue);
+        font-size: 2.15cqw;
+        letter-spacing: 0.02em;
+        white-space: nowrap;
+        transform: translateY(-0.72em);
+    }
+
+    /* Pins — anchored by their tip (bottom centre) to the coordinate. */
+    .map__pin {
+        @apply absolute cursor-pointer border-0 bg-transparent p-0;
+        width: 4.4cqw;
+        transform: translate(-50%, -100%);
+        transform-origin: bottom center;
+        transition: transform 0.2s ease, filter 0.2s ease;
+        color: var(--color-coral);
+    }
+    .map__pin-icon {
+        @apply block h-auto w-full;
+        fill: currentColor;
+        filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.2));
+    }
+    .map__pin:hover,
+    .map__pin.is-active {
+        transform: translate(-50%, -100%) scale(1.12);
+    }
+    .map__pin.is-active { color: #e64b4b; }
+
+    /* Info card — fixed top-right of the map, content swapped per pin. */
+    .map__cards {
+        @apply absolute z-10;
+        top: 4%;
+        right: 3%;
+        width: min(23rem, 46%);
+    }
+
+    .map__card {
+        @apply relative bg-white;
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.16);
+    }
+    .map__card[hidden] { display: none; }
+    .map__card:not([hidden]) {
+        animation: mapCardIn 0.3s ease both;
+    }
+    @keyframes mapCardIn {
+        from { opacity: 0; transform: translateY(0.75rem); }
+        to   { opacity: 1; transform: none; }
+    }
+
+    .map__card-media img { @apply block h-auto w-full; }
+
+    .map__card-title {
+        @apply font-bold;
+        color: var(--color-blue);
+        font-size: clamp(1.15rem, 1.4vw, 1.5rem);
+        padding: clamp(0.9rem, 1.4vw, 1.35rem) clamp(1rem, 1.6vw, 1.5rem) 0;
+    }
+
+    .map__card-body {
+        @apply flex flex-wrap items-end justify-between gap-4;
+        padding: clamp(0.75rem, 1.2vw, 1.1rem) clamp(1rem, 1.6vw, 1.5rem) clamp(1rem, 1.6vw, 1.5rem);
+    }
+
+    .map__card-address {
+        @apply not-italic;
+        color: #333;
+        font-size: clamp(0.85rem, 1vw, 1rem);
+        line-height: 1.4;
+    }
+
+    .map__gmaps {
+        @apply inline-flex shrink-0 items-center gap-2 rounded-full border font-bold uppercase no-underline;
+        border-color: var(--color-blue);
+        color: var(--color-blue);
+        padding: 0.5em 1em;
+        font-size: clamp(0.6rem, 0.75vw, 0.75rem);
+        letter-spacing: 0.05em;
+        transition: background-color 0.2s ease, color 0.2s ease;
+    }
+    .map__gmaps svg { width: 1.1em; height: 1.1em; }
+    .map__gmaps:hover {
+        background-color: var(--color-blue);
+        @apply text-white;
+    }
+
+    .map__card-close {
+        @apply absolute flex cursor-pointer items-center justify-center rounded-full border-0 bg-white text-neutral-700;
+        top: 0.5rem;
+        right: 0.5rem;
+        width: 1.9rem;
+        height: 1.9rem;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+    .map__card-close svg { width: 1rem; height: 1rem; }
+
+    /* Mobile: card drops to the bottom, wider and easier to read. */
+    @media (max-width: 640px) {
+        .map__cards {
+            top: auto;
+            bottom: 3%;
+            right: 50%;
+            transform: translateX(50%);
+            width: 88%;
+        }
     }
 
     /* ---- Podcasts -------------------------------------------------------- */
