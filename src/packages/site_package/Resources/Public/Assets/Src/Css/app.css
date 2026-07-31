@@ -193,9 +193,7 @@
     }
 
     /* Space between the headline and the body copy. */
-    .section__title + .richtext {
-        margin-top: var(--space-l);
-    }
+
 
     /* ---- Rich text ------------------------------------------------------- */
     .richtext {
@@ -249,7 +247,7 @@
         @apply grid items-start;
         gap: var(--space-m);
         grid-template-columns: 1fr;
-        margin-bottom: var(--space-m);
+        margin-bottom: var(--space-l);
     }
 
     @screen lg {
