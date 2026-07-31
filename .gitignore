@@ -10,6 +10,9 @@
 /config/*
 !/config/sites/
 
+# Node / frontend build
+/node_modules/
+
 # IDE / tooling
 /.idea/
 .claude/settings.local.json

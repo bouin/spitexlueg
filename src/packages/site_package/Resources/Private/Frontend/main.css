@@ -1,0 +1,18 @@
+@import "tailwindcss";
+
+/* Tell Tailwind v4 which Fluid templates to scan for utility classes. */
+@source "../Templates";
+@source "../Partials";
+@source "../Layouts";
+
+/* Project design tokens (extend Tailwind's theme). */
+@theme {
+    --color-brand: #0b5fff;
+}
+
+/* Custom base styles that complement the utility classes. */
+@layer base {
+    body {
+        @apply font-sans text-neutral-900 antialiased;
+    }
+}

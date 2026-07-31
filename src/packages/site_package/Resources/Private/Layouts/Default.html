@@ -1,25 +1,28 @@
-<!DOCTYPE html>
-<html lang="{f:if(condition: '{site.language.twoLetterIsoCode}', then: '{site.language.twoLetterIsoCode}', else: 'de')}"
-      xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:vite="http://typo3.org/ns/Praetorius/ViteAssetCollector/ViewHelpers"
       data-namespace-typo3-fluid="true">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
-<body>
-    <header class="site-header">
-        <a class="site-header__brand" href="{f:uri.page(pageUid: site.rootPageId)}">
-            {site.configuration.websiteTitle}
-        </a>
-        <f:render partial="Navigation/Main" arguments="{navigation: mainNavigation}"/>
-    </header>
 
-    <main class="site-main">
-        <f:render section="Main"/>
-    </main>
+<f:comment>
+    The document skeleton (doctype, html, head, body) is rendered by TYPO3's
+    PageRenderer. This template only provides the body content. <vite:asset>
+    registers CSS/JS with the AssetCollector, which outputs them into the head.
+</f:comment>
 
-    <footer class="site-footer">
-        <p>&copy; <f:format.date format="Y">now</f:format.date> {site.configuration.websiteTitle}</p>
-    </footer>
-</body>
+<vite:asset entry="EXT:site_package/Resources/Private/Frontend/main.js"/>
+
+<header class="mx-auto flex max-w-5xl items-center justify-between gap-8 px-6 py-4 border-b border-neutral-200">
+    <a class="text-xl font-bold no-underline text-inherit" href="{f:uri.page(pageUid: site.rootPageId)}">
+        {site.configuration.websiteTitle}
+    </a>
+    <f:render partial="Navigation/Main" arguments="{navigation: mainNavigation}"/>
+</header>
+
+<main class="mx-auto max-w-5xl px-6 py-8">
+    <f:render section="Main"/>
+</main>
+
+<footer class="mx-auto max-w-5xl px-6 py-8 border-t border-neutral-200 text-sm text-neutral-500">
+    <p>&copy; <f:format.date format="Y">now</f:format.date> {site.configuration.websiteTitle}</p>
+</footer>
+
 </html>

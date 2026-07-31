@@ -3,15 +3,17 @@
 
 <f:if condition="{navigation}">
     <nav class="main-nav" aria-label="Main navigation">
-        <ul class="main-nav__list">
+        <ul class="flex gap-5 list-none m-0 p-0">
             <f:for each="{navigation}" as="item">
-                <li class="main-nav__item{f:if(condition: item.active, then: ' is-active')}{f:if(condition: item.current, then: ' is-current')}">
-                    <a class="main-nav__link" href="{item.link}" target="{item.target}">{item.title}</a>
+                <li class="relative">
+                    <a href="{item.link}" target="{item.target}"
+                       class="no-underline {f:if(condition: '{item.active}', then: 'text-brand', else: 'text-inherit')} hover:text-brand">{item.title}</a>
                     <f:if condition="{item.children}">
-                        <ul class="main-nav__sub">
+                        <ul class="flex flex-col gap-2 list-none m-0 mt-2 p-0">
                             <f:for each="{item.children}" as="child">
-                                <li class="main-nav__item{f:if(condition: child.active, then: ' is-active')}{f:if(condition: child.current, then: ' is-current')}">
-                                    <a class="main-nav__link" href="{child.link}" target="{child.target}">{child.title}</a>
+                                <li>
+                                    <a href="{child.link}" target="{child.target}"
+                                       class="no-underline text-sm {f:if(condition: '{child.active}', then: 'text-brand', else: 'text-neutral-600')} hover:text-brand">{child.title}</a>
                                 </li>
                             </f:for>
                         </ul>

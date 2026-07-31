@@ -12,6 +12,7 @@
     },
     "require": {
         "lueg/site-package": "@dev",
+        "praetorius/vite-asset-collector": "^1.18",
         "typo3/cms-backend": "^14.3",
         "typo3/cms-belog": "^14.3",
         "typo3/cms-beuser": "^14.3",

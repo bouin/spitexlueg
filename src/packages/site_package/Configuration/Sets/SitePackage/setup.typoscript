@@ -2,16 +2,8 @@ page = PAGE
 page {
     typeNum = 0
 
-    # Meta / assets
-    shortcutIcon = EXT:site_package/Resources/Public/Icons/favicon.ico
-
-    includeCSS {
-        sitePackage = EXT:site_package/Resources/Public/Css/main.css
-    }
-
-    includeJSFooter {
-        sitePackage = EXT:site_package/Resources/Public/JavaScript/main.js
-    }
+    # Frontend assets (CSS/JS) are handled by Vite via the <vite:asset> ViewHelper
+    # in Resources/Private/Layouts/Default.html — see EXT:site_package Configuration/ViteEntrypoints.json.
 
     10 = FLUIDTEMPLATE
     10 {
