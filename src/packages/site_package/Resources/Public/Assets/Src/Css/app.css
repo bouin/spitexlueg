@@ -235,42 +235,55 @@
     }
 
     /* ---- Podcasts -------------------------------------------------------- */
-    /* Intro: title left, lead text right. */
+    .section--podcasts {
+        /* One source of truth for the arrow size, shared by intro and slider. */
+        --nav-size: clamp(2.25rem, 3.5vw, 3.25rem);
+        --nav-gap: var(--space-s);
+        /* How far the slider viewport is pushed in by the arrows. */
+        --slider-inset: calc(var(--nav-size) + var(--nav-gap));
+    }
+
+    /* Intro: title left, lead text right. Sits directly above the slider and
+       reaches slightly wider than the slider itself, into the arrow gutter. */
     .podcasts__intro {
         @apply grid items-start;
         gap: var(--space-m);
         grid-template-columns: 1fr;
-        margin-bottom: var(--space-l);
+        margin-bottom: var(--space-m);
     }
 
     @screen lg {
         .podcasts__intro {
-            grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
-            gap: var(--space-xl);
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+            gap: var(--space-l);
+            margin-inline: calc(var(--slider-inset) * 0.35);
         }
     }
 
     .podcasts__lead {
         font-size: clamp(1rem, 1.15vw, 1.2rem);
+        max-width: none;
     }
 
     /* Slider frame: arrows sit outside the viewport on wide screens. */
     .podcasts {
         @apply relative flex items-center;
-        gap: var(--space-s);
+        gap: var(--nav-gap);
     }
 
+    /* Without arrows (single episode) reserve the same gutter, so the slider
+       keeps the exact same width and the intro stays aligned with it. */
+    .podcasts:not(.podcasts--slider) {
+        padding-inline: var(--slider-inset);
+    }
+
+    /* Swiper owns the wrapper/slide layout; keep the viewport clipping. */
     .podcasts__viewport {
-        @apply w-full overflow-hidden;
-    }
-
-    .podcasts__track {
-        @apply flex;
-        transition: transform 0.5s ease;
+        @apply w-full min-w-0 overflow-hidden;
     }
 
     .podcast {
-        @apply w-full shrink-0;
+        @apply h-auto w-full;
     }
 
     /* Arrows — only rendered when there is more than one episode. */
@@ -278,7 +291,7 @@
         @apply flex shrink-0 items-center justify-center rounded-full border-2 bg-white transition-colors;
         border-color: var(--color-blue);
         color: var(--color-blue);
-        width: clamp(2.25rem, 3.5vw, 3.25rem);
+        width: var(--nav-size);
         aspect-ratio: 1 / 1;
     }
 
@@ -292,8 +305,10 @@
         @apply text-white;
     }
 
-    .podcasts__nav[disabled] {
-        @apply cursor-not-allowed opacity-30;
+    /* Swiper sets .is-disabled (see navigation.disabledClass in app.js). */
+    .podcasts__nav[disabled],
+    .podcasts__nav.is-disabled {
+        @apply pointer-events-none opacity-30;
     }
 
     /* Stage: player plus overlays. */

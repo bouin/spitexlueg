@@ -30,10 +30,10 @@
                     </button>
                 </f:if>
 
-                <div class="podcasts__viewport">
-                    <div class="podcasts__track" data-podcast-track>
+                <div class="podcasts__viewport swiper" data-podcast-swiper>
+                    <div class="swiper-wrapper">
                         <f:for each="{data.episodes}" as="episode" iteration="it">
-                            <article class="podcast" data-podcast-slide>
+                            <article class="podcast swiper-slide">
 
                                 <div class="podcast__stage">
                                     <video

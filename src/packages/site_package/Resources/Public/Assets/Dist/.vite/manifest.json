@@ -5,10 +5,38 @@
     "src": "Resources/Public/Assets/Src/JavaScript/app.js",
     "isEntry": true,
     "dynamicImports": [
-      "node_modules/video.js/dist/video.es.js"
+      "node_modules/video.js/dist/video.es.js",
+      "node_modules/swiper/swiper.mjs",
+      "node_modules/swiper/modules/index.mjs"
     ],
     "css": [
       "Css/app.css"
+    ]
+  },
+  "_utils.js": {
+    "file": "JavaScript/utils.js",
+    "name": "utils"
+  },
+  "node_modules/swiper/modules/index.mjs": {
+    "file": "JavaScript/index.js",
+    "name": "index",
+    "src": "node_modules/swiper/modules/index.mjs",
+    "isDynamicEntry": true,
+    "imports": [
+      "_utils.js"
+    ]
+  },
+  "node_modules/swiper/swiper.css": {
+    "file": "Css/swiper.css",
+    "src": "node_modules/swiper/swiper.css"
+  },
+  "node_modules/swiper/swiper.mjs": {
+    "file": "JavaScript/swiper.js",
+    "name": "swiper",
+    "src": "node_modules/swiper/swiper.mjs",
+    "isDynamicEntry": true,
+    "imports": [
+      "_utils.js"
     ]
   },
   "node_modules/video.js/dist/video-js.css": {

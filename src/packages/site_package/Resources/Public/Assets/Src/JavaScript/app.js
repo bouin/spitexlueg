@@ -76,51 +76,60 @@ async function initPodcastPlayers() {
 }
 
 /**
- * Podcast slider: only active when the element holds more than one episode.
- * A single episode renders without navigation, so there is nothing to do.
+ * Podcast slider (Swiper). Only runs when the element holds more than one
+ * episode — a single episode renders without navigation and stays static.
  */
-function initPodcastSliders(players) {
-    document.querySelectorAll('[data-podcast-slider]').forEach((slider) => {
-        const track = slider.querySelector('[data-podcast-track]');
-        const slides = slider.querySelectorAll('[data-podcast-slide]');
-        const prev = slider.querySelector('[data-podcast-prev]');
-        const next = slider.querySelector('[data-podcast-next]');
+async function initPodcastSliders(players) {
+    const sliders = document.querySelectorAll('[data-podcast-swiper]');
+    if (!sliders.length) {
+        return;
+    }
 
-        if (!track || slides.length < 2 || !prev || !next) {
+    const [{ default: Swiper }, { Navigation, Keyboard, A11y }] = await Promise.all([
+        import('swiper'),
+        import('swiper/modules'),
+        import('swiper/css'),
+    ]);
+
+    sliders.forEach((element) => {
+        const frame = element.closest('[data-podcast-slider]');
+        const prev = frame?.querySelector('[data-podcast-prev]');
+        const next = frame?.querySelector('[data-podcast-next]');
+
+        if (!prev || !next) {
             return;
         }
 
-        let index = 0;
-
-        const update = () => {
-            track.style.transform = `translateX(-${index * 100}%)`;
-            prev.disabled = index === 0;
-            next.disabled = index === slides.length - 1;
-
-            // Leaving a slide stops whatever was playing on it.
-            players.forEach((player) => {
-                if (!player.paused()) {
-                    player.pause();
-                }
-            });
-        };
-
-        prev.addEventListener('click', () => {
-            index = Math.max(0, index - 1);
-            update();
+        new Swiper(element, {
+            modules: [Navigation, Keyboard, A11y],
+            slidesPerView: 1,
+            speed: 500,
+            navigation: {
+                prevEl: prev,
+                nextEl: next,
+                disabledClass: 'is-disabled',
+            },
+            keyboard: { enabled: true },
+            a11y: {
+                prevSlideMessage: 'Vorherige Folge',
+                nextSlideMessage: 'Nächste Folge',
+            },
+            on: {
+                // Leaving a slide stops whatever was playing on it.
+                slideChange() {
+                    players.forEach((player) => {
+                        if (!player.paused()) {
+                            player.pause();
+                        }
+                    });
+                },
+            },
         });
-
-        next.addEventListener('click', () => {
-            index = Math.min(slides.length - 1, index + 1);
-            update();
-        });
-
-        update();
     });
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
     initHeroCarousel();
     const players = await initPodcastPlayers();
-    initPodcastSliders(players);
+    await initPodcastSliders(players);
 });
