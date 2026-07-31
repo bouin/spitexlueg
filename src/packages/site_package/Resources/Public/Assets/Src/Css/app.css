@@ -379,7 +379,7 @@
        is added on top to make the text itself 30% wide. */
     @screen md {
         .podcast__copy {
-            max-width: calc(30% + 2 * var(--space-l));
+            max-width: calc(40% + 2 * var(--space-l));
         }
     }
 
@@ -408,13 +408,35 @@
         height: auto;
         line-height: 1;
         font-size: clamp(3rem, 6vw, 6rem);
-        transition: transform 0.2s ease, opacity 0.2s ease;
+        /* Slight overshoot on the way back makes the scale feel springy. */
+        transition:
+            transform 0.4s cubic-bezier(0.34, 1.4, 0.64, 1),
+            opacity 0.25s ease;
     }
 
+    /* Shrink a touch on hover instead of growing. */
     .podcast__player.video-js .vjs-big-play-button:hover,
-    .podcast__player.video-js .vjs-big-play-button:focus {
+    .podcast__player.video-js .vjs-big-play-button:focus-visible {
         @apply bg-transparent;
-        transform: translate(-50%, -50%) scale(1.08);
+        transform: translate(-50%, -50%) scale(0.9);
+        opacity: 0.92;
+    }
+
+    .podcast__player.video-js .vjs-big-play-button:active {
+        transform: translate(-50%, -50%) scale(0.84);
+        transition-duration: 0.12s;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .podcast__player.video-js .vjs-big-play-button {
+            transition: opacity 0.25s ease;
+        }
+
+        .podcast__player.video-js .vjs-big-play-button:hover,
+        .podcast__player.video-js .vjs-big-play-button:focus-visible,
+        .podcast__player.video-js .vjs-big-play-button:active {
+            transform: translate(-50%, -50%);
+        }
     }
 
     .podcast__player.video-js .vjs-big-play-button .vjs-icon-placeholder::before {
