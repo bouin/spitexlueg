@@ -517,8 +517,10 @@
     }
 
     /* ---- Standorte map --------------------------------------------------- */
-    /* Peach band; the map canvas is centred inside it. */
+    /* Peach band; the map canvas is centred inside it, the card pins to its
+       top-right corner. */
     .map {
+        @apply relative;
         background-color: var(--color-peach);
         padding-block: clamp(2rem, 5vw, 5rem);
         margin-top: var(--space-l);
@@ -538,14 +540,19 @@
         object-fit: contain;
     }
 
-    /* Gemeinde labels — positioned in %, sized in cqw (baseline sits on the y). */
+    /* Gemeinde labels — the left/top coordinate is the blue dot's centre;
+       the label is centred on it and sits just below with a uniform gap. */
     .map__label {
         @apply pointer-events-none absolute font-normal;
         color: var(--color-blue);
         font-size: 2.15cqw;
         letter-spacing: 0.02em;
         white-space: nowrap;
-        transform: translateY(-0.72em);
+        transform: translate(-50%, 1cqw);
+    }
+    /* The one exception that reads better above its dot. */
+    .map__label--above {
+        transform: translate(-50%, calc(-100% - 1cqw));
     }
 
     /* Pins — anchored by their tip (bottom centre) to the coordinate. */
@@ -568,12 +575,13 @@
     }
     .map__pin.is-active { color: #e64b4b; }
 
-    /* Info card — fixed top-right of the map, content swapped per pin. */
+    /* Info card — always the top-right corner of the whole map band,
+       content swapped per pin. */
     .map__cards {
         @apply absolute z-10;
-        top: 4%;
-        right: 3%;
-        width: min(23rem, 46%);
+        top: clamp(1.5rem, 4vw, 3rem);
+        right: clamp(1.5rem, 5vw, 4rem);
+        width: min(24rem, 40%);
     }
 
     .map__card {

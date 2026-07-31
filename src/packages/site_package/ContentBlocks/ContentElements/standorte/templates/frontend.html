@@ -61,32 +61,32 @@
                  src="{f:uri.resource(path: 'Images/map-lueg.svg', extensionName: 'SitePackage')}"
                  alt="Karte des Einzugsgebiets der Spitex Region Lueg">
 
-            <f:comment><!-- Gemeinde-Namen (Positionen in % aus dem SVG) --></f:comment>
-            <span class="map__label" style="left: 9.75%;  top: 21.95%;">Rumendingen</span>
-            <span class="map__label" style="left: 26.21%; top: 26.76%;">Wynigen</span>
-            <span class="map__label" style="left: 54.48%; top: 20.06%;">Walterswil</span>
-            <span class="map__label" style="left: 53.95%; top: 37.35%;">Dürrenroth</span>
-            <span class="map__label" style="left: 20.88%; top: 51.46%;">Heimwiswil</span>
-            <span class="map__label" style="left: 37.47%; top: 48.17%;">Affoltern i. E.</span>
-            <span class="map__label" style="left: 67.76%; top: 62.03%;">Sumiswald</span>
-            <span class="map__label" style="left: 25.72%; top: 68.62%;">Rüegsau</span>
-            <span class="map__label" style="left: 47.56%; top: 73.53%;">Trachselwald</span>
-            <span class="map__label" style="left: 33.60%; top: 83.77%;">Lützelflüh</span>
-            <span class="map__label" style="left: 12.11%; top: 89.90%;">Hasle b.B.</span>
+            <f:comment><!-- Gemeinde-Namen: zentriert unter dem blauen Punkt (Punkt-Zentren in %) --></f:comment>
+            <span class="map__label map__label--above" style="left: 17.86%; top: 24.29%;">Rumendingen</span>
+            <span class="map__label" style="left: 30.85%; top: 22.71%;">Wynigen</span>
+            <span class="map__label" style="left: 60.93%; top: 15.77%;">Walterswil</span>
+            <span class="map__label" style="left: 61.29%; top: 39.74%;">Dürrenroth</span>
+            <span class="map__label" style="left: 27.17%; top: 47.28%;">Heimwiswil</span>
+            <span class="map__label" style="left: 45.18%; top: 44.15%;">Affoltern i. E.</span>
+            <span class="map__label" style="left: 74.02%; top: 57.68%;">Sumiswald</span>
+            <span class="map__label" style="left: 30.85%; top: 64.65%;">Rüegsau</span>
+            <span class="map__label" style="left: 56.05%; top: 76.23%;">Trachselwald</span>
+            <span class="map__label" style="left: 40.24%; top: 79.44%;">Lützelflüh</span>
+            <span class="map__label" style="left: 18.13%; top: 84.67%;">Hasle b.B.</span>
 
             <f:comment><!-- 4 Pins an festen Positionen (wo die roten Pins im SVG waren) --></f:comment>
             <f:render section="pin" arguments="{n: 1, title: data.pin1_title, x: '30.97', y: '22.51'}"/>
             <f:render section="pin" arguments="{n: 2, title: data.pin2_title, x: '58.21', y: '50.24'}"/>
             <f:render section="pin" arguments="{n: 3, title: data.pin3_title, x: '74.08', y: '57.31'}"/>
             <f:render section="pin" arguments="{n: 4, title: data.pin4_title, x: '21.01', y: '79.08'}"/>
+        </div>
 
-            <f:comment><!-- Info-Karte: fester Platz, Inhalt wird pro Pin getauscht --></f:comment>
-            <div class="map__cards" data-map-cards>
-                <f:render section="card" arguments="{n: 1, image: data.pin1_image.0, title: data.pin1_title, address: data.pin1_address, link: data.pin1_link}"/>
-                <f:render section="card" arguments="{n: 2, image: data.pin2_image.0, title: data.pin2_title, address: data.pin2_address, link: data.pin2_link}"/>
-                <f:render section="card" arguments="{n: 3, image: data.pin3_image.0, title: data.pin3_title, address: data.pin3_address, link: data.pin3_link}"/>
-                <f:render section="card" arguments="{n: 4, image: data.pin4_image.0, title: data.pin4_title, address: data.pin4_address, link: data.pin4_link}"/>
-            </div>
+        <f:comment><!-- Info-Karte: immer oben rechts im Kartenband, Inhalt pro Pin getauscht --></f:comment>
+        <div class="map__cards" data-map-cards>
+            <f:render section="card" arguments="{n: 1, image: data.pin1_image.0, title: data.pin1_title, address: data.pin1_address, link: data.pin1_link}"/>
+            <f:render section="card" arguments="{n: 2, image: data.pin2_image.0, title: data.pin2_title, address: data.pin2_address, link: data.pin2_link}"/>
+            <f:render section="card" arguments="{n: 3, image: data.pin3_image.0, title: data.pin3_title, address: data.pin3_address, link: data.pin3_link}"/>
+            <f:render section="card" arguments="{n: 4, image: data.pin4_image.0, title: data.pin4_title, address: data.pin4_address, link: data.pin4_link}"/>
         </div>
     </div>
 </section>
