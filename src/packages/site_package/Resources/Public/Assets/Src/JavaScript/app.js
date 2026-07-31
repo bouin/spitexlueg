@@ -128,8 +128,26 @@ async function initPodcastSliders(players) {
     });
 }
 
+/**
+ * Accordions: each item toggles on its own; opening one does not close others.
+ * The height animation is pure CSS (grid-template-rows), JS only flips a class.
+ */
+function initAccordions() {
+    document.querySelectorAll('[data-accordion-toggle]').forEach((button) => {
+        button.addEventListener('click', () => {
+            const item = button.closest('.accordion__item');
+            if (!item) {
+                return;
+            }
+            const open = item.classList.toggle('is-open');
+            button.setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
+    });
+}
+
 document.addEventListener('DOMContentLoaded', async () => {
     initHeroCarousel();
+    initAccordions();
     const players = await initPodcastPlayers();
     await initPodcastSliders(players);
 });

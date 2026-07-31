@@ -16,6 +16,17 @@
     --color-spitex-blue: #0091d0;
     --hero-frame: #9fb6d6;
 
+    /* Campaign accent palette (accordion cards, tiles, …). */
+    --color-orange: #f2a04f;
+    --color-sky: #6db9e7;
+    --color-purple: #c9a0dd;
+
+    /* Shared inset: elements that sit NARROWER than the full section width
+       (e.g. the accordion) pull in by this much on each side. Reuse this in
+       every such element so the indent is identical and scales the same way
+       down to mobile, where it shrinks to a small value. */
+    --inset: clamp(0rem, 8vw, 9rem);
+
     /* Layout rhythm — one scale reused by every section, so spacing stays
        consistent and scales with the viewport instead of jumping. */
     --container: 90rem;
@@ -281,6 +292,103 @@
         .section--text .section__title,
         .section--text .richtext {
             max-width: 70%;
+        }
+    }
+
+    /* ---- Intro (title left, description right) --------------------------- */
+    /* Reusable two-column intro used above elements like the accordion. */
+    .intro {
+        @apply grid items-start;
+        gap: var(--space-m);
+        grid-template-columns: 1fr;
+        margin-bottom: var(--space-l);
+    }
+
+    @screen lg {
+        .intro {
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+            gap: var(--space-l);
+        }
+    }
+
+    /* ---- Accordion ------------------------------------------------------- */
+    /* Sits narrower than the intro by the shared --inset on each side. */
+    .accordion {
+        @apply flex flex-col;
+        gap: var(--space-s);
+        margin-inline: var(--inset);
+    }
+
+    /* Colours cycle: orange, sky, purple, then repeat. */
+    .accordion__item {
+        background-color: var(--color-orange);
+    }
+    .accordion__item:nth-child(3n + 2) {
+        background-color: var(--color-sky);
+    }
+    .accordion__item:nth-child(3n + 3) {
+        background-color: var(--color-purple);
+    }
+
+    .accordion__header {
+        @apply flex w-full cursor-pointer items-center justify-between gap-4 border-0 bg-transparent text-left text-white;
+        padding: clamp(1.1rem, 2vw, 1.75rem) clamp(1.25rem, 2.5vw, 2.5rem);
+    }
+
+    .accordion__title {
+        @apply font-bold uppercase;
+        font-size: clamp(1rem, 1.5vw, 1.5rem);
+        letter-spacing: 0.01em;
+    }
+
+    .accordion__icon {
+        @apply flex shrink-0 items-center justify-center;
+        width: clamp(1.5rem, 2.2vw, 2.25rem);
+        transition: transform 0.35s ease;
+    }
+    .accordion__icon svg {
+        @apply h-full w-full;
+    }
+    .accordion__item.is-open .accordion__icon {
+        transform: rotate(180deg);
+    }
+
+    /* Smoothly animate to auto height with a 0fr → 1fr grid row. */
+    .accordion__panel {
+        display: grid;
+        grid-template-rows: 0fr;
+        transition: grid-template-rows 0.35s ease;
+    }
+    .accordion__item.is-open .accordion__panel {
+        grid-template-rows: 1fr;
+    }
+
+    /* The clipped grid item; padding lives inside so it is hidden when closed. */
+    .accordion__content {
+        overflow: hidden;
+        min-height: 0;
+        color: #fff;
+        padding: 0 clamp(1.25rem, 2.5vw, 2.5rem);
+    }
+    .accordion__item.is-open .accordion__content {
+        /* A thin divider under the header, then breathing room for the copy. */
+        border-top: 1px solid rgba(255, 255, 255, 0.4);
+        padding-block: clamp(1.5rem, 3vw, 2.5rem);
+    }
+
+    /* Rich text inside a card is white, not brand blue. */
+    .accordion__content.richtext {
+        color: #fff;
+        font-size: clamp(1rem, 1.15vw, 1.15rem);
+    }
+    .accordion__content.richtext a {
+        @apply text-white;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .accordion__panel,
+        .accordion__icon {
+            transition: none;
         }
     }
 

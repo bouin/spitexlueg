@@ -1,0 +1,34 @@
+name: lueg/ausbildung
+typeName: lueg_ausbildung
+group: default
+prefixFields: true
+prefixType: full
+basics:
+  - TYPO3/Appearance
+fields:
+  - identifier: header
+    useExistingField: true
+    label: 'Titel'
+    description: 'z. B. "Lueg – mir bilde lernendi us"'
+  - identifier: bodytext
+    useExistingField: true
+    label: 'Einleitungstext'
+    description: 'Steht rechts neben dem Titel.'
+    enableRichtext: true
+    richtextConfiguration: site_package
+
+  - identifier: items
+    type: Collection
+    label: 'Akkordeon-Einträge'
+    description: 'Öffnen unabhängig voneinander. Die Farben (orange, blau, violett) wechseln automatisch.'
+    labelField: title
+    fields:
+      - identifier: title
+        type: Text
+        label: 'Titel'
+        required: true
+      - identifier: content
+        type: Textarea
+        label: 'Inhalt'
+        enableRichtext: true
+        richtextConfiguration: site_package
