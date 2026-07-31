@@ -103,9 +103,15 @@
         top: clamp(1rem, 3vw, 3.5rem);
         right: clamp(1rem, 3vw, 3.5rem);
         width: clamp(7.5rem, 21vw, 21rem);
-        font-size: clamp(1rem, 2.6vw, 2.75rem);
+        font-size: clamp(1rem, 3.6vw, 3.75rem);
         line-height: 1.05;
         transition: transform 0.2s ease;
+        transform: rotate(-10deg);
+        &:hover {
+            transition: all .2s ease-in-out;
+            transform: rotate(-20deg);
+        }
+        z-index: 9999;
     }
 
     .hero__badge:hover {
@@ -159,7 +165,8 @@
 
     .pill-nav__link:hover,
     .pill-nav__link.is-active {
-        background-color: var(--color-ink);
+        background-color: var(--color-spitex-green);
+        border-color: var(--color-spitex-green);
         @apply text-white;
     }
 
