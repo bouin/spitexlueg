@@ -411,8 +411,8 @@
        reserved by .tile__text (flex: 1), so the tile never resizes. */
     .tile {
         --btn-h: clamp(2.25rem, 3vw, 2.75rem);
-        /* Sticky-gum easing: undershoot at the start, overshoot at the end. */
-        --gum: cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        /* Calm easing: smooth deceleration, no overshoot. */
+        --gum: cubic-bezier(0.33, 1, 0.68, 1);
         @apply relative flex flex-col overflow-hidden text-white;
         aspect-ratio: 1;
         padding: clamp(1.1rem, 1.8vw, 1.75rem);
@@ -500,7 +500,6 @@
         @apply flex shrink-0 items-center justify-center rounded-full;
         width: calc(var(--btn-h) - 0.7rem);
         aspect-ratio: 1;
-        border: 1.5px solid rgba(255, 255, 255, 0.9);
         transition: transform 0.5s var(--gum);
     }
     .tile__button-arrow svg { width: 62%; height: 62%; }
