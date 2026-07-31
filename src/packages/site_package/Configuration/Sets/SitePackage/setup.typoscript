@@ -53,6 +53,19 @@ page {
                 titleField = nav_title // title
             }
 
+            # {site} — the Site object (not available in Fluid without this).
+            5 = TYPO3\CMS\Frontend\DataProcessing\SiteProcessor
+            5 {
+                as = site
+            }
+
+            # {languagenavigation} — language switcher.
+            15 = TYPO3\CMS\Frontend\DataProcessing\LanguageMenuProcessor
+            15 {
+                languages = auto
+                as = languagenavigation
+            }
+
             # {media} — "Media" field of the current page.
             20 = TYPO3\CMS\Frontend\DataProcessing\FilesProcessor
             20 {

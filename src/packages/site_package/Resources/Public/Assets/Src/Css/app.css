@@ -37,21 +37,35 @@
 @layer components {
 
     /* ---- Hero banner ---------------------------------------------------- */
-    /* The background image is set inline from the root page's "Media" field. */
     .hero {
-        @apply relative w-full overflow-hidden bg-center bg-cover bg-no-repeat;
+        @apply relative w-full overflow-hidden;
         background-color: var(--color-lilac);
-        background-image: var(--hero-desktop, none);
-        aspect-ratio: 16 / 9;
         border: 1px solid var(--hero-frame);
     }
 
-    @media (max-width: 640px) {
-        .hero {
-            /* Use the second media image on mobile, fall back to the desktop one. */
-            background-image: var(--hero-mobile, var(--hero-desktop, none));
-            aspect-ratio: 3 / 4;
-        }
+    /* Home: grow to fill whatever the navbar leaves over, so image + nav = 100vh. */
+    .hero--home {
+        @apply min-h-0 flex-1;
+    }
+
+    /* Subpage: a shorter banner, no full-screen takeover. */
+    .hero--sub {
+        height: 38svh;
+        min-height: 14rem;
+    }
+
+    /* Slides are cross-faded by app.js (see [data-hero-carousel]). */
+    .hero__slides {
+        @apply absolute inset-0;
+    }
+
+    .hero__slide {
+        @apply absolute inset-0 bg-cover bg-center bg-no-repeat opacity-0;
+        transition: opacity 1s ease-in-out;
+    }
+
+    .hero__slide.is-active {
+        @apply opacity-100;
     }
 
     .hero__inner {
@@ -89,8 +103,28 @@
     }
 
     /* ---- Navigation bar below the hero ---------------------------------- */
+    /* shrink-0: keeps its natural height so the hero can take the rest. */
     .navbar {
-        @apply flex flex-wrap items-center justify-between gap-x-8 gap-y-4 bg-white px-6 py-5;
+        @apply flex shrink-0 flex-wrap items-center justify-between gap-x-8 gap-y-4 bg-white px-6 py-5;
+    }
+
+    .navbar__right {
+        @apply flex items-center gap-6;
+    }
+
+    /* ---- Language switcher ---------------------------------------------- */
+    .lang-nav {
+        @apply flex list-none items-center gap-3 p-0;
+    }
+
+    .lang-nav__link {
+        @apply text-xs font-bold uppercase no-underline opacity-50 transition-opacity;
+        color: var(--color-ink);
+    }
+
+    .lang-nav__link:hover,
+    .lang-nav__link.is-active {
+        @apply opacity-100;
     }
 
     .pill-nav {

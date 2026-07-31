@@ -1,1 +1,1 @@
-console.log("Say hello hello to the dev: dhackiewicz@gmail.com");
+function s(){document.querySelectorAll("[data-hero-carousel]").forEach(r=>{const e=r.querySelectorAll(".hero__slide");if(e.length<2||window.matchMedia("(prefers-reduced-motion: reduce)").matches)return;const n=parseInt(r.dataset.heroCarousel,10)||6e3;let t=0;setInterval(()=>{e[t].classList.remove("is-active"),t=(t+1)%e.length,e[t].classList.add("is-active")},n)})}document.addEventListener("DOMContentLoaded",()=>{s()});

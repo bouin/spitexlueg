@@ -3,38 +3,46 @@
 
 <f:comment>
     Hero media resolution:
-    {media}                  — "Media" field of the current page
-    {siteRoot.0.heroFiles}   — "Media" of the site root page (site-wide fallback)
+    {media}                — "Media" field of the current page
+    {siteRoot.0.heroFiles} — "Media" of the site root page (site-wide fallback)
 
-    The first image is used for desktop, an optional second one for mobile.
-    Both are handed to CSS as custom properties, so .hero can use background-image.
+    Layout: on the home page the header fills exactly one screen, so that the
+    hero image *plus* the navigation are visible without scrolling
+    (header = h-svh, hero = flex-1, navbar = shrink-0).
 </f:comment>
 <f:if condition="{media}">
     <f:then><f:variable name="heroMedia" value="{media}"/></f:then>
     <f:else><f:variable name="heroMedia" value="{siteRoot.0.heroFiles}"/></f:else>
 </f:if>
 
-<f:variable name="heroStyle"/>
-<f:for each="{heroMedia}" as="image" iteration="iterator">
-    <f:if condition="{iterator.index} == 0">
-        <f:variable name="heroStyle">--hero-desktop: url('<f:uri.image image="{image}" width="2000c" height="1125c"/>');</f:variable>
-    </f:if>
-    <f:if condition="{iterator.index} == 1">
-        <f:variable name="heroStyle">{heroStyle} --hero-mobile: url('<f:uri.image image="{image}" width="900c" height="1200c"/>');</f:variable>
-    </f:if>
-</f:for>
+<f:comment><!-- "Home" = the site root page; is_siteroot is always present on the page record. --></f:comment>
+<f:variable name="isHome" value="{data.is_siteroot}"/>
 
-<header class="site-header">
+<header class="site-header flex flex-col {f:if(condition: isHome, then: 'h-svh', else: '')}">
 
-    <section class="hero"<f:if condition="{heroStyle}"> style="{heroStyle}"</f:if>>
+    <f:comment><!-- Hero: fills the remaining screen height on the home page --></f:comment>
+    <section class="hero {f:if(condition: isHome, then: 'hero--home', else: 'hero--sub')}">
+
+        <f:comment><!-- Slides: all media images, cross-faded by app.js --></f:comment>
+        <div class="hero__slides" data-hero-carousel>
+            <f:for each="{heroMedia}" as="image" iteration="iterix">
+                <div class="hero__slide{f:if(condition: iterix.isFirst, then: ' is-active')}"
+                     style="background-image: url('<f:uri.image image="{image}" maxWidth="2400"/>');"
+                     role="img"
+                     aria-label="{image.alternative}"></div>
+            </f:for>
+        </div>
 
         <a href="#freie-stellen" class="hero__badge">Freie<br>Stellen</a>
 
-        <div class="hero__inner">
-            <h1 class="hero__title">Chum zu üs<br>ids Team</h1>
-        </div>
+        <f:if condition="{isHome}">
+            <div class="hero__inner">
+                <h1 class="hero__title">Chum zu üs<br>ids Team</h1>
+            </div>
+        </f:if>
     </section>
 
+    <f:comment><!-- Navigation bar: natural height, always on screen --></f:comment>
     <div class="navbar">
         <nav class="pill-nav" aria-label="Kampagnen-Navigation">
             <a class="pill-nav__link" href="#podcasts">Podcasts</a>
@@ -44,12 +52,25 @@
             <a class="pill-nav__link" href="#standorte">Standorte Spitex Region Lueg</a>
         </nav>
 
-        <a class="brand" href="{f:uri.page(pageUid: site.rootPageId)}">
-            <img class="brand__logo"
-                 src="{f:uri.resource(path: 'Images/spitex-region-lueg.svg', extensionName: 'SitePackage')}"
-                 alt="Spitex Region Lueg"
-                 width="260" height="76">
-        </a>
+        <div class="navbar__right">
+            <f:if condition="{languagenavigation -> f:count()} > 1">
+                <ul class="lang-nav">
+                    <f:for each="{languagenavigation}" as="language">
+                        <li>
+                            <a class="lang-nav__link{f:if(condition: language.active, then: ' is-active')}"
+                               href="{language.link}" hreflang="{language.hreflang}">{language.navigationTitle}</a>
+                        </li>
+                    </f:for>
+                </ul>
+            </f:if>
+
+            <f:link.page pageUid="{site.rootPageId}" class="brand">
+                <img class="brand__logo"
+                     src="{f:uri.resource(path: 'Images/spitex-region-lueg.svg', extensionName: 'SitePackage')}"
+                     alt="Spitex Region Lueg"
+                     width="260" height="76">
+            </f:link.page>
+        </div>
     </div>
 
 </header>
