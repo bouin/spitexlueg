@@ -192,15 +192,11 @@
         letter-spacing: -0.01em;
     }
 
-    /* Space between the headline and the body copy. */
-
-
     /* ---- Rich text ------------------------------------------------------- */
     .richtext {
         color: var(--color-blue);
         font-size: clamp(1.05rem, 1.35vw, 1.4rem);
         line-height: 1.5;
-        max-width: 62ch;
     }
 
     /* Paragraph rhythm: gaps between paragraphs, none before the first. */
@@ -232,6 +228,23 @@
         margin-top: var(--space-s);
     }
 
+    /* ---- Text section (headline + copy) --------------------------------- */
+    /* Gap below the headline — a touch larger than the paragraph rhythm,
+       so the headline reads as its own block above the copy. */
+    .section--text .section__title + .richtext {
+        margin-top: clamp(2rem, 3.5vw, 3.5rem);
+    }
+
+    /* On desktop the whole text column is capped at 70%, which makes the
+       headline wrap and keeps the copy at a readable measure. Full width
+       below lg, where 70% would be far too narrow. */
+    @screen lg {
+        .section--text .section__title,
+        .section--text .richtext {
+            max-width: 70%;
+        }
+    }
+
     /* ---- Podcasts -------------------------------------------------------- */
     .section--podcasts {
         /* One source of truth for the arrow size, shared by intro and slider. */
@@ -259,8 +272,9 @@
     }
 
     .podcasts__lead {
-        font-size: clamp(1rem, 1.15vw, 1.2rem);
+        font-size: clamp(1rem, 1.35vw, 1.345rem);
         max-width: none;
+        font-weight: 600;
     }
 
     /* Slider frame: arrows sit outside the viewport on wide screens. */

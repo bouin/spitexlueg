@@ -2,6 +2,8 @@ page = PAGE
 page {
     typeNum = 0
 
+    shortcutIcon = fileadmin/favicon/spitex-favicon.png
+
     # Adobe Fonts (Typekit) — loaded before the site CSS so font-family can use it.
     includeCSSLibs {
         typekit = https://use.typekit.net/icw4udj.css
