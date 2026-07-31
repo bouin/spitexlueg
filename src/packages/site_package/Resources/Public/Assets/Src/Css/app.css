@@ -20,6 +20,8 @@
     --color-orange: #f2a04f;
     --color-sky: #6db9e7;
     --color-purple: #c9a0dd;
+    --color-pink: #ef9dc0;
+    --color-tile-teal: #5cc4bd;
 
     /* Shared inset: elements that sit NARROWER than the full section width
        (e.g. the accordion) pull in by this much on each side. Reuse this in
@@ -390,6 +392,125 @@
         .accordion__icon {
             transition: none;
         }
+    }
+
+    /* ---- Benefits (tiles) ----------------------------------------------- */
+    .benefits {
+        @apply grid;
+        gap: var(--space-s);
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+    @media (max-width: 900px) {
+        .benefits { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 520px) {
+        .benefits { grid-template-columns: minmax(0, 1fr); }
+    }
+
+    /* Square tiles, all the same height. Space for the revealed text is
+       reserved by .tile__text (flex: 1), so the tile never resizes. */
+    .tile {
+        --btn-h: clamp(2.25rem, 3vw, 2.75rem);
+        /* Sticky-gum easing: undershoot at the start, overshoot at the end. */
+        --gum: cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        @apply relative flex flex-col overflow-hidden text-white;
+        aspect-ratio: 1;
+        padding: clamp(1.1rem, 1.8vw, 1.75rem);
+        gap: 0.6rem;
+    }
+
+    .tile--sky    { background-color: var(--color-sky); }
+    .tile--purple { background-color: var(--color-purple); }
+    .tile--orange { background-color: var(--color-orange); }
+    .tile--pink   { background-color: var(--color-pink); }
+    .tile--teal   { background-color: var(--color-tile-teal); }
+
+    .tile__icon img {
+        height: clamp(1.9rem, 2.8vw, 2.6rem);
+        width: auto;
+    }
+
+    .tile__title {
+        @apply font-bold uppercase;
+        font-size: clamp(0.95rem, 1.25vw, 1.3rem);
+        line-height: 1.1;
+        margin-top: 0.4rem;
+    }
+
+    /* Reserved area: always in the layout, revealed with a fade + rise. */
+    .tile__text {
+        @apply min-h-0 flex-1 overflow-hidden;
+        margin-top: 0.6rem;
+        color: #fff;
+        font-size: clamp(0.8rem, 1vw, 1rem);
+        line-height: 1.4;
+        opacity: 0;
+        transform: translateY(0.6rem);
+        transition: opacity 0.4s ease 0.15s, transform 0.45s var(--gum) 0.15s;
+    }
+    .tile.is-open .tile__text {
+        opacity: 1;
+        transform: none;
+    }
+    .tile__text.richtext { color: #fff; }
+    .tile__text.richtext > * + * { margin-top: 0.6rem; }
+
+    /* Button track — reserves the button height so nothing shifts. */
+    .tile__foot {
+        @apply relative;
+        height: var(--btn-h);
+    }
+
+    /* Position via `left` (not transform), so transform is free for the
+       gum-stretch (see app.js). It flies to the right edge on open. */
+    .tile__button {
+        @apply absolute bottom-0 left-0 flex cursor-pointer items-center rounded-full text-white;
+        height: var(--btn-h);
+        border: 1.5px solid rgba(255, 255, 255, 0.9);
+        background: transparent;
+        padding-inline: 0.35rem 0.35rem;
+        transition: left 0.6s var(--gum), padding 0.5s var(--gum);
+        will-change: left, transform;
+    }
+    .tile.is-open .tile__button {
+        left: calc(100% - var(--btn-h));
+        padding-inline: 0.35rem;
+    }
+
+    .tile__button-inner {
+        @apply flex items-center;
+        gap: 0.5rem;
+    }
+
+    .tile__button-label {
+        @apply overflow-hidden whitespace-nowrap font-bold uppercase;
+        padding-left: 0.6rem;
+        max-width: 12rem;
+        font-size: clamp(0.6rem, 0.75vw, 0.75rem);
+        letter-spacing: 0.06em;
+        transition: max-width 0.5s var(--gum), opacity 0.3s ease, padding 0.5s var(--gum);
+    }
+    .tile.is-open .tile__button-label {
+        max-width: 0;
+        padding-left: 0;
+        opacity: 0;
+    }
+
+    .tile__button-arrow {
+        @apply flex shrink-0 items-center justify-center rounded-full;
+        width: calc(var(--btn-h) - 0.7rem);
+        aspect-ratio: 1;
+        border: 1.5px solid rgba(255, 255, 255, 0.9);
+        transition: transform 0.5s var(--gum);
+    }
+    .tile__button-arrow svg { width: 62%; height: 62%; }
+    .tile.is-open .tile__button-arrow { transform: rotate(180deg); }
+
+    @media (prefers-reduced-motion: reduce) {
+        .tile__button,
+        .tile__text,
+        .tile__button-label,
+        .tile__button-arrow { transition-duration: 0.01ms; }
     }
 
     /* ---- Podcasts -------------------------------------------------------- */

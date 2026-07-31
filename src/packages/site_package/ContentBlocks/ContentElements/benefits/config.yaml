@@ -1,0 +1,54 @@
+name: lueg/benefits
+typeName: lueg_benefits
+group: default
+prefixFields: true
+prefixType: full
+basics:
+  - TYPO3/Appearance
+fields:
+  - identifier: header
+    useExistingField: true
+    label: 'Titel'
+    description: 'z. B. "Lueg – was mir dir biete"'
+  - identifier: bodytext
+    useExistingField: true
+    label: 'Einleitungstext'
+    description: 'Steht rechts neben dem Titel.'
+    enableRichtext: true
+    richtextConfiguration: site_package
+
+  - identifier: tiles
+    type: Collection
+    label: 'Kacheln'
+    description: 'Jede Kachel hat eine Farbe, einen Titel und einen kurzen Text, der per Button erscheint.'
+    labelField: title
+    fields:
+      - identifier: color
+        type: Select
+        renderType: selectSingle
+        label: 'Farbe'
+        default: sky
+        items:
+          - label: 'Hellblau'
+            value: sky
+          - label: 'Violett'
+            value: purple
+          - label: 'Orange'
+            value: orange
+          - label: 'Rosa'
+            value: pink
+          - label: 'Türkis'
+            value: teal
+      - identifier: icon
+        type: File
+        label: 'Icon (optional, SVG oder PNG)'
+        allowed: 'svg,png'
+      - identifier: title
+        type: Text
+        label: 'Titel'
+        required: true
+      - identifier: text
+        type: Textarea
+        label: 'Text (erscheint auf Klick)'
+        enableRichtext: true
+        richtextConfiguration: site_package

@@ -10,6 +10,9 @@ module.exports = {
     ],
     safelist: [
         'link-fixed',
+        // Tile colours are applied dynamically (tile--{color}), so the scanner
+        // never sees the literal class names — keep them explicitly.
+        { pattern: /^tile--(sky|purple|orange|pink|teal)$/ },
     ],
     theme: {
         extend: {

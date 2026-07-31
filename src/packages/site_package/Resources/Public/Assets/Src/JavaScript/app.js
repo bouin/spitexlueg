@@ -145,9 +145,45 @@ function initAccordions() {
     });
 }
 
+/**
+ * Benefit tiles: the button flips the tile open/closed. Position (left→right)
+ * is a CSS transition; here we add the "sticky gum" — a horizontal stretch that
+ * peaks mid-flight and snaps back — on the transform, which CSS leaves free.
+ */
+function initBenefitTiles() {
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    document.querySelectorAll('[data-tile-toggle]').forEach((button) => {
+        button.addEventListener('click', () => {
+            const tile = button.closest('.tile');
+            if (!tile) {
+                return;
+            }
+            const open = tile.classList.toggle('is-open');
+            button.setAttribute('aria-expanded', open ? 'true' : 'false');
+
+            if (reduce || typeof button.animate !== 'function') {
+                return;
+            }
+
+            // Squash-and-stretch: elongate horizontally, then settle.
+            button.animate(
+                [
+                    { transform: 'scaleX(1) scaleY(1)' },
+                    { transform: 'scaleX(1.5) scaleY(0.9)', offset: 0.4 },
+                    { transform: 'scaleX(0.92) scaleY(1.04)', offset: 0.72 },
+                    { transform: 'scaleX(1) scaleY(1)' },
+                ],
+                { duration: 600, easing: 'ease-in-out' }
+            );
+        });
+    });
+}
+
 document.addEventListener('DOMContentLoaded', async () => {
     initHeroCarousel();
     initAccordions();
+    initBenefitTiles();
     const players = await initPodcastPlayers();
     await initPodcastSliders(players);
 });
