@@ -414,10 +414,19 @@
             opacity 0.25s ease;
     }
 
+    /* video.js tints the button when the *player* is hovered
+       (.video-js:hover .vjs-big-play-button). Same specificity as the rule
+       above and later in the file, so it has to be overridden explicitly —
+       otherwise a dark blue box shows up around the triangle. */
+    .podcast__player.video-js:hover .vjs-big-play-button,
+    .podcast__player.video-js .vjs-big-play-button:focus,
+    .podcast__player.video-js .vjs-big-play-button:hover {
+        @apply border-0 bg-transparent shadow-none outline-none;
+    }
+
     /* Shrink a touch on hover instead of growing. */
     .podcast__player.video-js .vjs-big-play-button:hover,
     .podcast__player.video-js .vjs-big-play-button:focus-visible {
-        @apply bg-transparent;
         transform: translate(-50%, -50%) scale(0.9);
         opacity: 0.92;
     }
