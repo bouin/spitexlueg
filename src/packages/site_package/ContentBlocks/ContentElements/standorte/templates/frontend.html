@@ -30,7 +30,8 @@
                     <address class="map__card-address"><f:format.nl2br>{address}</f:format.nl2br></address>
                 </f:if>
                 <f:if condition="{link}">
-                    <f:link.typolink parameter="{link}" class="map__gmaps">
+                    <f:link.typolink parameter="{link}" target="_blank" class="map__gmaps"
+                                     additionalAttributes="{rel: 'noopener noreferrer'}">
                         <span>Google Maps</span>
                         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                     </f:link.typolink>
