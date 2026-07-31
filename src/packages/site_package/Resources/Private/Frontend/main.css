@@ -7,9 +7,8 @@
 
 /* Spitex Region Lueg — campaign design tokens. */
 @theme {
-    --color-lilac: #c8c2e8;
-    --color-lilac-soft: #d8d4ef;
-    --color-magenta: #e6007e;
+    --color-lilac: #b3a6da;
+    --color-badge: #a82d74;
     --color-navy: #2e3192;
     --color-spitex: #3aaa35;
     --font-display: "Poppins", ui-sans-serif, system-ui, sans-serif;
@@ -22,54 +21,70 @@
 }
 
 @layer components {
-    /* ---- Hero ---- */
+
+    /* ---- Hero banner (backend image as background-image) ---- */
     .hero {
-        @apply relative overflow-hidden bg-lilac;
+        @apply relative w-full overflow-hidden bg-lilac bg-cover bg-center;
+        aspect-ratio: 16 / 8;
+        border: 1px solid #9fb6d6;
     }
-    .hero__media {
-        @apply absolute inset-0 h-full w-full object-cover;
+    @media (max-width: 640px) {
+        .hero {
+            aspect-ratio: 4 / 5;
+        }
     }
-    /* Fade the photo into the lilac so the headline stays readable. */
-    .hero__scrim {
-        @apply absolute inset-0;
-        background: linear-gradient(180deg, rgba(200, 194, 232, 0) 45%, var(--color-lilac) 92%);
+
+    .hero__inner {
+        @apply absolute inset-0 mx-auto flex max-w-6xl flex-col justify-end px-6 pb-8 sm:pb-12;
     }
     .hero__title {
-        @apply relative font-display text-4xl font-extrabold uppercase leading-none tracking-tight text-white sm:text-6xl lg:text-7xl;
-        text-shadow: 0 2px 18px rgba(46, 49, 146, 0.25);
+        @apply font-display text-4xl font-extrabold uppercase leading-[0.95] tracking-tight text-white sm:text-6xl lg:text-7xl;
+        text-shadow: 0 2px 24px rgba(60, 50, 110, 0.35);
     }
 
     /* ---- "Freie Stellen" badge ---- */
-    .badge-circle {
-        @apply flex aspect-square items-center justify-center rounded-full bg-magenta text-center font-display font-bold uppercase leading-tight text-white;
+    .hero__badge {
+        @apply absolute right-4 top-4 flex aspect-square w-28 items-center justify-center rounded-full bg-badge text-center font-display text-base font-extrabold uppercase leading-tight text-white no-underline sm:right-10 sm:top-10 sm:w-44 sm:text-2xl;
+        transition: transform 0.2s ease;
+    }
+    .hero__badge:hover {
+        transform: scale(1.05);
     }
 
-    /* ---- Pill navigation ---- */
+    /* ---- White navigation bar ---- */
+    .navbar {
+        @apply mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-6 gap-y-4 bg-white px-6 py-5;
+    }
+
+    /* ---- Pill navigation (outlined) ---- */
     .pill-nav {
-        @apply flex flex-wrap items-center gap-1 rounded-full bg-white/95 px-2 py-2 shadow-lg backdrop-blur;
+        @apply flex flex-wrap items-center gap-3;
     }
     .pill-nav__link {
-        @apply rounded-full px-4 py-2 text-sm font-semibold uppercase tracking-wide text-navy no-underline transition-colors;
+        @apply rounded-full border-2 border-neutral-900 px-5 py-2 text-sm font-bold uppercase tracking-wide text-neutral-900 no-underline transition-colors;
     }
     .pill-nav__link:hover,
     .pill-nav__link.is-active {
-        @apply bg-navy text-white;
-    }
-    .pill-nav__link--cta {
-        @apply bg-magenta text-white;
-    }
-    .pill-nav__link--cta:hover {
-        @apply bg-navy text-white;
+        @apply bg-neutral-900 text-white;
     }
 
-    /* ---- Logo ---- */
+    /* ---- Spitex logo ---- */
     .brand {
-        @apply flex items-center gap-2 no-underline;
+        @apply flex items-center gap-3 no-underline;
+    }
+    .brand__mark {
+        @apply h-11 w-11 shrink-0;
+    }
+    .brand__text {
+        @apply flex flex-col leading-none;
+    }
+    .brand__claim {
+        @apply text-[0.6rem] font-medium text-neutral-500;
     }
     .brand__name {
-        @apply font-display text-lg font-bold leading-none text-navy;
+        @apply font-display text-2xl font-bold tracking-wide text-neutral-900;
     }
-    .brand__sub {
-        @apply block text-xs font-medium uppercase tracking-widest text-spitex;
+    .brand__region {
+        @apply text-sm font-semibold text-spitex;
     }
 }
