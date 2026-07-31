@@ -2,6 +2,12 @@ page = PAGE
 page {
     typeNum = 0
 
+    # Adobe Fonts (Typekit) — loaded before the site CSS so font-family can use it.
+    includeCSSLibs {
+        typekit = https://use.typekit.net/uza1kip.css
+        typekit.external = 1
+    }
+
     # Frontend assets, built by Vite/Tailwind from Resources/Public/Assets/Src/.
     includeCSS {
         site_package = EXT:site_package/Resources/Public/Assets/Dist/Css/app.css

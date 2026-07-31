@@ -13,6 +13,11 @@ module.exports = {
     ],
     theme: {
         extend: {
+            fontFamily: {
+                // Adobe Fonts kit uza1kip, loaded via page.includeCSSLibs.
+                sans: ['adelle', 'Georgia', 'serif'],
+                adelle: ['adelle', 'Georgia', 'serif'],
+            },
             colors: {
                 lilac: '#b3a6da',
                 badge: '#a82d74',
