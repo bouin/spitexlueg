@@ -30,6 +30,7 @@
                     </button>
                 </f:if>
 
+                <div class="podcasts__stagewrap">
                 <div class="podcasts__viewport swiper" data-podcast-swiper>
                     <div class="swiper-wrapper">
                         <f:for each="{data.episodes}" as="episode" iteration="it">
@@ -49,12 +50,6 @@
                                         </f:for>
                                     </video>
 
-                                    <f:comment><!-- Label is part of every episode, shown above the player --></f:comment>
-                                    <div class="podcast__label">
-                                        <span class="podcast__label-title">Podcast</span>
-                                        <span class="podcast__label-sub">Spitex Region Lueg</span>
-                                    </div>
-
                                     <div class="podcast__copy">
                                         <f:if condition="{episode.claim}">
                                             <p class="podcast__claim">{episode.claim}</p>
@@ -67,6 +62,17 @@
 
                             </article>
                         </f:for>
+                    </div>
+                </div>
+
+                    <f:comment>
+                        The label sits above the slider, not inside a slide: its text is the
+                        same for every episode, so it stays put while slides move and never
+                        disappears — not while swiping and not during playback.
+                    </f:comment>
+                    <div class="podcast__label">
+                        <span class="podcast__label-title">Podcast</span>
+                        <span class="podcast__label-sub">Spitex Region Lueg</span>
                     </div>
                 </div>
 
