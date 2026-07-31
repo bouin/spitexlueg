@@ -39,14 +39,17 @@
     /* ---- Hero banner ---------------------------------------------------- */
     /* The background image is set inline from the root page's "Media" field. */
     .hero {
-        @apply relative w-full overflow-hidden bg-center bg-cover;
+        @apply relative w-full overflow-hidden bg-center bg-cover bg-no-repeat;
         background-color: var(--color-lilac);
+        background-image: var(--hero-desktop, none);
         aspect-ratio: 16 / 9;
         border: 1px solid var(--hero-frame);
     }
 
     @media (max-width: 640px) {
         .hero {
+            /* Use the second media image on mobile, fall back to the desktop one. */
+            background-image: var(--hero-mobile, var(--hero-desktop, none));
             aspect-ratio: 3 / 4;
         }
     }

@@ -1,22 +1,39 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
       data-namespace-typo3-fluid="true">
 
-<f:comment><!-- Site-wide hero image: root page "Media" field, resolved to a URL for background-image --></f:comment>
-<f:variable name="heroUrl"><f:if condition="{heroImage}"><f:uri.image image="{heroImage}" maxWidth="2400"/></f:if></f:variable>
+<f:comment>
+    Hero media resolution:
+    {media}                  — "Media" field of the current page
+    {siteRoot.0.heroFiles}   — "Media" of the site root page (site-wide fallback)
+
+    The first image is used for desktop, an optional second one for mobile.
+    Both are handed to CSS as custom properties, so .hero can use background-image.
+</f:comment>
+<f:if condition="{media}">
+    <f:then><f:variable name="heroMedia" value="{media}"/></f:then>
+    <f:else><f:variable name="heroMedia" value="{siteRoot.0.heroFiles}"/></f:else>
+</f:if>
+
+<f:variable name="heroStyle"/>
+<f:for each="{heroMedia}" as="image" iteration="iterator">
+    <f:if condition="{iterator.index} == 0">
+        <f:variable name="heroStyle">--hero-desktop: url('<f:uri.image image="{image}" width="2000c" height="1125c"/>');</f:variable>
+    </f:if>
+    <f:if condition="{iterator.index} == 1">
+        <f:variable name="heroStyle">{heroStyle} --hero-mobile: url('<f:uri.image image="{image}" width="900c" height="1200c"/>');</f:variable>
+    </f:if>
+</f:for>
 
 <header class="site-header">
 
-    <f:if condition="{heroUrl}">
-        <f:then><div class="hero" style="background-image: url('{heroUrl}');"></f:then>
-        <f:else><div class="hero"></f:else>
-    </f:if>
+    <section class="hero"<f:if condition="{heroStyle}"> style="{heroStyle}"</f:if>>
 
         <a href="#freie-stellen" class="hero__badge">Freie<br>Stellen</a>
 
         <div class="hero__inner">
             <h1 class="hero__title">Chum zu üs<br>ids Team</h1>
         </div>
-    </div>
+    </section>
 
     <div class="navbar">
         <nav class="pill-nav" aria-label="Kampagnen-Navigation">

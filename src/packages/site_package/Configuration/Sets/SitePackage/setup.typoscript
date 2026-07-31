@@ -53,10 +53,17 @@ page {
                 titleField = nav_title // title
             }
 
-            # Site-wide hero media: read the "Media" field of the site root page,
-            # so an editor sets the hero image once on the root page for the whole site.
-            20 = TYPO3\CMS\Frontend\DataProcessing\DatabaseQueryProcessor
+            # {media} — "Media" field of the current page.
+            20 = TYPO3\CMS\Frontend\DataProcessing\FilesProcessor
             20 {
+                references.fieldName = media
+                as = media
+            }
+
+            # Fallback: "Media" of the site root page, so one hero image set on the
+            # root page serves the whole site unless a page overrides it.
+            30 = TYPO3\CMS\Frontend\DataProcessing\DatabaseQueryProcessor
+            30 {
                 table = pages
                 pidInList = root
                 recursive = 0
