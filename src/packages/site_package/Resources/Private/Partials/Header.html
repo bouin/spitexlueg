@@ -27,7 +27,7 @@
         <div class="hero__slides" data-hero-carousel>
             <f:for each="{heroMedia}" as="image" iteration="iterix">
                 <div class="hero__slide{f:if(condition: iterix.isFirst, then: ' is-active')}"
-                     style="background-image: url('<f:uri.image image="{image}" maxWidth="2400"/>');"
+                     style="background-image: url('<f:uri.image image="{image}" width="1920c" height="1280c"/>');"
                      role="img"
                      aria-label="{image.alternative}"></div>
             </f:for>

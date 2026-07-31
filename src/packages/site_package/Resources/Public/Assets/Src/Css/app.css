@@ -312,10 +312,11 @@
     }
 
     /* Stage: player plus overlays. */
+    /* Matches the 1920x1280 poster crop, so nothing is letterboxed. */
     .podcast__stage {
         @apply relative overflow-hidden;
         background-color: var(--color-teal);
-        aspect-ratio: 16 / 10;
+        aspect-ratio: 3 / 2;
     }
 
     .podcast__player.video-js {

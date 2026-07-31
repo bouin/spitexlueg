@@ -43,7 +43,7 @@
                                         preload="none"
                                         playsinline
                                         data-podcast-player
-                                        <f:if condition="{episode.poster.0}">poster="{f:uri.image(image: episode.poster.0, maxWidth: 1600)}"</f:if>>
+                                        <f:if condition="{episode.poster.0}">poster="{f:uri.image(image: episode.poster.0, width: '1920c', height: '1280c')}"</f:if>>
                                         <f:for each="{episode.mediafile}" as="file">
                                             <source src="{file.publicUrl}" type="{file.mimeType}">
                                         </f:for>
