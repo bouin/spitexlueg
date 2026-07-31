@@ -1,0 +1,186 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:spaceless>
+    <div class="grid grid-cols-12">
+        <div class="col-span-12">
+            <f:for each="{data.immoimage}" as="image">
+                <div class="hidden md:block">
+                    <f:image image="{image}" class="w-full h-auto" width="1920c" height="1080c" />
+                </div>
+            </f:for>    
+            <f:if condition="{data.immoimage.0}">
+                <div class="block md:hidden">
+                    <f:for each="{data.immoimage}" as="image">
+                        <div class="w-full {f:if(condition: data.checkboxheight, then: 'h-full', else: 'minmin-h h-[60vh]')} bg-cover bg-center" style="background-image: url('{f:uri.image(image: image)}');"></div>
+                    </f:for>
+                </div>
+            </f:if>
+        </div>
+    </div>
+    <div class="grid grid-cols-12" id="kaufen">
+        <div class="col-span-12 md:col-span-4 lg:col-span-4 xl:col-span-3">
+            <nav class="top-0 left-0 p-3 md:p-5 text-black">
+                <ul class="font-medium">
+                    <li>
+                        <a href="#kaufen" class="link-underline checkifactive">Immobilie&nbsp;kaufen</a>
+                    </li>
+                    <li>
+                        <a href="#verkaufen" class="link-underline">Immobilie&nbsp;verkaufen</a>
+                    </li>
+                    <li>
+                        <a href="#bewerten" class="link-underline">Immobilie&nbsp;bewerten</a>
+                    </li>
+                    <li>
+                        <a href="#uber-mich" class="link-underline">Über&nbsp;mich</a>
+                    </li>
+                    <li>
+                        <a href="#kontakt" class="link-underline">Kontakt</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div class="col-span-12 md:col-span-0 p-3 md:p-5 block md:hidden">
+            <div id="myid-9">
+                <div class="col-span-12 md:col-span-9  pr-2 [&_p]:!mb-0">
+                    <f:format.html>{data.maintext}</f:format.html>    
+                </div>
+            </div>
+        </div>
+        <div class="col-span-12 md:col-span-7 lg:col-span-6 xl:col-span-6 pt-5">
+
+            <f:cObject typoscriptObjectPath="lib.topnews"></f:cObject>
+
+        </div>
+            <div class="col-span-12 md:col-span-1 lg:col-span-2 xl:col-span-3">
+            </div>
+        </div>
+        <div class="col-span-12">
+            <!-- Coming soon properties -->
+             <!-- Coming soon properties -->
+              <!-- Coming soon properties -->
+            <div class="grid grid-cols-12">
+            
+            <div class="col-span-12 md:col-span-4 lg:col-span-4 xl:col-span-3">
+                <!-- empty NIXcolumn  --> 
+            </div>
+            
+            <div class="col-span-12 md:col-span-7 lg:col-span-6 xl:col-span-6 pt-5">
+                <f:if condition="{data.comingsoonnews}">
+                    <f:then>
+                        <div class="p-3 md:p-0">
+                            <hr class=" border-t border-black pb-1 md:pb-2">
+                        </div>
+                        <p class="text-center !text-[17px] leading-[1.2em]">{data.titel}</p>
+                    </f:then>
+                </f:if>
+
+                <f:cObject typoscriptObjectPath="lib.comingsoonnews"></f:cObject>
+
+            </div>
+                <div class="col-span-12 md:col-span-1 lg:col-span-2 xl:col-span-3">
+                </div>
+            </div>
+        
+            </div>
+            <!-- Coming soon properties -->
+             <!-- Coming soon properties -->
+              <!-- Coming soon properties -->
+        </div>
+    </div>
+    
+    <div class="grid grid-cols-12 gap-0 relative hidden md:grid">
+        <div class="col-span-12 md:col-span-8 lg:col-span-6">
+            <div class="relative">
+                <div class="p-5 pt-[5vw]" id="myid-8">
+                    <f:format.html>{data.maintext}</f:format.html>
+                </div>
+            </div>
+            <div class="relative w-full"></div>    
+        </div>
+        
+    </div>
+
+</f:spaceless>
+
+<style>
+    .property-item {
+        opacity: 1;
+        transition: opacity 0.5s ease-in-out;
+    }
+    
+    .property-item.hidden {
+        opacity: 0;
+        display: none;
+    }
+    
+    .property-item.fade-in {
+        display: block;
+        animation: fadeIn 0.5s ease-in-out forwards;
+    }
+    
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const loadMoreBtn = document.querySelector('.load-more-properties');
+        const loadMoreBtn2 = document.querySelector('.load-more-properties2');
+
+        const hiddenProperties = document.querySelectorAll('.property-item.hidden');
+        const hiddenProperties2 = document.querySelectorAll('.property-item-2.hidden');
+        
+        if (loadMoreBtn && hiddenProperties.length === 0) {
+            loadMoreBtn.style.display = 'none';
+        }
+        if (loadMoreBtn2 && hiddenProperties2.length === 0) {
+            loadMoreBtn2.style.display = 'none';
+        }
+        
+        if (loadMoreBtn) {
+            loadMoreBtn.addEventListener('click', function() {
+                const hiddenProperties = document.querySelectorAll('.property-item.hidden');
+                let counter = 0;
+                
+                hiddenProperties.forEach(function(property) {
+                    if (counter < 3) {
+                        property.classList.remove('hidden');
+                        property.classList.add('fade-in');
+                        counter++;
+                    }
+                });
+                
+                if (loadMoreBtn && document.querySelectorAll('.property-item.hidden').length === 0) {
+                    loadMoreBtn.style.display = 'none';
+                }
+            });
+        }
+
+        if (loadMoreBtn2) {
+            loadMoreBtn2.addEventListener('click', function() {
+                const hiddenProperties = document.querySelectorAll('.property-item-2.hidden');
+                let counter = 0;
+                
+                hiddenProperties.forEach(function(property) {
+                    if (counter < 3) {
+                        property.classList.remove('hidden');
+                        property.classList.add('fade-in');
+                        counter++;
+                    }
+                });
+                
+                if (loadMoreBtn2 && document.querySelectorAll('.property-item-2.hidden').length === 0) {
+                    loadMoreBtn2.style.display = 'none';
+                }
+            });
+        }
+    });
+</script>
+</html>

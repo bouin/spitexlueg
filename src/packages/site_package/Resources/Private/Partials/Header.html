@@ -1,12 +1,11 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
       data-namespace-typo3-fluid="true">
 
-<f:comment><!-- Resolve the site-wide hero image (root page "Media") to a URL for background-image --></f:comment>
+<f:comment><!-- Site-wide hero image: root page "Media" field, resolved to a URL for background-image --></f:comment>
 <f:variable name="heroUrl"><f:if condition="{heroImage}"><f:uri.image image="{heroImage}" maxWidth="2400"/></f:if></f:variable>
 
 <header class="site-header">
 
-    <f:comment><!-- Hero banner: backend image as background-image --></f:comment>
     <f:if condition="{heroUrl}">
         <f:then><div class="hero" style="background-image: url('{heroUrl}');"></f:then>
         <f:else><div class="hero"></f:else>
@@ -19,7 +18,6 @@
         </div>
     </div>
 
-    <f:comment><!-- White bar: pill navigation (left) + Spitex logo (right) --></f:comment>
     <div class="navbar">
         <nav class="pill-nav" aria-label="Kampagnen-Navigation">
             <a class="pill-nav__link" href="#podcasts">Podcasts</a>
@@ -29,16 +27,11 @@
             <a class="pill-nav__link" href="#standorte">Standorte Spitex Region Lueg</a>
         </nav>
 
-        <a class="brand" href="{f:uri.page(pageUid: site.rootPageId)}" aria-label="Spitex Region Lueg">
-            <svg class="brand__mark" viewBox="0 0 48 48" aria-hidden="true">
-                <path fill="#0091d0" d="M23 6c-9 1-16 8-16 17 0 4 2 8 5 10-1-9 4-18 11-27z"/>
-                <path fill="#3aaa35" d="M25 42c9-1 16-8 16-17 0-4-2-8-5-10 1 9-4 18-11 27z"/>
-            </svg>
-            <span class="brand__text">
-                <span class="brand__claim">Überall für alle</span>
-                <span class="brand__name">SPITEX</span>
-                <span class="brand__region">Region Lueg</span>
-            </span>
+        <a class="brand" href="{f:uri.page(pageUid: site.rootPageId)}">
+            <img class="brand__logo"
+                 src="{f:uri.resource(path: 'Images/spitex-region-lueg.svg', extensionName: 'SitePackage')}"
+                 alt="Spitex Region Lueg"
+                 width="260" height="76">
         </a>
     </div>
 

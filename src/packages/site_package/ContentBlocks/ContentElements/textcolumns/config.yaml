@@ -1,0 +1,39 @@
+name: danidani/textcolumns
+typeName: danidani_textcolumns
+group: default
+prefixFields: true
+prefixType: full
+basics:
+  - TYPO3/Appearance
+  - TYPO3/Links
+  - TYPO3/Categories
+fields:
+  - identifier: header
+    useExistingField: true
+    label: 'Header (It is NOT rendered in Frontend)'
+  - identifier: longer
+    type: Textarea
+    enableRichtext: true
+    label: 'Text for the first column'
+    required: false
+    richtextConfiguration: full
+  - identifier: longer2
+    type: Textarea
+    enableRichtext: true
+    label: 'Text for the first column -> part two'
+    required: false
+    richtextConfiguration: full
+  - identifier: shorter
+    type: Textarea
+    enableRichtext: true
+    label: 'Text for the second column'
+    required: false
+    richtextConfiguration: full
+  - identifier: phone
+    type: Text
+    label: 'Phone number'
+    required: false
+  - identifier: email
+    type: Text
+    label: 'Email'
+    required: false

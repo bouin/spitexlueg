@@ -10,8 +10,8 @@
 /config/*
 !/config/sites/
 
-# Node / frontend build
-/node_modules/
+# Node / frontend build (root and inside packages)
+node_modules/
 
 # IDE / tooling
 /.idea/

@@ -1,0 +1,69 @@
+<html xmlns:be="http://typo3.org/ns/TYPO3/CMS/Backend/ViewHelpers" data-namespace-typo3-fluid="true">
+
+<f:layout name="Preview"/>
+
+<f:section name="Header">
+    <be:link.editRecord uid="{data.uid}" table="{data.mainType}"><h1>{data.header}</h1></be:link.editRecord>
+</f:section>
+
+<f:section name="Content">
+    <style>
+        .bg-red {
+    background-color: #C87A74;
+    }
+
+    .bg-green {
+        background-color: #C3C4B5;
+    }
+    .colorspace-container {
+        color: black !important;
+    }
+    </style>
+    <!-- Start of the content rendering -->
+    <div class="colorspace-container colorspace-container-{data.select} p-5 
+        <f:if condition="{data.select}==one">
+            <f:then>
+                bg-red
+            </f:then>
+            <f:else>
+                bg-green
+            </f:else>
+        </f:if>
+    ">
+        <div class="grid grid-cols-12">
+            <div class="col-span-12 md:col-span-3">
+                <nav class="top-0 left-0 text-black">
+                    <ul class="font-medium">
+                        <li>
+                            <a href="#kaufen" class="link-underline">Immobilie kaufen</a>
+                        </li>
+                        <li>
+                            <a href="#verkaufen" class="link-underline {f:if(condition: data.verkaufen, then:'checkifactive')}">Immobilie verkaufen</a>
+                        </li>
+                        <li>
+                            <a href="#bewerten" class="link-underline {f:if(condition: data.bewerten, then:'checkifactive')}">Immobilie bewerten</a>
+                        </li>
+                        <li>
+                            <a href="#uber-mich" class="link-underline">Über mich</a>
+                        </li>
+                        <li>
+                            <a href="#kontakt" class="link-underline">Kontakt</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="col-span-12 md:col-span-9 pt-5 pb-[14vw]">
+                <div class="grid grid-cols-12">
+                    <div class="col-span-12 md:col-span-7">
+                        <f:transform.html>{data.longText}</f:transform.html>
+                    </div>
+                    <div class="col-span-12 md:col-span-5 pl-5">
+                        <a class="mail-arrow" href="mailto:waser@adowia.ch">{data.mailus}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</f:section>
+
+</html>

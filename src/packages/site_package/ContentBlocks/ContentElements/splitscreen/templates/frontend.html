@@ -1,0 +1,99 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:spaceless>
+    <div id="c{data.uid}" class="contentblock-element frame frame-{data.frame_class} frame-type-{data.CType} frame-layout-{data.layout}{f:if(condition: data.space_before_class, then: ' frame-space-before-{data.space_before_class}')}{f:if(condition: data.space_after_class, then: ' frame-space-after-{data.space_after_class}')}">
+        <div class="grid {f:if(condition: data.image1.0, then: 'grid-cols-1 md:grid-cols-2', else: 'grid-cols-1 xl:grid-cols-2')} gap-0 relative {f:if(condition: data.checkboxheight, then: 'min-h-[600px] h-[calc(100vh-var(--header-height))]')}" id="{f:if(condition: data.checkformenu, then:'uber-mich')}">
+            <!-- Left Image -->
+            <div class="relative w-full">
+                <f:if condition="{data.image1.0}">
+                    <f:then>
+                        <div class="w-full {f:if(condition: data.checkboxheight, then: 'h-full', else: 'minmin-h h-[60vh]')} bg-cover bg-center" style="background-image: url('{f:uri.image(image: data.image1.0)}');"></div>
+                    
+                        <!-- Menu overlay if checkbox is checked -->
+                        <f:if condition="{data.checkboxes}">
+                            <nav class="absolute top-0 left-0 p-5 text-black">
+                                <ul class="font-medium">
+                                    <li>
+                                        <a href="#kaufen" class="link-underline">Immobilie kaufen</a>
+                                    </li>
+                                    <li>
+                                        <a href="#verkaufen" class="link-underline">Immobilie verkaufen</a>
+                                    </li>
+                                    <li>
+                                        <a href="#bewerten" class="link-underline">Immobilie bewerten</a>
+                                    </li>
+                                    <li>
+                                        <a href="#uber-mich" class="link-underline {f:if(condition: data.checkformenu, then:'checkifactive')}">Über mich</a>
+                                    </li>
+                                    <li>
+                                        <a href="#kontakt" class="link-underline">Kontakt</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </f:if>
+                        <f:if condition="{data.textus}">
+                            <div class="absolute left-0 bottom-0 p-5 pr-5  text-black">
+                                <div class="text-black">
+                                    <p>Dominique Andreas Waser</p>
+                                    <p><span class="mail-arrow">Inhaber, Geschäftsführer</span></p>
+                                    <br>
+                                </div>
+                                <div id="mybr-{data.uid}">
+                                    <f:format.html>{data.textus}</f:format.html>
+                                </div>
+                            </div>
+                        </f:if>
+                    </f:then>
+                    <f:else>
+                        <div class="w-full bg-cover bg-center"></div>
+                        <!-- f:if(condition: data.checkboxheight, then: 'h-full', else: 'minmin-h h-[60vh]')} -->
+                        <!-- Menu overlay if checkbox is checked -->
+                        <f:if condition="{data.checkboxes}">
+                            <nav class="relative xl:absolute top-0 left-0 p-5 text-black">
+                                <ul class="font-medium">
+                                    <li>
+                                        <a href="#kaufen" class="link-underline">Immobilie&nbsp;kaufen</a>
+                                    </li>
+                                    <li>
+                                        <a href="#verkaufen" class="link-underline">Immobilie&nbsp;verkaufen</a>
+                                    </li>
+                                    <li>
+                                        <a href="#bewerten" class="link-underline">Immobilie&nbsp;bewerten</a>
+                                    </li>
+                                    <li>
+                                        <a href="#uber-mich" class="link-underline {f:if(condition: data.checkformenu, then:'checkifactive')}">Über&nbsp;mich</a>
+                                    </li>
+                                    <li>
+                                        <a href="#kontakt" class="link-underline">Kontakt</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </f:if>
+                        <f:if condition="{data.textus}">
+                            <div class="relative xl:absolute left-0 bottom-0 p-5 pr-5  text-black">
+                                <div id="mybr-{data.uid}" class="pr-12">
+                                    <f:format.html>{data.textus}</f:format.html>
+                                </div>
+                            </div>
+                        </f:if>
+                    </f:else>
+                </f:if>
+            </div>
+
+            <!-- Right Image -->
+            <div class="relative w-full">
+                <f:if condition="{data.image2.0}">
+                    <div class="w-full {f:if(condition: data.checkboxheight, then: 'h-full', else: 'minmin-h h-[60vh]')} bg-cover bg-center" style="background-image: url('{f:uri.image(image: data.image2.0)}');"></div>
+                    
+                    <!-- Text overlay if available -->
+                    <f:if condition="{data.text}">
+                        <div class="absolute top-4 right-4 text-white">
+                            
+                            <h1><f:format.stripTags allowedTags="br">{data.text}</f:format.stripTags></h1>
+                        </div>
+                    </f:if>
+                </f:if>
+            </div>
+        </div>
+    </div>
+</f:spaceless>
+</html>

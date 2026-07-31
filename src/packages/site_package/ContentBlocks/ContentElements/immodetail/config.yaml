@@ -1,0 +1,51 @@
+name: danidani/immodetail
+typeName: danidani_immodetail
+group: default
+prefixFields: true
+prefixType: full
+basics:
+  - TYPO3/Appearance
+  - TYPO3/Links
+  - TYPO3/Categories
+fields:
+  - identifier: header
+    useExistingField: true
+    label: 'Nur zur Orientierung (es wird nicht angezeigt)'
+  - identifier: nameoftheproperty
+    type: Textarea
+    enableRichtext: true
+    label: 'Name der Immobilie (in zwei Zeilen: Name + Strasse)'
+    required: false
+    richtextConfiguration: full
+  - identifier: longerdetails
+    type: Textarea
+    enableRichtext: true
+    label: 'Text für die Details. Fügen Sie die Details hinzu, wie Baujahr, Grundstücksgrösse usw.'
+    required: false
+    richtextConfiguration: full
+  - identifier: longertext
+    type: Textarea
+    enableRichtext: true
+    label: 'Text für die Details. Fügen Sie eine ausführliche Beschreibung hinzu.'
+    required: false
+    richtextConfiguration: full
+  - identifier: text1
+    type: Text
+    label: 'E-Mail-Adresse für Kontakt'
+    required: false
+  - identifier: textformemail
+    type: Text
+    label: 'Der Text für den Link, am besten: Verkaufsdokumentation anfordern'
+    required: false
+  - identifier: vimeoId
+    type: Text
+    label: 'Vimeo Video-ID (Video im Querformat)'
+    required: false
+  - identifier: images
+    type: File
+    label: 'Bilder für den Slider (max 12 Bilder)'
+    required: false
+    multiple: true
+    maxItems: 12
+    enableSorting: true
+    enableDragAndDrop: true  

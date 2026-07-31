@@ -1,0 +1,11 @@
+{
+  "Resources/Public/Assets/Src/JavaScript/app.js": {
+    "file": "JavaScript/app.js",
+    "name": "app",
+    "src": "Resources/Public/Assets/Src/JavaScript/app.js",
+    "isEntry": true,
+    "css": [
+      "Css/app.css"
+    ]
+  }
+}

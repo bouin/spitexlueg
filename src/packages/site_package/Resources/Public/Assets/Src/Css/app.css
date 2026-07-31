@@ -1,0 +1,118 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ==========================================================================
+   Spitex Region Lueg — Kampagne "Chum zu üs ids Team"
+   ========================================================================== */
+
+:root {
+    --color-lilac: #b3a6da;
+    --color-badge: #a82d74;
+    --color-ink: #1a1a1a;
+    --color-spitex-green: #009e5c;
+    --color-spitex-blue: #0091d0;
+    --hero-frame: #9fb6d6;
+}
+
+@layer base {
+    html {
+        scroll-behavior: smooth;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        color: var(--color-ink);
+    }
+
+    body {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        line-height: 1.5;
+    }
+
+    h1, h2, h3 {
+        line-height: 1;
+        letter-spacing: -0.01em;
+    }
+}
+
+@layer components {
+
+    /* ---- Hero banner ---------------------------------------------------- */
+    /* The background image is set inline from the root page's "Media" field. */
+    .hero {
+        @apply relative w-full overflow-hidden bg-center bg-cover;
+        background-color: var(--color-lilac);
+        aspect-ratio: 16 / 9;
+        border: 1px solid var(--hero-frame);
+    }
+
+    @media (max-width: 640px) {
+        .hero {
+            aspect-ratio: 3 / 4;
+        }
+    }
+
+    .hero__inner {
+        @apply absolute inset-0 flex flex-col justify-end p-6 sm:p-12;
+    }
+
+    .hero__title {
+        @apply text-4xl font-bold uppercase text-white sm:text-6xl lg:text-7xl;
+        line-height: 0.95;
+    }
+
+    /* ---- "Freie Stellen" badge ------------------------------------------ */
+    .hero__badge {
+        @apply absolute flex aspect-square items-center justify-center rounded-full text-center font-bold uppercase text-white no-underline;
+        background-color: var(--color-badge);
+        top: 1rem;
+        right: 1rem;
+        width: 7rem;
+        font-size: 0.95rem;
+        line-height: 1.1;
+        transition: transform 0.2s ease;
+    }
+
+    @screen sm {
+        .hero__badge {
+            top: 3rem;
+            right: 3rem;
+            width: 13rem;
+            font-size: 1.75rem;
+        }
+    }
+
+    .hero__badge:hover {
+        transform: scale(1.04);
+    }
+
+    /* ---- Navigation bar below the hero ---------------------------------- */
+    .navbar {
+        @apply flex flex-wrap items-center justify-between gap-x-8 gap-y-4 bg-white px-6 py-5;
+    }
+
+    .pill-nav {
+        @apply flex flex-wrap items-center gap-3;
+    }
+
+    .pill-nav__link {
+        @apply rounded-full border px-5 py-2 text-xs font-bold uppercase no-underline transition-colors;
+        border-color: var(--color-ink);
+        color: var(--color-ink);
+        letter-spacing: 0.02em;
+    }
+
+    .pill-nav__link:hover,
+    .pill-nav__link.is-active {
+        background-color: var(--color-ink);
+        @apply text-white;
+    }
+
+    /* ---- Logo ------------------------------------------------------------ */
+    .brand {
+        @apply block shrink-0 no-underline;
+    }
+
+    .brand__logo {
+        @apply h-12 w-auto sm:h-14;
+    }
+}

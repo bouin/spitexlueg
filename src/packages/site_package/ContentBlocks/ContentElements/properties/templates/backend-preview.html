@@ -1,0 +1,102 @@
+<html xmlns:be="http://typo3.org/ns/TYPO3/CMS/Backend/ViewHelpers" data-namespace-typo3-fluid="true">
+
+<f:layout name="Preview"/>
+
+<f:section name="Header">
+    <be:link.editRecord uid="{data.uid}" table="{data.mainType}"><h1>{data.header}</h1></be:link.editRecord>
+</f:section>
+
+<f:section name="Content">
+
+    <!-- Start of the content rendering -->
+    <div class="container-fluid">
+        <!-- Image Section -->
+        <div class="row">
+            <div class="col-12">
+                <f:for each="{data.immoimage}" as="image">
+                    <div class="d-none d-md-block">
+                        <f:image image="{image}" class="img-fluid w-100" width="1920c" height="1080c" />
+                    </div>
+                </f:for>    
+                <f:if condition="{data.immoimage.0}">
+                    <div class="d-block d-md-none">
+                        <f:for each="{data.immoimage}" as="image">
+                            <div class="w-100 {f:if(condition: data.checkboxheight, then: 'h-100', else: 'min-vh-75')}" 
+                                 style="background-image: url('{f:uri.image(image: image)}'); background-size: cover; background-position: center;">
+                            </div>
+                        </f:for>
+                    </div>
+                </f:if>
+            </div>
+        </div>
+
+        <!-- Navigation and Content Section -->
+        <div class="row" id="kaufen">
+            <!-- Navigation Sidebar -->
+            <div class="col-12 col-md-4 col-lg-4 col-xl-3">
+                <nav class="p-3 p-md-5 text-dark">
+                    <ul class="list-unstyled fw-medium">
+                        <li class="mb-2">
+                            <a href="#kaufen" class="text-decoration-underline checkifactive">Immobilie&nbsp;kaufen</a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="#verkaufen" class="text-decoration-underline">Immobilie&nbsp;verkaufen</a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="#bewerten" class="text-decoration-underline">Immobilie&nbsp;bewerten</a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="#uber-mich" class="text-decoration-underline">Über&nbsp;mich</a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="#kontakt" class="text-decoration-underline">Kontakt</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+
+            <!-- Mobile Text Section -->
+            <div class="col-12 d-block d-md-none p-3">
+                <div id="myid-9">
+                    <div class="pe-2">
+                        <f:transform.html>{data.maintext}</f:transform.html>    
+                    </div>
+                </div>
+            </div>
+
+            <!-- Properties Grid -->
+            <div class="col-12 col-md-7 col-lg-6 pt-5">
+                <p>Immobilien werden automatisch generiert (NEWS)</p>
+            </div>
+
+            <!-- Coming Soon Properties Section -->
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-12 col-md-7 col-lg-6 offset-md-4 offset-lg-4 pt-5">
+                        <div class="p-3 p-md-0">
+                            <hr class="border-dark">
+                        </div>
+                        
+                        <p class="text-center fs-6">{data.titel}</p>
+
+                        <p>Coming Soon Immobilien werden automatisch generiert (NEWS)</p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Desktop Text Section -->
+        <div class="row d-none d-md-flex">
+            <div class="col-12 col-md-8 col-lg-6">
+                <div class="position-relative">
+                    <div class="p-5" id="myid-8">
+                        <f:transform.html>{data.maintext}</f:transform.html>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</f:section>
+
+</html>

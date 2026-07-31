@@ -1,0 +1,39 @@
+name: danidani/colorspace
+typeName: danidani_colorspace
+group: default
+prefixFields: true
+prefixType: full
+basics:
+  - TYPO3/Appearance
+  - TYPO3/Links
+  - TYPO3/Categories
+fields:
+  - identifier: header
+    useExistingField: true
+    label: 'Header (It is NOT rendered in Frontend)'
+  - identifier: select
+    type: Select
+    renderType: selectSingle
+    items:
+      - label: 'Red color'
+        value: one
+      - label: 'Green color'
+        value: two
+  - identifier: bewerten
+    type: Checkbox
+    label: 'Bewerten?'
+    required: false
+  - identifier: verkaufen
+    type: Checkbox
+    label: 'Verkaufen?'
+    required: false
+  - identifier: mailus
+    type: Text
+    label: 'Text for mail'
+    required: false
+  - identifier: longText
+    type: Textarea
+    enableRichtext: true
+    label: 'Text about offer'
+    required: false
+    richtextConfiguration: full

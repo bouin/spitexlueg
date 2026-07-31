@@ -2,8 +2,15 @@ page = PAGE
 page {
     typeNum = 0
 
-    # Frontend assets (CSS/JS) are handled by Vite via the <vite:asset> ViewHelper
-    # in Resources/Private/Layouts/Default.html — see EXT:site_package Configuration/ViteEntrypoints.json.
+    # Frontend assets, built by Vite/Tailwind from Resources/Public/Assets/Src/.
+    includeCSS {
+        site_package = EXT:site_package/Resources/Public/Assets/Dist/Css/app.css
+    }
+
+    includeJSFooter {
+        site_package = EXT:site_package/Resources/Public/Assets/Dist/JavaScript/app.js
+        site_package.type = module
+    }
 
     10 = FLUIDTEMPLATE
     10 {

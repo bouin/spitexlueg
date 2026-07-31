@@ -1,0 +1,23 @@
+<html xmlns:be="http://typo3.org/ns/TYPO3/CMS/Backend/ViewHelpers" data-namespace-typo3-fluid="true">
+
+<f:layout name="Preview"/>
+
+<f:section name="Header">
+    <be:link.editRecord uid="{data.uid}" table="{data.mainType}"><h1>{data.header}</h1></be:link.editRecord>
+</f:section>
+
+<f:section name="Content">
+    <div class="grid grid-12 p-3 md:p-5 pb-8 md:pb-12 pt-3 md:pt-10 pb-3 md:pb-18">
+        <div class="col-span-12 md:col-span-10 md:col-start-2">
+            <div class="">
+                <f:if condition="{data.longtext}">
+                    <f:then>
+                        <f:transform.html>{data.longtext}</f:transform.html>
+                    </f:then>
+                </f:if>
+            </div>
+        </div>
+    </div>
+</f:section>
+
+</html>

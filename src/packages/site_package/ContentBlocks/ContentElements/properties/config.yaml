@@ -1,0 +1,31 @@
+name: danidani/properties
+typeName: danidani_properties
+group: default
+prefixFields: true
+prefixType: full
+basics:
+  - TYPO3/Appearance
+  - TYPO3/Links
+  - TYPO3/Categories
+fields:
+  - identifier: header
+    useExistingField: true
+    label: 'Header (It is NOT rendered in Frontend)'
+  - identifier: titel
+    type: Text
+    label: 'Titel, for example:"Immobilie in Kürze verfügbar"'
+    required: false
+  - identifier: immoimage
+    type: File
+    extendedPalette: true
+    allowed: jpg, png, webp 
+    required: false
+    label: 'Main image for the properties'
+  - identifier: maintext
+    type: Textarea
+    enableRichtext: true
+    label: 'Main text for the properties'
+    required: false
+  - identifier: comingsoonnews
+    type: Checkbox
+    label: 'Enable coming soon properties'

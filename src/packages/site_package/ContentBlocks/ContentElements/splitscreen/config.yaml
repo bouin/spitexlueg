@@ -1,0 +1,50 @@
+name: danidani/splitscreen
+typeName: danidani_splitscreen
+group: default
+prefixFields: true
+prefixType: full
+basics:
+  - TYPO3/Appearance
+  - TYPO3/Links
+  - TYPO3/Categories
+fields:
+  - identifier: header
+    useExistingField: true
+    label: 'Header (It is NOT rendered in Frontend)'
+  - identifier: checkboxes
+    type: Checkbox
+    label: 'Show menu on the image?'
+    required: false
+  - identifier: checkformenu
+    type: Checkbox
+    label: 'Menu: About me?'
+    required: false
+  - identifier: checkboxheight
+    type: Checkbox
+    label: 'Height 100vh?'
+    required: false
+  - identifier: image1
+    type: File
+    extendedPalette: true
+    allowed: common-image-types
+    required: false
+    label: 'Image 1'
+    maxitems: 1
+  - identifier: image2
+    type: File
+    extendedPalette: true
+    allowed: common-image-types
+    required: false
+    label: 'Image 2'
+    maxitems: 1
+  - identifier: text
+    type: Text
+    label: 'Text'
+    default: 'Text'
+    required: false
+  - identifier: textus
+    type: Textarea
+    enableRichtext: true
+    label: 'Text abuout me'
+    required: false
+    richtextConfiguration: full

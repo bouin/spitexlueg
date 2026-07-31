@@ -1,0 +1,51 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:spaceless>
+    <div class="colorspace-container colorspace-container-{data.select} p-3 md:p-5" id="{f:if(condition: data.verkaufen, then: 'verkaufen')}{f:if(condition: data.bewerten, then: 'bewerten')}">
+        <div class="grid grid-cols-12">
+            <div class="col-span-12 lg:col-span-3">
+                <nav class="top-0 left-0 text-black">
+                    <ul class="font-medium ">
+                        <li>
+                            <a href="#kaufen" class=" leading-[1.2em] link-underline">Immobilie kaufen</a>
+                        </li>
+                        <li>
+                            <a href="#verkaufen" class="leading-[1.2em] link-underline {f:if(condition: data.verkaufen, then:'checkifactive')}">Immobilie verkaufen</a>
+                        </li>
+                        <li>
+                            <a href="#bewerten" class="leading-[1.2em] link-underline {f:if(condition: data.bewerten, then:'checkifactive')}">Immobilie bewerten</a>
+                        </li>
+                        <li>
+                            <a href="#uber-mich" class="leading-[1.2em] link-underline">Über mich</a>
+                        </li>
+                        <li>
+                            <a href="#kontakt" class="leading-[1.2em] link-underline">Kontakt</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="col-span-12 lg:col-span-9 pt-7 md:pt-5 pb-[8vw] md:pb-[14vw]">
+                <div class="grid grid-cols-12">
+                    <div class="col-span-12 xl:col-span-7 pl-0 lg:pl-2 xl:pl-2">
+                        <f:format.html>{data.longText}</f:format.html>
+                    </div>
+                    <div class="col-span-12 xl:col-span-5 pl-0 md:pl-5 pt-12 xl:pt-0 lx:pl-0">
+                        <f:if condition="{data.bewerten}">
+                            <f:then>
+                                <a class="link-underline mail-arrow" href="#kontakt">{data.mailus}</a>
+                            </f:then>
+                            <f:else>
+                                <f:link.email 
+                                email="info@adowia.ch" 
+                                class="link-underline mail-arrow works2334 {data.mailus}3"
+                                additionalAttributes="{spamProtectEmailAddresses: 'ascii'}"
+                            >{data.mailus}</f:link.email>
+                            </f:else>
+                            
+                        </f:if>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</f:spaceless>
+</html>

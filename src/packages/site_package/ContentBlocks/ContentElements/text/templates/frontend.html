@@ -1,0 +1,15 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:spaceless>
+    <div class="itouchedthetext grid grid-12 p-3 md:p-5 pb-8 md:pb-12 pt-3 md:pt-10 pb-3 md:pb-18">
+        <div class="col-span-12 md:col-span-10 md:col-start-1">
+            <div class="">
+                <f:if condition="{data.longtext}">
+                    <f:then>
+                        <f:transform.html>{data.longtext}</f:transform.html>
+                    </f:then>
+                </f:if>
+            </div>
+        </div>
+    </div>
+</f:spaceless>
+</html>

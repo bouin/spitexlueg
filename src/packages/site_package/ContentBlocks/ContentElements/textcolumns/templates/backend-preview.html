@@ -1,0 +1,63 @@
+<html xmlns:be="http://typo3.org/ns/TYPO3/CMS/Backend/ViewHelpers" data-namespace-typo3-fluid="true">
+
+<f:layout name="Preview"/>
+
+<f:section name="Header">
+    <be:link.editRecord uid="{data.uid}" table="{data.mainType}"><h1>{data.header}</h1></be:link.editRecord>
+</f:section>
+
+<f:section name="Content">
+    <div class="bg-[#ECE6DA] p-3 md:p-5 pb-8 md:pb-24">
+        <div class="flex flex-col md:flex-row md:gap-5">
+            <div class="w-full md:w-6/12 block md:hidden pb-8">
+                <div class="flex flex-col md:flex-row">
+                    <div class="w-full md:w-6/12 pb-5">
+                        <p>
+                            ADOWIA Immobilien AG <br>
+                            <a target="_blank" class="link-underline" href="https://maps.app.goo.gl/1xj1htwgQGJrc5Yw6">
+                                Neufeldstrasse 56<br>
+                                3604 Thun<br>
+                            </a>
+                        </p>
+                    </div>
+                    <div class="w-full md:w-6/12 pl-0">
+                        <p>
+                            <a class="link-underline" href="tel:+41797737519">+41 79 773 75 19</a> <br>
+                            <a class="link-underline mail-arrow" href="mailto:{data.email}">{data.email}</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="w-full md:w-6/12 mb-4 md:mb-0 deactivate-br-only-here pr-10 md:pr-4">
+                <div id="first-text" class=" pb-3">
+                    <f:transform.html>{data.longer}</f:transform.html>
+                </div>
+                <div id="second-text">
+                    <f:transform.html>{data.longer2}</f:transform.html>
+                </div>
+            </div>
+            <div class="w-full md:w-6/12 hidden md:block">
+                <div class="flex flex-col xl:flex-row">
+                    <div class="w-full xl:w-6/12 pb-5">
+                        <p>
+                            ADOWIA Immobilien AG <br>
+                            <a target="_blank" class="link-underline" href="https://maps.app.goo.gl/1xj1htwgQGJrc5Yw6">
+                                Neufeldstrasse 56<br>
+                                3604 Thun<br>
+                            </a>
+                        </p>
+                    </div>
+                    <div class="w-full xl:w-6/12 pl-0">
+                        <p>
+                            <a class="link-underline" href="tel:+41797737519">+41 79 773 75 19</a> <br>
+                            <a class="link-underline mail-arrow" href="mailto:{data.email}">{data.email}</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</f:section>
+
+</html>

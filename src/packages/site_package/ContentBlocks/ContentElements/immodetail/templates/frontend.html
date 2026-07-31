@@ -1,0 +1,186 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:spaceless>
+
+    <div class="grid grid-cols-12 p-3 lg:p-5 mb-5 enable-p-pb">
+        <div class="col-span-12 lg:col-span-3 lg:col-span-3 xl:col-span-3">
+            <nav class="top-0 left-0 text-black">
+                <ul class="font-medium">
+                    <li>
+                        <a href="{f:uri.page(pageUid: 1)}#kaufen" class="link-underline checkifactive">Immobilie&nbsp;kaufen</a>
+                    </li>
+                    <li>
+                        <a href="{f:uri.page(pageUid: 1)}#verkaufen" class="link-underline">Immobilie&nbsp;verkaufen</a>
+                    </li>
+                    <li>
+                        <a href="{f:uri.page(pageUid: 1)}#bewerten" class="link-underline">Immobilie&nbsp;bewerten</a>
+                    </li>
+                    <li>
+                        <a href="{f:uri.page(pageUid: 1)}#uber-mich" class="link-underline">Über&nbsp;mich</a>
+                    </li>
+                    <li>
+                        <a href="{f:uri.page(pageUid: 1)}#kontakt" class="link-underline">Kontakt</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div class="col-span-12 lg:col-span-8 xl:col-span-7">
+            <div class="grid grid-cols-7">
+                <div class="col-span-7 lg:col-span-7">
+                    <f:if condition="{data.nameoftheproperty}">
+                        <div class="font-medium pb-6 lg:pb-12 pt-16 lg:pt-0">
+                            <f:transform.html>{data.nameoftheproperty}</f:transform.html>
+                        </div>
+                    </f:if>
+                    <div class="grid grid-cols-7">
+                        <div class="col-span-7 lg:col-span-2">
+                            <f:if condition="{data.longerdetails}">
+                                <div class="[&>*]:text-[19px] [&>*]:leading-[1.2em]  pb-6 lg:pb-6 longerdetails">
+                                    <f:transform.html>{data.longerdetails}</f:transform.html>
+                                </div>
+                            </f:if>
+                        </div>
+                        <div class="col-span-7 lg:col-span-5">
+                            <f:if condition="{data.longertext}">
+                                <f:transform.html>{data.longertext}</f:transform.html>
+                            </f:if>
+                            <div class="flex justify-between">
+                                <div>
+                                    <f:link.email email="{data.text1}" class="link-underline-fine mail-arrow text-[17px] " target="_blank">{data.textformemail}</f:link.email>
+                                    <f:comment>
+                                        <f:link.typolink parameter="{data.link2}" class="link-underline-fine !text-[17px]" target="_blank">{data.text2}</f:link.typolink>
+                                    </f:comment>
+                                </div>
+                                <div>
+                                    <f:comment>
+                                        <f:link.typolink parameter="{data.link3}" class="link-underline-fine !text-[17px]" target="_blank">{data.text3}</f:link.typolink>
+                                    </f:comment>
+                                </div>
+                            </div>
+                                
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-span-12 lg:col-span-2 xl:col-span-2 xxl:col-span-4">
+        </div>
+    </div>
+    
+    <f:if condition="{data.vimeoId}">
+        <div class="">
+            <div class="grid grid-cols-12 p-0 md:p-3 lg:p-3 lg:p-3 mb-5 enable-p-pb">
+                <div class="col-span-12 lg:col-span-8 lg:col-start-4">
+                <div class="video-container relative w-full" style="padding-bottom: 56.25%;">
+                    <iframe 
+                        src="https://player.vimeo.com/video/{data.vimeoId}"
+                        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+                        frameborder="0"
+                        allow="autoplay; fullscreen; picture-in-picture"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </f:if>
+
+
+
+    <!--SLIDER-->
+    
+            <f:if condition="{data.images}">
+                <div class="grid grid-cols-12 p-0 md:p-3 lg:p-3 lg:p-3 mb-2 enable-p-pb">
+                    <div class="col-span-12 lg:col-span-8 lg:col-start-4">
+                        <div class="container custom-swiper-wrapper">
+                            <div class="swiper gallery-top mt-5 width-smaller-slider w-[70%] myBigSwiper{data.uid}" data-big-swiper="myBigSwiper{data.uid}">
+                                <div class="swiper-wrapper">
+                                    <f:for each="{data.images}" as="file">
+                                        <div class="swiper-slide">
+                                            
+                                            
+                                            <f:image 
+                                                image="{file}" 
+                                                width="960c" 
+                                                height="1000c" 
+                                                class="slider-mom" 
+                                                alt="{newsItem.title}"
+                                            />
+                                            
+                                        </div>
+                                    </f:for>
+                                </div>
+
+                                <div class="swiper-button-next button-next swiper-custom-nav"></div>
+                                <div class="swiper-button-prev button-prev swiper-custom-nav"></div>
+
+                            </div>
+                        </div>
+
+                        <div thumbsSlider="" class="pt-2 swiper thumbs-class mySwiper mySwiper{data.uid} mb-8 md:mb-6" data-big-swiper="mySwiper{data.uid}">
+                            <div class="swiper-wrapper">
+                                <f:for each="{data.images}" as="file">
+                                    <div class="swiper-slide">
+                                        
+                                        <f:image 
+                                            image="{file}" 
+                                            width="640c" 
+                                            height="670c" 
+                                            class="slider-mom" 
+                                            alt="{newsItem.title}"
+                                        />
+                                        
+                                    </div>
+                                </f:for>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </f:if>
+
+    <!--END SLIDER-->
+
+    
+
+    <script>
+         setTimeout(() => {
+
+            const myCustomSlider = document.querySelectorAll('.gallery-top');
+            const myCustomGalleryThumbs = document.querySelectorAll('.thumbs-class');
+            const prev = document.querySelectorAll('.button-prev');
+            const next = document.querySelectorAll('.button-next');
+
+            for (i = 0; i < myCustomSlider.length; i++) {
+
+                myCustomSlider[i].classList.add('gallery-top-' + i);
+                prev[i].classList.add('button-prev-' + i);
+                next[i].classList.add('button-next-' + i);
+                myCustomGalleryThumbs[i].classList.add('thumbs-class-' + i);
+
+                var galleryThumbs = new Swiper('.thumbs-class-' + i , {
+                    spaceBetween: 10,
+                    slidesPerView: 4,
+                    freeMode: true,
+                    touchRatio: 0.2,
+                    threshold: 10,
+                    watchSlidesProgress: true,
+                    autoScrollOffset: 0,
+                });
+
+                var galleryTop = new Swiper('.gallery-top-' + i, {
+                    spaceBetween: 10,
+                    navigation: {
+                        nextEl: ".button-next-" + i,
+                        prevEl: ".button-prev-" + i,
+                    },
+                    thumbs: {
+                        swiper: galleryThumbs
+                    }
+                });
+
+            }
+            
+        }, 100);
+    </script>
+
+</f:spaceless>
+              
+</html>

@@ -1,0 +1,90 @@
+<html xmlns:be="http://typo3.org/ns/TYPO3/CMS/Backend/ViewHelpers" data-namespace-typo3-fluid="true">
+
+<f:layout name="Preview"/>
+
+<f:section name="Header">
+    <be:link.editRecord uid="{data.uid}" table="{data.mainType}"><h1>{data.header}</h1></be:link.editRecord>
+</f:section>
+
+<f:section name="Content">
+    <div class="container mb-4">
+        <div class="row">
+            <div class="col-12 col-lg-3">
+                <nav class="position-top-0 position-start-0 text-black">
+                    <ul class="fw-medium list-unstyled">
+                        <li>
+                            <a href="{f:uri.page(pageUid: 1)}#kaufen" class="text-decoration-underline checkifactive">Immobilie&nbsp;kaufen</a>
+                        </li>
+                        <li>
+                            <a href="{f:uri.page(pageUid: 1)}#verkaufen" class="text-decoration-underline">Immobilie&nbsp;verkaufen</a>
+                        </li>
+                        <li>
+                            <a href="{f:uri.page(pageUid: 1)}#bewerten" class="text-decoration-underline">Immobilie&nbsp;bewerten</a>
+                        </li>
+                        <li>
+                            <a href="{f:uri.page(pageUid: 1)}#uber-mich" class="text-decoration-underline">Über&nbsp;mich</a>
+                        </li>
+                        <li>
+                            <a href="{f:uri.page(pageUid: 1)}#kontakt" class="text-decoration-underline">Kontakt</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="col-12 col-lg-8 col-xl-7">
+                <div class="row">
+                    <div class="col-12">
+                        <f:if condition="{data.nameoftheproperty}">
+                            <div class="fw-medium pb-3 pb-lg-4 pt-5 pt-lg-0">
+                                <f:transform.html>{data.nameoftheproperty}</f:transform.html>
+                            </div>
+                        </f:if>
+                        <div class="row">
+                            <div class="col-12 col-lg-4">
+                                <f:if condition="{data.longerdetails}">
+                                    <div class="fs-5 pb-3">
+                                        <f:transform.html>{data.longerdetails}</f:transform.html>
+                                    </div>
+                                </f:if>
+                            </div>
+                            <div class="col-12 col-lg-8">
+                                <f:if condition="{data.longertext}">
+                                    <f:transform.html>{data.longertext}</f:transform.html>
+                                </f:if>
+                                <div class="d-flex justify-content-between">
+                                    <div>
+                                        <f:link.typolink parameter="{data.link1}" class="text-decoration-underline fs-5 me-3">{data.text1}</f:link.typolink>
+                                        <f:link.typolink parameter="{data.link2}" class="text-decoration-underline fs-5">{data.text2}</f:link.typolink>
+                                    </div>
+                                    <div>
+                                        <f:link.typolink parameter="{data.link3}" class="text-decoration-underline fs-5">{data.text3}</f:link.typolink>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-2 col-xl-2 col-xxl-4">
+            </div>
+        </div>
+    </div>
+    
+    <f:if condition="{data.vimeoId}">
+        <div class="container mb-4">
+            <div class="row">
+                <div class="col-12 col-lg-8 offset-lg-4">
+                    <div class="ratio ratio-16x9">
+                        <iframe 
+                            src="https://player.vimeo.com/video/{data.vimeoId}"
+                            frameborder="0"
+                            allow="autoplay; fullscreen; picture-in-picture"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </f:if>
+</f:section>
+
+</html>

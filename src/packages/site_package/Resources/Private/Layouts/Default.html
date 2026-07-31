@@ -1,14 +1,11 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
-      xmlns:vite="http://typo3.org/ns/Praetorius/ViteAssetCollector/ViewHelpers"
       data-namespace-typo3-fluid="true">
 
 <f:comment>
     The document skeleton (doctype, html, head, body) is rendered by TYPO3's
-    PageRenderer. This template only provides the body content. <vite:asset>
-    registers CSS/JS with the AssetCollector, which outputs them into the head.
+    PageRenderer. This template only provides the body content. CSS/JS are
+    included via TypoScript from Resources/Public/Assets/Dist/.
 </f:comment>
-
-<vite:asset entry="EXT:site_package/Resources/Private/Frontend/main.js"/>
 
 <f:render partial="Header" arguments="{
     navigation: mainNavigation,
