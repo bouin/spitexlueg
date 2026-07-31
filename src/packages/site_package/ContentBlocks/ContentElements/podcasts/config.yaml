@@ -1,0 +1,47 @@
+name: lueg/podcasts
+typeName: lueg_podcasts
+group: default
+prefixFields: true
+prefixType: full
+basics:
+  - TYPO3/Appearance
+fields:
+  - identifier: header
+    useExistingField: true
+    label: 'Titel'
+    description: 'z. B. "Lueg – u los ine"'
+  - identifier: bodytext
+    useExistingField: true
+    label: 'Einleitungstext'
+    description: 'Steht rechts neben dem Titel.'
+    enableRichtext: true
+    richtextConfiguration: site_package
+
+  - identifier: episodes
+    type: Collection
+    label: 'Podcast-Folgen'
+    description: 'Eine Folge = kein Slider. Ab zwei Folgen wird automatisch ein Slider mit Navigation angezeigt.'
+    labelField: claim
+    fields:
+      - identifier: claim
+        type: Text
+        label: 'Claim'
+        description: 'Grosse Schrift im Bild, z. B. "Starte dort, wo du wirklich gebraucht wirst".'
+        required: true
+      - identifier: description
+        type: Text
+        label: 'Beschreibung'
+        description: 'Kleine Zeile unten, z. B. "Lernende bei der Spitex Region Lueg".'
+      - identifier: mediafile
+        type: File
+        label: 'Audio-/Videodatei'
+        description: 'Datei aus der Dateiliste, z. B. MP3 oder MP4.'
+        allowed: 'mp3,mp4,m4a,wav,webm,ogg'
+        maxItems: 1
+        required: true
+      - identifier: poster
+        type: File
+        label: 'Startbild'
+        description: 'Wird vor dem Abspielen angezeigt.'
+        allowed: common-image-types
+        maxItems: 1

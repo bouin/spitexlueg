@@ -1,0 +1,15 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+
+<strong>{data.header}</strong>
+<div><f:format.stripTags>{data.bodytext}</f:format.stripTags></div>
+<div>
+    <em><f:count>{data.episodes}</f:count> Podcast-Folge(n)</em>
+    <ul>
+        <f:for each="{data.episodes}" as="episode">
+            <li>{episode.claim}</li>
+        </f:for>
+    </ul>
+</div>
+
+</html>

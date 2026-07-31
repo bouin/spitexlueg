@@ -4,8 +4,21 @@
     "name": "app",
     "src": "Resources/Public/Assets/Src/JavaScript/app.js",
     "isEntry": true,
+    "dynamicImports": [
+      "node_modules/video.js/dist/video.es.js"
+    ],
     "css": [
       "Css/app.css"
     ]
+  },
+  "node_modules/video.js/dist/video-js.css": {
+    "file": "Css/video-js.css",
+    "src": "node_modules/video.js/dist/video-js.css"
+  },
+  "node_modules/video.js/dist/video.es.js": {
+    "file": "JavaScript/video.es.js",
+    "name": "video.es",
+    "src": "node_modules/video.js/dist/video.es.js",
+    "isDynamicEntry": true
   }
 }

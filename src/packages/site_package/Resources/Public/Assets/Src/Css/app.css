@@ -11,6 +11,7 @@
     --color-badge: #a82d74;
     --color-ink: #1a1a1a;
     --color-blue: #0069b4;
+    --color-teal: #67c8c8;
     --color-spitex-green: #009e5c;
     --color-spitex-blue: #0091d0;
     --hero-frame: #9fb6d6;
@@ -231,6 +232,136 @@
 
     .richtext li + li {
         margin-top: var(--space-s);
+    }
+
+    /* ---- Podcasts -------------------------------------------------------- */
+    /* Intro: title left, lead text right. */
+    .podcasts__intro {
+        @apply grid items-start;
+        gap: var(--space-m);
+        grid-template-columns: 1fr;
+        margin-bottom: var(--space-l);
+    }
+
+    @screen lg {
+        .podcasts__intro {
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+            gap: var(--space-xl);
+        }
+    }
+
+    .podcasts__lead {
+        font-size: clamp(1rem, 1.15vw, 1.2rem);
+    }
+
+    /* Slider frame: arrows sit outside the viewport on wide screens. */
+    .podcasts {
+        @apply relative flex items-center;
+        gap: var(--space-s);
+    }
+
+    .podcasts__viewport {
+        @apply w-full overflow-hidden;
+    }
+
+    .podcasts__track {
+        @apply flex;
+        transition: transform 0.5s ease;
+    }
+
+    .podcast {
+        @apply w-full shrink-0;
+    }
+
+    /* Arrows — only rendered when there is more than one episode. */
+    .podcasts__nav {
+        @apply flex shrink-0 items-center justify-center rounded-full border-2 bg-white transition-colors;
+        border-color: var(--color-blue);
+        color: var(--color-blue);
+        width: clamp(2.25rem, 3.5vw, 3.25rem);
+        aspect-ratio: 1 / 1;
+    }
+
+    .podcasts__nav svg {
+        width: 55%;
+        height: 55%;
+    }
+
+    .podcasts__nav:hover {
+        background-color: var(--color-blue);
+        @apply text-white;
+    }
+
+    .podcasts__nav[disabled] {
+        @apply cursor-not-allowed opacity-30;
+    }
+
+    /* Stage: player plus overlays. */
+    .podcast__stage {
+        @apply relative overflow-hidden;
+        background-color: var(--color-teal);
+        aspect-ratio: 16 / 10;
+    }
+
+    .podcast__player.video-js {
+        @apply absolute inset-0 h-full w-full;
+    }
+
+    /* Teal wash over the lower half so claim/description stay readable.
+       Hidden once playback starts (see app.js). */
+    .podcast__stage::after {
+        content: "";
+        @apply pointer-events-none absolute inset-0 z-0 transition-opacity;
+        background: linear-gradient(180deg, rgba(103, 200, 200, 0) 30%, rgba(103, 200, 200, 0.85) 100%);
+    }
+
+    .podcast__stage.is-playing::after,
+    .podcast__stage.is-playing .podcast__copy,
+    .podcast__stage.is-playing .podcast__label {
+        @apply opacity-0;
+    }
+
+    .podcast__copy,
+    .podcast__label {
+        transition: opacity 0.3s ease;
+    }
+
+    /* Teal "PODCAST" label — a half circle in the top left corner.
+       Present on every episode, since podcasts are a repeating element. */
+    .podcast__label {
+        @apply pointer-events-none absolute left-0 top-0 z-10 flex flex-col items-center justify-center text-center text-white;
+        background-color: var(--color-teal);
+        width: clamp(9rem, 17vw, 17rem);
+        aspect-ratio: 1 / 1;
+        border-radius: 0 0 100% 100%;
+        padding-bottom: 1.5em;
+    }
+
+    .podcast__label-title {
+        @apply font-bold uppercase;
+        font-size: clamp(1rem, 1.8vw, 1.9rem);
+        line-height: 1;
+    }
+
+    .podcast__label-sub {
+        font-size: clamp(0.7rem, 0.95vw, 1rem);
+        margin-top: 0.35em;
+    }
+
+    /* Claim and description sit on the tinted lower half of the image. */
+    .podcast__copy {
+        @apply pointer-events-none absolute inset-x-0 bottom-0 z-10 flex flex-col text-white;
+        gap: var(--space-l);
+        padding: var(--space-l);
+    }
+
+    .podcast__claim {
+        font-size: clamp(1.5rem, 3.2vw, 3.25rem);
+        line-height: 1.1;
+    }
+
+    .podcast__description {
+        font-size: clamp(1rem, 1.5vw, 1.5rem);
     }
 
     /* ---- Footer ---------------------------------------------------------- */

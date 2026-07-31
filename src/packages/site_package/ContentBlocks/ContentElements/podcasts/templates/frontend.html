@@ -1,0 +1,86 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+
+<f:variable name="episodeCount" value="{data.episodes -> f:count()}"/>
+
+<section class="section section--podcasts">
+    <div class="section__inner">
+
+        <f:comment><!-- Intro: title left, lead text right --></f:comment>
+        <div class="podcasts__intro">
+            <f:if condition="{data.header}">
+                <h2 class="section__title">{data.header}</h2>
+            </f:if>
+            <f:if condition="{data.bodytext}">
+                <div class="richtext podcasts__lead">
+                    <f:format.html>{data.bodytext}</f:format.html>
+                </div>
+            </f:if>
+        </div>
+
+        <f:if condition="{episodeCount}">
+            <f:comment><!-- One episode = static. Two or more = slider with navigation. --></f:comment>
+            <div class="podcasts{f:if(condition: '{episodeCount} > 1', then: ' podcasts--slider')}"
+                 data-podcast-slider="{episodeCount}">
+
+                <f:if condition="{episodeCount} > 1">
+                    <button type="button" class="podcasts__nav podcasts__nav--prev"
+                            data-podcast-prev aria-label="Vorherige Folge">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </button>
+                </f:if>
+
+                <div class="podcasts__viewport">
+                    <div class="podcasts__track" data-podcast-track>
+                        <f:for each="{data.episodes}" as="episode" iteration="it">
+                            <article class="podcast" data-podcast-slide>
+
+                                <div class="podcast__stage">
+                                    <video
+                                        id="podcast-{data.uid}-{it.index}"
+                                        class="video-js podcast__player"
+                                        controls
+                                        preload="none"
+                                        playsinline
+                                        data-podcast-player
+                                        <f:if condition="{episode.poster.0}">poster="{f:uri.image(image: episode.poster.0, maxWidth: 1600)}"</f:if>>
+                                        <f:for each="{episode.mediafile}" as="file">
+                                            <source src="{file.publicUrl}" type="{file.mimeType}">
+                                        </f:for>
+                                    </video>
+
+                                    <f:comment><!-- Label is part of every episode, shown above the player --></f:comment>
+                                    <div class="podcast__label">
+                                        <span class="podcast__label-title">Podcast</span>
+                                        <span class="podcast__label-sub">Spitex Region Lueg</span>
+                                    </div>
+
+                                    <div class="podcast__copy">
+                                        <f:if condition="{episode.claim}">
+                                            <p class="podcast__claim">{episode.claim}</p>
+                                        </f:if>
+                                        <f:if condition="{episode.description}">
+                                            <p class="podcast__description">{episode.description}</p>
+                                        </f:if>
+                                    </div>
+                                </div>
+
+                            </article>
+                        </f:for>
+                    </div>
+                </div>
+
+                <f:if condition="{episodeCount} > 1">
+                    <button type="button" class="podcasts__nav podcasts__nav--next"
+                            data-podcast-next aria-label="Nächste Folge">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </button>
+                </f:if>
+
+            </div>
+        </f:if>
+
+    </div>
+</section>
+
+</html>
