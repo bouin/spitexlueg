@@ -293,8 +293,8 @@
         --slider-inset: calc(var(--nav-size) + var(--nav-gap));
     }
 
-    /* Intro: title left, lead text right. Sits directly above the slider and
-       reaches slightly wider than the slider itself, into the arrow gutter. */
+    /* Intro: title left, lead text right. Left edge aligns with every other
+       section (the shared gutter), so nothing looks inset. */
     .podcasts__intro {
         @apply grid items-start;
         gap: var(--space-m);
@@ -306,7 +306,6 @@
         .podcasts__intro {
             grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
             gap: var(--space-l);
-            margin-inline: calc(var(--slider-inset) * 0.35);
         }
     }
 
