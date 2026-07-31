@@ -16,12 +16,10 @@
     site: site
 }"/>
 
-<main class="mx-auto max-w-6xl px-6 py-12">
+<main>
     <f:render section="Main"/>
 </main>
 
-<footer class="mx-auto max-w-6xl px-6 py-10 border-t border-neutral-200 text-sm text-neutral-500">
-    <p>&copy; <f:format.date format="Y">now</f:format.date> {site.configuration.websiteTitle}</p>
-</footer>
+<f:render partial="Footer" arguments="{site: site}"/>
 
 </html>

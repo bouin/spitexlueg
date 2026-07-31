@@ -10,9 +10,19 @@
     --color-lilac: #b3a6da;
     --color-badge: #a82d74;
     --color-ink: #1a1a1a;
+    --color-blue: #0069b4;
     --color-spitex-green: #009e5c;
     --color-spitex-blue: #0091d0;
     --hero-frame: #9fb6d6;
+
+    /* Layout rhythm — one scale reused by every section, so spacing stays
+       consistent and scales with the viewport instead of jumping. */
+    --container: 90rem;
+    --gutter: clamp(1.25rem, 3vw, 3rem);
+    --space-s: clamp(0.75rem, 1.2vw, 1.25rem);
+    --space-m: clamp(1.5rem, 2.5vw, 2.5rem);
+    --space-l: clamp(2.5rem, 5vw, 5rem);
+    --space-xl: clamp(4rem, 8vw, 8rem);
 }
 
 @layer base {
@@ -110,8 +120,8 @@
     /* The white bar is full-bleed, its content is width-constrained. */
     .navbar__inner {
         @apply mx-auto flex w-full flex-wrap items-center justify-between gap-x-8 gap-y-4;
-        max-width: 90rem;
-        padding: clamp(0.75rem, 1.6vw, 1.5rem) clamp(1.25rem, 3vw, 3rem);
+        max-width: var(--container);
+        padding: var(--space-s) var(--gutter);
     }
 
     .navbar__right {
@@ -160,5 +170,185 @@
     .brand__logo {
         @apply w-auto;
         height: clamp(2.75rem, 4.5vw, 4.75rem);
+    }
+
+    /* ---- Content sections ------------------------------------------------ */
+    .section {
+        padding-block: var(--space-xl);
+    }
+
+    .section__inner {
+        @apply mx-auto w-full;
+        max-width: var(--container);
+        padding-inline: var(--gutter);
+    }
+
+    .section__title {
+        @apply font-bold uppercase;
+        color: var(--color-blue);
+        font-size: clamp(1.75rem, 3.4vw, 3.25rem);
+        line-height: 1.05;
+        letter-spacing: -0.01em;
+    }
+
+    /* Space between the headline and the body copy. */
+    .section__title + .richtext {
+        margin-top: var(--space-l);
+    }
+
+    /* ---- Rich text ------------------------------------------------------- */
+    .richtext {
+        color: var(--color-blue);
+        font-size: clamp(1.05rem, 1.35vw, 1.4rem);
+        line-height: 1.5;
+        max-width: 62ch;
+    }
+
+    /* Paragraph rhythm: gaps between paragraphs, none before the first. */
+    .richtext > * + * {
+        margin-top: var(--space-m);
+    }
+
+    .richtext strong,
+    .richtext b {
+        @apply font-bold;
+    }
+
+    .richtext a {
+        @apply underline;
+        text-underline-offset: 0.15em;
+    }
+
+    .richtext ul,
+    .richtext ol {
+        padding-left: 1.35em;
+        list-style: disc;
+    }
+
+    .richtext ol {
+        list-style: decimal;
+    }
+
+    .richtext li + li {
+        margin-top: var(--space-s);
+    }
+
+    /* ---- Footer ---------------------------------------------------------- */
+    /* Shared width-constrained container for all three footer bands. */
+    .footer__inner {
+        @apply mx-auto w-full;
+        max-width: var(--container);
+        padding-inline: var(--gutter);
+    }
+
+    /* Band 1: claim */
+    .footer__claim {
+        @apply bg-white;
+        padding-block: var(--space-l);
+    }
+
+    .footer__claim-title {
+        @apply font-bold uppercase;
+        color: var(--color-blue);
+        font-size: clamp(1.75rem, 3.4vw, 3.25rem);
+        letter-spacing: -0.01em;
+    }
+
+    /* Band 2: contact */
+    .footer__contact {
+        background-color: var(--color-lilac);
+        padding-block: var(--space-xl);
+    }
+
+    .footer__grid {
+        @apply grid items-start;
+        gap: var(--space-l);
+        grid-template-columns: 1fr;
+    }
+
+    @screen lg {
+        .footer__grid {
+            grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+            gap: var(--space-xl);
+        }
+    }
+
+    .footer__person {
+        @apply flex flex-wrap items-start;
+        gap: var(--space-l);
+    }
+
+    .footer__portrait {
+        @apply shrink-0 rounded-full bg-white object-cover;
+        width: clamp(9rem, 15vw, 15rem);
+        aspect-ratio: 1 / 1;
+    }
+
+    .footer__person-body,
+    .footer__org {
+        @apply text-white;
+    }
+
+    .footer__name,
+    .footer__org-name {
+        @apply font-bold uppercase;
+        font-size: clamp(1.25rem, 2vw, 2rem);
+        line-height: 1.1;
+    }
+
+    .footer__name {
+        @apply normal-case;
+    }
+
+    .footer__role {
+        font-size: clamp(1rem, 1.25vw, 1.25rem);
+        margin-top: 0.25em;
+    }
+
+    /* The gap between the name block and the contact lines / address. */
+    .footer__contact-lines,
+    .footer__address {
+        @apply not-italic;
+        margin-top: var(--space-m);
+        font-size: clamp(1rem, 1.25vw, 1.25rem);
+        line-height: 1.55;
+    }
+
+    .footer__contact-lines {
+        @apply flex flex-col;
+    }
+
+    .footer__link {
+        @apply text-white no-underline transition-opacity;
+    }
+
+    .footer__link:hover {
+        @apply opacity-70;
+    }
+
+    /* Band 3: legal links + logo */
+    .footer__meta {
+        @apply bg-white;
+        padding-block: var(--space-m);
+    }
+
+    .footer__meta-inner {
+        @apply flex flex-wrap items-center justify-between;
+        gap: var(--space-m);
+    }
+
+    .footer__legal {
+        @apply flex flex-wrap items-center;
+        gap: var(--space-m);
+    }
+
+    .footer__legal-link {
+        @apply font-bold no-underline transition-opacity;
+        color: var(--color-blue);
+        font-size: clamp(0.95rem, 1.15vw, 1.15rem);
+    }
+
+    .footer__legal-link:hover {
+        @apply opacity-70;
     }
 }

@@ -1,0 +1,66 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+
+<footer class="footer">
+
+    <f:comment><!-- Claim band (white) --></f:comment>
+    <div class="footer__claim">
+        <div class="footer__inner">
+            <h2 class="footer__claim-title">Mir si für di da</h2>
+        </div>
+    </div>
+
+    <f:comment><!-- Contact band (lilac) --></f:comment>
+    <div class="footer__contact">
+        <div class="footer__inner footer__grid">
+
+            <div class="footer__person">
+                <img class="footer__portrait"
+                     src="{f:uri.resource(path: 'Images/portrait-placeholder.png', extensionName: 'SitePackage')}"
+                     alt="Anita Beer, Personalleiterin"
+                     width="600" height="600" loading="lazy">
+
+                <div class="footer__person-body">
+                    <p class="footer__name">Anita Beer</p>
+                    <p class="footer__role">Personalleiterin</p>
+
+                    <p class="footer__contact-lines">
+                        <a class="footer__link" href="tel:+41344605000">034 460 50 00</a>
+                        <a class="footer__link" href="mailto:personal@spitexleug.ch">personal@spitexleug.ch</a>
+                    </p>
+                </div>
+            </div>
+
+            <div class="footer__org">
+                <p class="footer__org-name">Spitex<br>Region Lueg</p>
+                <address class="footer__address">
+                    Geschäftsstelle<br>
+                    Rüegsaustrasse 8<br>
+                    Postfach<br>
+                    3415 Hasle-Rüegsau
+                </address>
+            </div>
+
+        </div>
+    </div>
+
+    <f:comment><!-- Meta band (white): legal links + logo --></f:comment>
+    <div class="footer__meta">
+        <div class="footer__inner footer__meta-inner">
+            <nav class="footer__legal" aria-label="Rechtliches">
+                <a class="footer__legal-link" href="#impressum">Impressum</a>
+                <a class="footer__legal-link" href="#disclaimer">Disclaimer</a>
+            </nav>
+
+            <f:link.page pageUid="{site.rootPageId}" class="brand">
+                <img class="brand__logo"
+                     src="{f:uri.resource(path: 'Images/spitex-region-lueg.svg', extensionName: 'SitePackage')}"
+                     alt="Spitex Region Lueg"
+                     width="260" height="76" loading="lazy">
+            </f:link.page>
+        </div>
+    </div>
+
+</footer>
+
+</html>

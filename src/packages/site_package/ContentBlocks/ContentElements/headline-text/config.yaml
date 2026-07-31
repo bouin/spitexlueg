@@ -1,0 +1,17 @@
+name: lueg/headline-text
+typeName: lueg_headline_text
+group: default
+prefixFields: true
+prefixType: full
+basics:
+  - TYPO3/Appearance
+fields:
+  - identifier: header
+    useExistingField: true
+    label: 'Titel'
+    description: 'Wird als Überschrift ausgegeben.'
+  - identifier: bodytext
+    useExistingField: true
+    label: 'Text'
+    enableRichtext: true
+    richtextConfiguration: site_package
