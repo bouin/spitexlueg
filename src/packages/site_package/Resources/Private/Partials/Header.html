@@ -1,0 +1,48 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+
+<header class="hero min-h-[75vh] flex flex-col">
+
+    <f:comment><!-- Site-wide hero image, set on the root page's "Media" field --></f:comment>
+    <f:if condition="{heroImage}">
+        <f:image class="hero__media" image="{heroImage}" alt="{heroImage.alternative}" maxWidth="2200" loading="eager"/>
+    </f:if>
+    <div class="hero__scrim"></div>
+
+    <f:comment><!-- Top bar: pill navigation + logo --></f:comment>
+    <div class="relative z-10 mx-auto flex w-full max-w-6xl flex-wrap items-center justify-between gap-4 px-6 pt-6">
+        <nav class="pill-nav" aria-label="Kampagnen-Navigation">
+            <a class="pill-nav__link" href="#podcasts">Podcasts</a>
+            <a class="pill-nav__link" href="#freie-stellen">Freie Stellen</a>
+            <a class="pill-nav__link" href="#events">Events</a>
+            <a class="pill-nav__link pill-nav__link--cta" href="#bewerben">Jetzt bewerben</a>
+            <a class="pill-nav__link" href="#standorte">Standorte</a>
+        </nav>
+
+        <a class="brand" href="{f:uri.page(pageUid: site.rootPageId)}">
+            <svg viewBox="0 0 32 32" class="h-9 w-9 shrink-0" aria-hidden="true">
+                <path fill="var(--color-spitex)" d="M28 4C16 4 7 9 7 20c0 3 1 5 1 5s6-2 11-7c4-4 6-9 6-9s-4 2-8 6c-3 3-5 7-5 7s7-13 10-18z"/>
+                <path fill="var(--color-navy)" d="M6 27c0-6 3-10 3-10s-1 6-1 10z"/>
+            </svg>
+            <span>
+                <span class="brand__name">Spitex</span>
+                <span class="brand__sub">Region Lueg</span>
+            </span>
+        </a>
+    </div>
+
+    <f:comment><!-- "Freie Stellen" badge --></f:comment>
+    <div class="relative z-10 mx-auto w-full max-w-6xl px-6">
+        <a href="#freie-stellen" class="badge-circle absolute right-6 top-4 h-28 w-28 text-sm no-underline sm:h-36 sm:w-36 sm:text-base rotate-[-8deg] transition-transform hover:rotate-0">
+            Freie<br>Stellen
+        </a>
+    </div>
+
+    <f:comment><!-- Headline --></f:comment>
+    <div class="relative z-10 mx-auto mt-auto w-full max-w-6xl px-6 pb-16 pt-40">
+        <h1 class="hero__title">Chum zu üs<br>ids Team</h1>
+    </div>
+
+</header>
+
+</html>

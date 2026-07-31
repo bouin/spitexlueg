@@ -5,14 +5,71 @@
 @source "../Partials";
 @source "../Layouts";
 
-/* Project design tokens (extend Tailwind's theme). */
+/* Spitex Region Lueg — campaign design tokens. */
 @theme {
-    --color-brand: #0b5fff;
+    --color-lilac: #c8c2e8;
+    --color-lilac-soft: #d8d4ef;
+    --color-magenta: #e6007e;
+    --color-navy: #2e3192;
+    --color-spitex: #3aaa35;
+    --font-display: "Poppins", ui-sans-serif, system-ui, sans-serif;
 }
 
-/* Custom base styles that complement the utility classes. */
 @layer base {
     body {
-        @apply font-sans text-neutral-900 antialiased;
+        @apply font-sans text-neutral-800 antialiased;
+    }
+}
+
+@layer components {
+    /* ---- Hero ---- */
+    .hero {
+        @apply relative overflow-hidden bg-lilac;
+    }
+    .hero__media {
+        @apply absolute inset-0 h-full w-full object-cover;
+    }
+    /* Fade the photo into the lilac so the headline stays readable. */
+    .hero__scrim {
+        @apply absolute inset-0;
+        background: linear-gradient(180deg, rgba(200, 194, 232, 0) 45%, var(--color-lilac) 92%);
+    }
+    .hero__title {
+        @apply relative font-display text-4xl font-extrabold uppercase leading-none tracking-tight text-white sm:text-6xl lg:text-7xl;
+        text-shadow: 0 2px 18px rgba(46, 49, 146, 0.25);
+    }
+
+    /* ---- "Freie Stellen" badge ---- */
+    .badge-circle {
+        @apply flex aspect-square items-center justify-center rounded-full bg-magenta text-center font-display font-bold uppercase leading-tight text-white;
+    }
+
+    /* ---- Pill navigation ---- */
+    .pill-nav {
+        @apply flex flex-wrap items-center gap-1 rounded-full bg-white/95 px-2 py-2 shadow-lg backdrop-blur;
+    }
+    .pill-nav__link {
+        @apply rounded-full px-4 py-2 text-sm font-semibold uppercase tracking-wide text-navy no-underline transition-colors;
+    }
+    .pill-nav__link:hover,
+    .pill-nav__link.is-active {
+        @apply bg-navy text-white;
+    }
+    .pill-nav__link--cta {
+        @apply bg-magenta text-white;
+    }
+    .pill-nav__link--cta:hover {
+        @apply bg-navy text-white;
+    }
+
+    /* ---- Logo ---- */
+    .brand {
+        @apply flex items-center gap-2 no-underline;
+    }
+    .brand__name {
+        @apply font-display text-lg font-bold leading-none text-navy;
+    }
+    .brand__sub {
+        @apply block text-xs font-medium uppercase tracking-widest text-spitex;
     }
 }

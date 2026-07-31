@@ -10,18 +10,17 @@
 
 <vite:asset entry="EXT:site_package/Resources/Private/Frontend/main.js"/>
 
-<header class="mx-auto flex max-w-5xl items-center justify-between gap-8 px-6 py-4 border-b border-neutral-200">
-    <a class="text-xl font-bold no-underline text-inherit" href="{f:uri.page(pageUid: site.rootPageId)}">
-        {site.configuration.websiteTitle}
-    </a>
-    <f:render partial="Navigation/Main" arguments="{navigation: mainNavigation}"/>
-</header>
+<f:render partial="Header" arguments="{
+    navigation: mainNavigation,
+    heroImage: siteRoot.0.heroFiles.0,
+    site: site
+}"/>
 
-<main class="mx-auto max-w-5xl px-6 py-8">
+<main class="mx-auto max-w-6xl px-6 py-12">
     <f:render section="Main"/>
 </main>
 
-<footer class="mx-auto max-w-5xl px-6 py-8 border-t border-neutral-200 text-sm text-neutral-500">
+<footer class="mx-auto max-w-6xl px-6 py-10 border-t border-neutral-200 text-sm text-neutral-500">
     <p>&copy; <f:format.date format="Y">now</f:format.date> {site.configuration.websiteTitle}</p>
 </footer>
 

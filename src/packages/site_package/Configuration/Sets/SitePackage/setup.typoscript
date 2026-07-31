@@ -45,6 +45,28 @@ page {
                 includeSpacer = 1
                 titleField = nav_title // title
             }
+
+            # Site-wide hero media: read the "Media" field of the site root page,
+            # so an editor sets the hero image once on the root page for the whole site.
+            20 = TYPO3\CMS\Frontend\DataProcessing\DatabaseQueryProcessor
+            20 {
+                table = pages
+                pidInList = root
+                recursive = 0
+                where = uid = ###ROOTUID###
+                markers {
+                    ROOTUID.data = leveluid:0
+                    ROOTUID.intval = 1
+                }
+                as = siteRoot
+                dataProcessing {
+                    10 = TYPO3\CMS\Frontend\DataProcessing\FilesProcessor
+                    10 {
+                        references.fieldName = media
+                        as = heroFiles
+                    }
+                }
+            }
         }
     }
 }
