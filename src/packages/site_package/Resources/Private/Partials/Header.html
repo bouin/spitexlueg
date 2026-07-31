@@ -45,15 +45,24 @@
     <f:comment><!-- Navigation bar: natural height, always on screen --></f:comment>
     <div class="navbar">
       <div class="navbar__inner">
-        <nav class="pill-nav" aria-label="Kampagnen-Navigation">
-            <a class="pill-nav__link" href="#podcasts">Podcasts</a>
-            <a class="pill-nav__link" href="#freie-stellen">Freie Stellen</a>
-            <a class="pill-nav__link" href="#benefits">Benefits</a>
-            <a class="pill-nav__link" href="#bewerben">Direkt bewerben</a>
-            <a class="pill-nav__link" href="#standorte">Standorte Spitex Region Lueg</a>
-        </nav>
 
-        <div class="navbar__right">
+        <f:comment><!-- Logo: centered, above the navigation --></f:comment>
+        <f:link.page pageUid="{site.rootPageId}" class="brand">
+            <img class="brand__logo"
+                 src="{f:uri.resource(path: 'Images/spitex-region-lueg.svg', extensionName: 'SitePackage')}"
+                 alt="Spitex Region Lueg"
+                 width="260" height="76">
+        </f:link.page>
+
+        <div class="navbar__bar">
+            <nav class="pill-nav" aria-label="Kampagnen-Navigation">
+                <a class="pill-nav__link" href="#podcasts">Podcasts</a>
+                <a class="pill-nav__link" href="#freie-stellen">Freie Stellen</a>
+                <a class="pill-nav__link" href="#benefits">Benefits</a>
+                <a class="pill-nav__link" href="#bewerben">Direkt bewerben</a>
+                <a class="pill-nav__link" href="#standorte">Standorte Spitex Region Lueg</a>
+            </nav>
+
             <f:if condition="{languagenavigation -> f:count()} > 1">
                 <ul class="lang-nav">
                     <f:for each="{languagenavigation}" as="language">
@@ -64,13 +73,6 @@
                     </f:for>
                 </ul>
             </f:if>
-
-            <f:link.page pageUid="{site.rootPageId}" class="brand">
-                <img class="brand__logo"
-                     src="{f:uri.resource(path: 'Images/spitex-region-lueg.svg', extensionName: 'SitePackage')}"
-                     alt="Spitex Region Lueg"
-                     width="260" height="76">
-            </f:link.page>
         </div>
       </div>
     </div>

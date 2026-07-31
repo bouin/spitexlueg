@@ -124,15 +124,34 @@
         @apply w-full shrink-0 bg-white;
     }
 
-    /* The white bar is full-bleed, its content is width-constrained. */
+    /* The white bar is full-bleed, its content is width-constrained.
+       Mobile: logo centered on top, navigation underneath. */
     .navbar__inner {
-        @apply mx-auto flex w-full flex-wrap items-center justify-between gap-x-8 gap-y-4;
+        @apply mx-auto flex w-full flex-col items-center;
+        gap: var(--space-m);
         max-width: var(--container);
-        padding: var(--space-s) var(--gutter);
+        padding: var(--space-m) var(--gutter);
     }
 
-    .navbar__right {
-        @apply flex items-center gap-6;
+    /* Navigation row: pills on the left, language switcher on the right. */
+    .navbar__bar {
+        @apply flex w-full flex-wrap items-center justify-between gap-x-8 gap-y-4;
+    }
+
+    /* Desktop: back to a single row — pills left, logo right (as before). */
+    @screen lg {
+        .navbar__inner {
+            @apply flex-row items-center;
+            gap: var(--space-l);
+        }
+
+        .navbar__bar {
+            flex: 1 1 auto;
+        }
+
+        .navbar .brand {
+            order: 2;
+        }
     }
 
     /* ---- Language switcher ---------------------------------------------- */
@@ -180,6 +199,18 @@
         height: clamp(2.75rem, 4.5vw, 4.75rem);
     }
 
+    /* Mobile header logo is 30% larger (centered above the nav). */
+    .navbar .brand__logo {
+        height: clamp(3.6rem, 11vw, 5.5rem);
+    }
+
+    /* Desktop: original logo size, back on the right. */
+    @screen lg {
+        .navbar .brand__logo {
+            height: clamp(2.75rem, 4.5vw, 4.75rem);
+        }
+    }
+
     /* ---- Content sections ------------------------------------------------ */
     .section {
         padding-block: var(--space-xl);
@@ -203,12 +234,13 @@
     .richtext {
         color: var(--color-blue);
         font-size: clamp(1.05rem, 1.35vw, 1.4rem);
-        line-height: 1.5;
+        line-height: 1.35;
     }
 
-    /* Paragraph rhythm: gaps between paragraphs, none before the first. */
+    /* Paragraph rhythm: gap ABOVE every block except the first, so gaps sit
+       between paragraphs (margin-bottom would skip the first pair). */
     .richtext > * + * {
-        margin-top: var(--space-m);
+        margin-top: 1.2rem;
     }
 
     .richtext strong,
@@ -597,5 +629,11 @@
 
     .footer__legal-link:hover {
         @apply opacity-70;
+    }
+    .richtext p {
+        font-weight: 600;
+        strong {
+            font-weight: 700;
+        }
     }
 }
