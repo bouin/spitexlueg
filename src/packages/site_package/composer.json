@@ -1,0 +1,20 @@
+{
+    "name": "lueg/site-package",
+    "type": "typo3-cms-extension",
+    "description": "Lueg site package: page templates, TypoScript and assets.",
+    "license": "GPL-2.0-or-later",
+    "require": {
+        "typo3/cms-core": "^14.3",
+        "typo3/cms-fluid-styled-content": "^14.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "Lueg\\SitePackage\\": "Classes/"
+        }
+    },
+    "extra": {
+        "typo3/cms": {
+            "extension-key": "site_package"
+        }
+    }
+}

@@ -1,0 +1,19 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+
+<f:layout name="Default"/>
+
+<f:section name="Main">
+    <f:comment><!-- Header region (backend layout colPos 1) --></f:comment>
+    <f:cObject typoscriptObjectPath="lib.contentHeader" />
+
+    <f:comment><!-- Body region (backend layout colPos 0) --></f:comment>
+    <div class="content content--body">
+        <f:cObject typoscriptObjectPath="lib.contentBody" />
+    </div>
+
+    <f:comment><!-- Footer region (backend layout colPos 2) --></f:comment>
+    <f:cObject typoscriptObjectPath="lib.contentFooter" />
+</f:section>
+
+</html>

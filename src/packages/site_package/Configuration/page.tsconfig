@@ -1,0 +1,41 @@
+# Use the site package RTE preset everywhere by default.
+RTE.default.preset = site_package
+
+mod.web_layout.BackendLayouts {
+    default {
+        title = Lueg: Header / Body / Footer
+        icon = EXT:site_package/Resources/Public/Icons/Extension.svg
+        config {
+            backend_layout {
+                colCount = 1
+                rowCount = 3
+                rows {
+                    1 {
+                        columns {
+                            1 {
+                                name = Header
+                                colPos = 1
+                            }
+                        }
+                    }
+                    2 {
+                        columns {
+                            1 {
+                                name = Body
+                                colPos = 0
+                            }
+                        }
+                    }
+                    3 {
+                        columns {
+                            1 {
+                                name = Footer
+                                colPos = 2
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

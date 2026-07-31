@@ -1,0 +1,5 @@
+settings:
+  sitePackage.siteName:
+    label: 'Site name'
+    type: string
+    default: 'Lueg'

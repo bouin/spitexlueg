@@ -1,0 +1,16 @@
+# TYPO3 composer-managed project
+/.Build/
+/vendor/
+/var/
+
+# public/ is fully generated in Composer mode (index.php, typo3, _assets, fileadmin, …)
+/public/
+
+# TYPO3 system config (contains encryption key / credentials) — keep only site config
+/config/*
+!/config/sites/
+
+# IDE / tooling
+/.idea/
+.claude/settings.local.json
+.DS_Store

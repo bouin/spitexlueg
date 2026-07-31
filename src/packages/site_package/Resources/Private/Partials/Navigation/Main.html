@@ -1,0 +1,25 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+
+<f:if condition="{navigation}">
+    <nav class="main-nav" aria-label="Main navigation">
+        <ul class="main-nav__list">
+            <f:for each="{navigation}" as="item">
+                <li class="main-nav__item{f:if(condition: item.active, then: ' is-active')}{f:if(condition: item.current, then: ' is-current')}">
+                    <a class="main-nav__link" href="{item.link}" target="{item.target}">{item.title}</a>
+                    <f:if condition="{item.children}">
+                        <ul class="main-nav__sub">
+                            <f:for each="{item.children}" as="child">
+                                <li class="main-nav__item{f:if(condition: child.active, then: ' is-active')}{f:if(condition: child.current, then: ' is-current')}">
+                                    <a class="main-nav__link" href="{child.link}" target="{child.target}">{child.title}</a>
+                                </li>
+                            </f:for>
+                        </ul>
+                    </f:if>
+                </li>
+            </f:for>
+        </ul>
+    </nav>
+</f:if>
+
+</html>

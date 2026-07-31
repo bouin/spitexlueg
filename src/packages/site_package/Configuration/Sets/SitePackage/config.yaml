@@ -1,0 +1,4 @@
+name: lueg/site-package
+label: 'Lueg Site Package'
+dependencies:
+  - typo3/fluid-styled-content

@@ -1,0 +1,47 @@
+# Lueg RTE / CKEditor preset.
+# Imports TYPO3's default processing + editor base, then customises the toolbar.
+imports:
+  - resource: "EXT:rte_ckeditor/Configuration/RTE/Processing.yaml"
+  - resource: "EXT:rte_ckeditor/Configuration/RTE/Editor/Base.yaml"
+  - resource: "EXT:rte_ckeditor/Configuration/RTE/Editor/Plugins.yaml"
+
+editor:
+  config:
+    # Visible toolbar. Use '|' for a separator and '-' for a line break.
+    toolbar:
+      items:
+        - undo
+        - redo
+        - "|"
+        - bold
+        - italic
+        - "|"
+        - link
+        - "|"
+        - bulletedList
+        - numberedList
+        - "|"
+        - blockQuote
+        - "|"
+        - insertTable
+        - "|"
+        - removeFormat
+
+    # Block/paragraph formats available in the "Styles"/heading dropdown.
+    heading:
+      options:
+        - { model: "paragraph", title: "Paragraph" }
+        - { model: "heading2", view: "h2", title: "Heading 2" }
+        - { model: "heading3", view: "h3", title: "Heading 3" }
+        - { model: "heading4", view: "h4", title: "Heading 4" }
+
+    # Only allow safe, semantic links.
+    link:
+      defaultProtocol: "https://"
+
+    # Basic table handling.
+    table:
+      contentToolbar:
+        - tableColumn
+        - tableRow
+        - mergeTableCells
