@@ -34,8 +34,10 @@
                             </span>
                         </button>
                         <div class="accordion__panel" id="acc-{data.uid}-{it.index}" role="region">
-                            <div class="accordion__content richtext">
-                                <f:format.html>{item.content}</f:format.html>
+                            <div class="accordion__content">
+                                <div class="accordion__inner richtext">
+                                    <f:format.html>{item.content}</f:format.html>
+                                </div>
                             </div>
                         </div>
                     </div>
