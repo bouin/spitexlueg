@@ -351,10 +351,9 @@
     .podcast__label {
         @apply pointer-events-none absolute left-0 top-0 z-30 flex flex-col items-center justify-center text-center text-white;
         background-color: var(--color-teal);
-        width: clamp(8rem, 15vw, 15rem);
-        aspect-ratio: 1 / 0.86;
-        border-radius: 0 0 50% 50%;
-        padding: 0.9em 1em 1.4em;
+        aspect-ratio: 1 / 0.76;
+        border-radius: 0 0 60% 60%;
+        padding: 0.3em 1.3em 1.4em;
     }
 
     .podcast__label-title {
@@ -373,7 +372,15 @@
     .podcast__copy {
         @apply pointer-events-none absolute inset-x-0 bottom-0 z-10 flex flex-col text-white;
         gap: var(--space-l);
-        padding: var(--space-l);
+        padding: var(--space-m);
+    }
+
+    /* Keep the copy to 30% of the stage. The padding is inside the box, so it
+       is added on top to make the text itself 30% wide. */
+    @screen md {
+        .podcast__copy {
+            max-width: calc(30% + 2 * var(--space-l));
+        }
     }
 
     .podcast__claim {
@@ -383,6 +390,40 @@
 
     .podcast__description {
         font-size: clamp(1rem, 1.5vw, 1.5rem);
+    }
+
+    /* ---- Play button ------------------------------------------------------ */
+    /* video.js ships a rounded rectangle with a border; the campaign uses a
+       plain white triangle, so strip the chrome and keep just the glyph. */
+    .podcast__player.video-js .vjs-big-play-button {
+        @apply absolute z-20 border-0 bg-transparent p-0 text-white shadow-none;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        /* video.js centres with negative margins; the transform does it here. */
+        margin: 0;
+        width: auto;
+        height: auto;
+        line-height: 1;
+        font-size: clamp(3rem, 6vw, 6rem);
+        transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    .podcast__player.video-js .vjs-big-play-button:hover,
+    .podcast__player.video-js .vjs-big-play-button:focus {
+        @apply bg-transparent;
+        transform: translate(-50%, -50%) scale(1.08);
+    }
+
+    .podcast__player.video-js .vjs-big-play-button .vjs-icon-placeholder::before {
+        @apply static;
+        /* Solid triangle instead of video.js' outlined play glyph. */
+        content: "";
+        display: block;
+        width: 1em;
+        height: 1.15em;
+        background-color: currentColor;
+        clip-path: polygon(8% 0%, 100% 50%, 8% 100%);
     }
 
     /* ---- Footer ---------------------------------------------------------- */
