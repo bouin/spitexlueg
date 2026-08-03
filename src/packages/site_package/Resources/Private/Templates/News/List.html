@@ -25,8 +25,10 @@
                 <f:for each="{news}" as="newsItem">
                     <li class="stellen__item">
                         <div class="stellen__body">
-                            <f:for each="{newsItem.tags}" as="tag">
-                                <span class="stellen__tag">{tag.title}</span>
+                            <f:comment><!-- Badge(s): every category assigned to this news in the
+                                 backend (e.g. "Lehrstelle") renders as a pill. --></f:comment>
+                            <f:for each="{newsItem.categories}" as="category">
+                                <span class="stellen__tag">{category.title}</span>
                             </f:for>
                             <f:if condition="{newsItem.teaser}">
                                 <p class="stellen__intro">{newsItem.teaser}</p>
@@ -34,13 +36,23 @@
                             <h3 class="stellen__title">{newsItem.title}</h3>
                         </div>
 
-                        <f:link.page pageUid="{settings.detailPid}" class="stellen__link"
-                                     additionalParams="{tx_news_pi1: {news: '{newsItem.uid}', controller: 'News', action: 'detail'}}">
-                            <span class="stellen__link-label">Mehr erfahren</span>
-                            <span class="stellen__link-icon" aria-hidden="true">
-                                <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                            </span>
-                        </f:link.page>
+                        <div class="stellen__actions">
+                            <f:link.page pageUid="{settings.detailPid}" class="stellen__link"
+                                         additionalParams="{tx_news_pi1: {news: '{newsItem.uid}', controller: 'News', action: 'detail'}}">
+                                <span class="stellen__link-label">Mehr erfahren</span>
+                                <span class="stellen__link-icon" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                                </span>
+                            </f:link.page>
+
+                            <f:comment><!-- Bewerbungsformular: same pill, down arrow. No target yet. --></f:comment>
+                            <a class="stellen__link" data-bewerbung>
+                                <span class="stellen__link-label">Bewerbungsformular</span>
+                                <span class="stellen__link-icon" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24"><path d="M12 5v14M6 13l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                                </span>
+                            </a>
+                        </div>
                     </li>
                 </f:for>
             </ul>

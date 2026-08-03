@@ -11,8 +11,8 @@
                 <span>Alle offenen Stellen</span>
             </f:link.page>
 
-            <f:for each="{newsItem.tags}" as="tag">
-                <span class="stellen-detail__tag">{tag.title}</span>
+            <f:for each="{newsItem.categories}" as="category">
+                <span class="stellen-detail__tag">{category.title}</span>
             </f:for>
 
             <h1 class="stellen-detail__title">{newsItem.title}</h1>

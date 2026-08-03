@@ -518,15 +518,17 @@
     }
 
     /* ---- Stellen (job openings) ----------------------------------------- */
-    /* Sits narrower than the intro by the shared --inset, like the accordion,
-       so the rules line up under the copy. Every row links to a detail page —
-       this is NOT an accordion. */
-    .stellen {
-        @apply m-0 list-none;
-        margin-inline: var(--inset);
+    /* Full-bleed light-blue band behind the whole section (intro + list). */
+    .section--stellen {
         background-color: var(--color-stellen-bg);
-        border: 1px solid color-mix(in srgb, var(--color-blue) 25%, transparent);
-        padding: clamp(0.5rem, 1.5vw, 1.5rem) clamp(1.5rem, 3.5vw, 3.5rem);
+    }
+
+    /* List sits narrower than the intro by the shared --inset, like the
+       accordion, so the rules line up under the copy. Every row links to a
+       detail page — this is NOT an accordion. */
+    .stellen {
+        @apply m-0 list-none p-0;
+        margin-inline: var(--inset);
     }
 
     .stellen__item {
@@ -564,7 +566,13 @@
         margin-top: var(--space-s);
     }
 
-    /* "Mehr erfahren" pill — static link (no toggle). Right arrow, no circle.
+    /* Right-hand action buttons: "Mehr erfahren" + "Bewerbungsformular". */
+    .stellen__actions {
+        @apply flex flex-wrap items-center;
+        gap: var(--space-s);
+    }
+
+    /* Pills — static links (no toggle), no circle around the arrow.
        Hover turns green, matching the header pill-nav. */
     .stellen__link {
         @apply inline-flex shrink-0 items-center rounded-full no-underline transition-colors;
