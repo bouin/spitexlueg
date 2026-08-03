@@ -1,5 +1,9 @@
 base: 'https://lueg.ddev.site/'
 dependencies:
+  - in2code/powermail-main
+  - in2code/powermail-dropin-main
+  - in2code/powermail-dropin-marketing
+  - in2code/powermail-dropin-styling
   - lueg/site-package
 languages:
   -

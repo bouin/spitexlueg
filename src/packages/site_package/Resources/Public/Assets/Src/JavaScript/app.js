@@ -220,10 +220,19 @@ function initApplyPrefill() {
         }
     };
 
-    // Cross-page: ?stelle=<job> in the URL (arrived from a subpage).
-    const match = window.location.search.match(/[?&]stelle=([^&]+)/);
+    const scrollToForm = () => {
+        const target = document.getElementById('bewerben');
+        if (target) {
+            target.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
+
+    // Cross-page: #stelle=<job> in the hash (arrived from a subpage). A hash is
+    // never sent to the server, so it avoids the query-param 404 on the home page.
+    const match = window.location.hash.match(/stelle=([^&]+)/);
     if (match) {
         pick(decodeURIComponent(match[1].replace(/\+/g, ' ')));
+        scrollToForm();
     }
 
     // Same-page: intercept so we scroll + pre-select without a reload.
@@ -234,10 +243,7 @@ function initApplyPrefill() {
             }
             e.preventDefault();
             pick(link.getAttribute('data-stelle'));
-            const target = document.getElementById('bewerben');
-            if (target) {
-                target.scrollIntoView({ behavior: 'smooth' });
-            }
+            scrollToForm();
         });
     });
 }

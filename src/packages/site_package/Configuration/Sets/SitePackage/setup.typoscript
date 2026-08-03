@@ -162,11 +162,12 @@ lib.powermailStellen {
 }
 
 # ---- Powermail: render a form by uid inside the "bewerben" content block ------
+lib.powermailForm < plugin.tx_powermail
 lib.powermailForm = USER_INT
 lib.powermailForm {
     userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
     extensionName = Powermail
     pluginName = Pi1
-    settings =< plugin.tx_powermail.settings
     settings.main.form = {$lueg.bewerbenForm}
+    settings.staticTemplate = 1
 }
