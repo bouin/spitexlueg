@@ -16,6 +16,8 @@ editor:
         - bold
         - italic
         - "|"
+        - style
+        - "|"
         - link
         - "|"
         - bulletedList
@@ -28,6 +30,13 @@ editor:
         - removeFormat
         - "|"
         - sourceEditing
+
+    style:
+      definitions:
+        - name: "Small text"
+          element: "p"
+          classes:
+            - "text-small"
 
     # Block/paragraph formats available in the "Styles"/heading dropdown.
     heading:
