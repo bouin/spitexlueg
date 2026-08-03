@@ -234,8 +234,11 @@ function initApplyPrefill() {
         if (!sel) {
             return;
         }
+        // Restart the animation cleanly if it is already running.
+        sel.classList.remove('powermail_select--flash');
+        void sel.offsetWidth;
         sel.classList.add('powermail_select--flash');
-        window.setTimeout(() => sel.classList.remove('powermail_select--flash'), 1400);
+        window.setTimeout(() => sel.classList.remove('powermail_select--flash'), 1600);
     };
 
     // Pre-select, scroll there, then flash once it has scrolled into view.
