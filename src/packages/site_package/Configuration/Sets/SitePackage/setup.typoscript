@@ -117,3 +117,21 @@ lib.contentBody.select.where = colPos = 0
 
 lib.contentFooter < styles.content.get
 lib.contentFooter.select.where = colPos = 2
+
+# ---- News (EXT:news) — job openings -----------------------------------------
+# List renders on the home one-pager, detail on the "Freie Stellen" page (uid 3),
+# records stored in the "Jobs" folder (uid 8). Templates overridden to match the
+# site design (reuses the .stellen* classes).
+plugin.tx_news {
+    view {
+        templateRootPaths.100 = EXT:site_package/Resources/Private/Templates/
+        partialRootPaths.100 = EXT:site_package/Resources/Private/Partials/
+        layoutRootPaths.100 = EXT:site_package/Resources/Private/Layouts/
+    }
+    settings {
+        startingpoint = 8
+        detailPid = 3
+        list.paginate.itemsPerPage = 50
+        list.hidePagination = 1
+    }
+}

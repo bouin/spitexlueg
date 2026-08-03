@@ -7,7 +7,7 @@
         <f:comment><!-- Intro: title left, description right --></f:comment>
         <div class="intro">
             <f:if condition="{data.header}">
-                <h2 class="section__title">{data.header}</h2>
+                <h2 class="section__title"><f:transform.html><f:format.stripTags allowedTags="<br>">{data.header}</f:format.stripTags></f:transform.html></h2>
             </f:if>
             <f:if condition="{data.bodytext}">
                 <div class="richtext">

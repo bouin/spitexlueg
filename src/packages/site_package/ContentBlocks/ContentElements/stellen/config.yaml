@@ -1,0 +1,43 @@
+name: lueg/stellen
+typeName: lueg_stellen
+group: default
+prefixFields: true
+prefixType: full
+basics:
+  - TYPO3/Appearance
+fields:
+  - identifier: header
+    useExistingField: true
+    label: 'Titel'
+    description: 'z. B. "Lueg – üsi freie Stelle"'
+  - identifier: bodytext
+    useExistingField: true
+    label: 'Einleitungstext'
+    description: 'Steht rechts neben dem Titel.'
+    enableRichtext: true
+    richtextConfiguration: site_package
+
+  - identifier: stellen
+    type: Collection
+    label: 'Stellen'
+    description: 'Jede Stelle wird von Hand gepflegt und verlinkt auf ihre eigene Unterseite. Kein Akkordeon.'
+    labelField: title
+    fields:
+      - identifier: tag
+        type: Text
+        label: 'Badge (optional)'
+        description: 'z. B. "Lehrstelle". Leer lassen für normale Stellen.'
+      - identifier: intro
+        type: Textarea
+        label: 'Einleitungszeile'
+        description: 'Steht klein über dem Titel, z. B. "Für unsere Standorte suchen wir ab sofort oder nach Vereinbarung". Zeilenumbrüche werden übernommen.'
+        rows: 3
+      - identifier: title
+        type: Text
+        label: 'Stellentitel'
+        required: true
+      - identifier: link
+        type: Link
+        label: 'Link zur Unterseite'
+        description: 'Zielseite im Seitenbaum (oder externe URL) mit dem vollständigen Inserat.'
+        required: true

@@ -1,0 +1,14 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+
+<strong>{data.header}</strong>
+<div><f:format.stripTags>{data.bodytext}</f:format.stripTags></div>
+<ul>
+    <f:for each="{data.stellen}" as="stelle">
+        <li>
+            <f:if condition="{stelle.tag}"><em>[{stelle.tag}]</em> </f:if>{stelle.title}
+        </li>
+    </f:for>
+</ul>
+
+</html>

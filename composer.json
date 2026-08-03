@@ -12,6 +12,7 @@
     },
     "require": {
         "contentblocks/content-blocks": "^2.4",
+        "georgringer/news": "^14.0",
         "lueg/site-package": "@dev",
         "typo3/cms-backend": "^14.3",
         "typo3/cms-belog": "^14.3",

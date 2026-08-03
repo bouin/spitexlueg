@@ -1,0 +1,52 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:n="http://typo3.org/ns/GeorgRinger/News/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+
+<section class="section section--stellen">
+    <div class="section__inner">
+
+        <f:comment><!-- Intro: title left, description right — taken from the
+             plugin content element's header + bodytext (shared pattern). --></f:comment>
+        <div class="intro">
+            <f:if condition="{contentObjectData.header}">
+                <h2 class="section__title">
+                    <f:transform.html><f:format.stripTags allowedTags="<br>">{contentObjectData.header}</f:format.stripTags></f:transform.html>
+                </h2>
+            </f:if>
+            <f:if condition="{contentObjectData.bodytext}">
+                <div class="richtext">
+                    <f:format.html>{contentObjectData.bodytext}</f:format.html>
+                </div>
+            </f:if>
+        </div>
+
+        <f:if condition="{news}">
+            <ul class="stellen">
+                <f:for each="{news}" as="newsItem">
+                    <li class="stellen__item">
+                        <div class="stellen__body">
+                            <f:for each="{newsItem.tags}" as="tag">
+                                <span class="stellen__tag">{tag.title}</span>
+                            </f:for>
+                            <f:if condition="{newsItem.teaser}">
+                                <p class="stellen__intro">{newsItem.teaser}</p>
+                            </f:if>
+                            <h3 class="stellen__title">{newsItem.title}</h3>
+                        </div>
+
+                        <f:link.page pageUid="{settings.detailPid}" class="stellen__link"
+                                     additionalParams="{tx_news_pi1: {news: '{newsItem.uid}', controller: 'News', action: 'detail'}}">
+                            <span class="stellen__link-label">Mehr erfahren</span>
+                            <span class="stellen__link-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            </span>
+                        </f:link.page>
+                    </li>
+                </f:for>
+            </ul>
+        </f:if>
+
+    </div>
+</section>
+
+</html>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="labels.xlf"
+          product-name="lueg/stellen" date="2026-08-03T00:00:00Z">
+        <header/>
+        <body>
+            <trans-unit id="title"><source>Freie Stellen</source></trans-unit>
+            <trans-unit id="description"><source>Liste offener Stellen, jede verlinkt von Hand auf ihre eigene Unterseite.</source></trans-unit>
+        </body>
+    </file>
+</xliff>
