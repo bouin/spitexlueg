@@ -227,12 +227,29 @@ function initApplyPrefill() {
         }
     };
 
+    // Confirmation flash: briefly turn the pill green so the user notices the
+    // value was pre-selected, then it eases back to blue (CSS transition).
+    const flash = () => {
+        const sel = select();
+        if (!sel) {
+            return;
+        }
+        sel.classList.add('powermail_select--flash');
+        window.setTimeout(() => sel.classList.remove('powermail_select--flash'), 1400);
+    };
+
+    // Pre-select, scroll there, then flash once it has scrolled into view.
+    const apply = (title) => {
+        pick(title);
+        scrollToForm();
+        window.setTimeout(flash, 500);
+    };
+
     // Cross-page: #stelle=<job> in the hash (arrived from a subpage). A hash is
     // never sent to the server, so it avoids the query-param 404 on the home page.
     const match = window.location.hash.match(/stelle=([^&]+)/);
     if (match) {
-        pick(decodeURIComponent(match[1].replace(/\+/g, ' ')));
-        scrollToForm();
+        apply(decodeURIComponent(match[1].replace(/\+/g, ' ')));
     }
 
     // Same-page: intercept so we scroll + pre-select without a reload.
@@ -242,8 +259,7 @@ function initApplyPrefill() {
                 return; // form not on this page → let the href navigate
             }
             e.preventDefault();
-            pick(link.getAttribute('data-stelle'));
-            scrollToForm();
+            apply(link.getAttribute('data-stelle'));
         });
     });
 }

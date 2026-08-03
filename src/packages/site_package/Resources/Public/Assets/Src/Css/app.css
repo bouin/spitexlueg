@@ -744,6 +744,16 @@
         font-size: clamp(0.7rem, 0.85vw, 0.85rem);
         letter-spacing: 0.04em;
         padding: 0.7rem 2.6rem 0.7rem 1.3rem;
+        transition: color 0.4s ease, border-color 0.4s ease, background-color 0.4s ease;
+    }
+
+    /* Confirmation flash: when a job is pre-selected we briefly turn the pill
+       green so the user notices the value changed, then it eases back to blue. */
+    .bewerben__form .powermail_select--flash {
+        color: var(--color-spitex-green);
+        border-color: var(--color-spitex-green);
+        background-color: color-mix(in srgb, var(--color-spitex-green) 10%, transparent);
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23009e5c' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
     }
 
     /* Submit: pill button, right-aligned, green on hover (like the other pills). */
