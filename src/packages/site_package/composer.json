@@ -4,8 +4,8 @@
     "description": "Lueg site package: page templates, TypoScript and assets.",
     "license": "GPL-2.0-or-later",
     "require": {
-        "typo3/cms-core": "^14.3",
-        "typo3/cms-fluid-styled-content": "^14.3"
+        "typo3/cms-core": "^13.4",
+        "typo3/cms-fluid-styled-content": "^13.4"
     },
     "autoload": {
         "psr-4": {

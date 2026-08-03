@@ -1,25 +1,26 @@
-rootPageId: 1
 base: 'https://lueg.ddev.site/'
-websiteTitle: 'Lueg'
 dependencies:
   - lueg/site-package
 languages:
-  - title: Deutsch
+  -
+    title: Deutsch
     enabled: true
     languageId: 0
     base: /
-    locale: de_DE.UTF-8
+    locale: de_CH.UTF-8
     navigationTitle: Deutsch
-    flag: de
-errorHandling: []
-routes: []
+    flag: ch
+    hreflang: de-CH
+    websiteTitle: ''
+rootPageId: 1
 routeEnhancers:
   NewsPlugin:
     type: Extbase
     extension: News
     plugin: Pi1
     routes:
-      - routePath: '/{news_title}'
+      -
+        routePath: '/{news_title}'
         _controller: 'News::detail'
         _arguments:
           news_title: news
@@ -29,3 +30,4 @@ routeEnhancers:
         type: PersistedAliasMapper
         tableName: tx_news_domain_model_news
         routeFieldName: path_segment
+websiteTitle: Lueg
