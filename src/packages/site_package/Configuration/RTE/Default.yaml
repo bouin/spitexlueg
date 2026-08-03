@@ -26,6 +26,8 @@ editor:
         - insertTable
         - "|"
         - removeFormat
+        - "|"
+        - sourceEditing
 
     # Block/paragraph formats available in the "Styles"/heading dropdown.
     heading:
