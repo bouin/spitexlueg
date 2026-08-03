@@ -1,0 +1,10 @@
+#!/bin/bash
+
+## Description: Watch & rebuild the site_package frontend assets (Tailwind/Vite) on every save
+## Usage: vite
+## Example: "ddev vite"
+
+set -e
+cd /var/www/html/src/packages/site_package
+echo "Watching Src/ → rebuilding Dist/ on save. Reload the browser after each change. Ctrl-C to stop."
+exec npm run watch-build
