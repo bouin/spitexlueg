@@ -631,6 +631,10 @@
         margin-bottom: var(--space-m);
     }
 
+    .stellen-detail__apply {
+        margin-top: var(--space-l);
+    }
+
     /* Body copy reuses the shared .richtext scale; headings get brand blue. */
     .stellen-detail__body h3 {
         @apply font-bold uppercase;
