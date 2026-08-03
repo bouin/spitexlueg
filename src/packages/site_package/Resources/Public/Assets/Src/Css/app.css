@@ -24,6 +24,7 @@
     --color-tile-teal: #5cc4bd;
     --color-peach: #fce3cd;
     --color-coral: #f76b6b;
+    --color-stellen-bg: #eaf4fa;
 
     /* Shared inset: elements that sit NARROWER than the full section width
        (e.g. the accordion) pull in by this much on each side. Reuse this in
@@ -521,9 +522,11 @@
        so the rules line up under the copy. Every row links to a detail page —
        this is NOT an accordion. */
     .stellen {
-        @apply m-0 list-none p-0;
+        @apply m-0 list-none;
         margin-inline: var(--inset);
-        border-top: 1px solid color-mix(in srgb, var(--color-blue) 30%, transparent);
+        background-color: var(--color-stellen-bg);
+        border: 1px solid color-mix(in srgb, var(--color-blue) 25%, transparent);
+        padding: clamp(0.5rem, 1.5vw, 1.5rem) clamp(1.5rem, 3.5vw, 3.5rem);
     }
 
     .stellen__item {
@@ -531,7 +534,12 @@
         grid-template-columns: minmax(0, 1fr) auto;
         gap: var(--space-m);
         padding-block: var(--space-l);
-        border-bottom: 1px solid color-mix(in srgb, var(--color-blue) 30%, transparent);
+        border-bottom: 1px solid color-mix(in srgb, var(--color-blue) 25%, transparent);
+    }
+
+    /* Divider above the first row, inside the box (matches the design). */
+    .stellen__item:first-child {
+        border-top: 1px solid color-mix(in srgb, var(--color-blue) 25%, transparent);
     }
 
     .stellen__tag {
