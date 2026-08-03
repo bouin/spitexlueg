@@ -13,3 +13,19 @@ languages:
     flag: de
 errorHandling: []
 routes: []
+routeEnhancers:
+  NewsPlugin:
+    type: Extbase
+    extension: News
+    plugin: Pi1
+    routes:
+      - routePath: '/{news_title}'
+        _controller: 'News::detail'
+        _arguments:
+          news_title: news
+    defaultController: 'News::list'
+    aspects:
+      news_title:
+        type: PersistedAliasMapper
+        tableName: tx_news_domain_model_news
+        routeFieldName: path_segment
