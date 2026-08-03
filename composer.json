@@ -13,6 +13,7 @@
     "require": {
         "contentblocks/content-blocks": "^1.6",
         "georgringer/news": "^14.0",
+        "in2code/powermail": "^13",
         "lueg/site-package": "@dev",
         "typo3/cms-backend": "^13.4",
         "typo3/cms-belog": "^13.4",

@@ -3,3 +3,4 @@ label: 'Lueg Site Package'
 dependencies:
   - typo3/fluid-styled-content
   - georgringer/news
+  - in2code/powermail-main
