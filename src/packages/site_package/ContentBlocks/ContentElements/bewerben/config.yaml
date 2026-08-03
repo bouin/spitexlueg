@@ -1,0 +1,39 @@
+name: lueg/bewerben
+typeName: lueg_bewerben
+group: default
+prefixFields: true
+prefixType: full
+basics:
+  - TYPO3/Appearance
+fields:
+  - identifier: header
+    useExistingField: true
+    label: 'Titel'
+    description: 'z. B. "Lueg – u chum zu üs"'
+  - identifier: bodytext
+    useExistingField: true
+    label: 'Einleitungstext'
+    description: 'Steht rechts neben dem Titel.'
+    enableRichtext: true
+    richtextConfiguration: site_package
+
+  - identifier: steps_heading
+    type: Text
+    label: 'Überschrift linke Spalte'
+    default: 'Wie läuft der Bewerbungsprozess ab?'
+
+  - identifier: steps
+    type: Collection
+    label: 'Ablauf-Schritte (linke Spalte)'
+    description: 'Die nummerierten Schritte des Bewerbungsprozesses.'
+    labelField: title
+    fields:
+      - identifier: title
+        type: Text
+        label: 'Titel'
+        required: true
+      - identifier: text
+        type: Textarea
+        label: 'Text'
+        enableRichtext: true
+        richtextConfiguration: site_package

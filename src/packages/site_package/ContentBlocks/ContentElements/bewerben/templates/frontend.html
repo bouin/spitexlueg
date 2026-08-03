@@ -1,0 +1,47 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+
+<section class="section section--bewerben" id="bewerben">
+    <div class="section__inner">
+
+        <f:comment><!-- Intro: title left, description right (shared pattern). --></f:comment>
+        <div class="intro">
+            <f:if condition="{data.header}">
+                <h2 class="section__title">{data.header}</h2>
+            </f:if>
+            <f:if condition="{data.bodytext}">
+                <div class="richtext">
+                    <f:format.html>{data.bodytext}</f:format.html>
+                </div>
+            </f:if>
+        </div>
+
+        <div class="bewerben">
+
+            <f:comment><!-- Left: the application process steps (editorial). --></f:comment>
+            <div class="bewerben__col bewerben__process">
+                <f:if condition="{data.steps_heading}">
+                    <h3 class="bewerben__heading">{data.steps_heading}</h3>
+                </f:if>
+                <ol class="bewerben__steps">
+                    <f:for each="{data.steps}" as="step" iteration="it">
+                        <li class="bewerben__step">
+                            <h4 class="bewerben__step-title">{it.cycle}. {step.title}</h4>
+                            <div class="bewerben__step-text richtext">
+                                <f:format.html>{step.text}</f:format.html>
+                            </div>
+                        </li>
+                    </f:for>
+                </ol>
+            </div>
+
+            <f:comment><!-- Right: the Powermail application form (uid via constant lueg.bewerbenForm). --></f:comment>
+            <div class="bewerben__col bewerben__form">
+                <f:cObject typoscriptObjectPath="lib.powermailForm" />
+            </div>
+
+        </div>
+    </div>
+</section>
+
+</html>

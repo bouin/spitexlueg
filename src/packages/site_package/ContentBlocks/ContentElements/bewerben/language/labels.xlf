@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="labels.xlf"
+          product-name="lueg/bewerben" date="2026-08-03T00:00:00Z">
+        <header/>
+        <body>
+            <trans-unit id="title"><source>Direkt bewerben</source></trans-unit>
+            <trans-unit id="description"><source>Bewerbungs-Section: Ablauf links, Powermail-Formular rechts.</source></trans-unit>
+        </body>
+    </file>
+</xliff>

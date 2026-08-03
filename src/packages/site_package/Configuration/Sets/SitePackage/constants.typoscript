@@ -5,3 +5,7 @@ styles {
         layoutRootPath = EXT:site_package/Resources/Private/Layouts/
     }
 }
+
+# UID of the Powermail application form embedded in the "Direkt bewerben" section.
+# There is one application form site-wide; set this to its uid (List › Forms).
+lueg.bewerbenForm = 1

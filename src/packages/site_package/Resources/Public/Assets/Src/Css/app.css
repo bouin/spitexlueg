@@ -25,6 +25,7 @@
     --color-peach: #fce3cd;
     --color-coral: #f76b6b;
     --color-stellen-bg: #eaf4fa;
+    --color-bewerben-bg: #f0de99;
 
     /* Shared inset: elements that sit NARROWER than the full section width
        (e.g. the accordion) pull in by this much on each side. Reuse this in
@@ -642,6 +643,50 @@
         font-size: clamp(1.1rem, 1.6vw, 1.5rem);
         margin-top: var(--space-m);
         margin-bottom: var(--space-s);
+    }
+
+    /* ---- Direkt bewerben (Powermail) ------------------------------------ */
+    /* Full-bleed yellow band; two white cards (process left, form right). */
+    .section--bewerben {
+        background-color: var(--color-bewerben-bg);
+    }
+
+    .bewerben {
+        @apply grid;
+        gap: var(--space-m);
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr);
+    }
+    @media (max-width: 820px) {
+        .bewerben { grid-template-columns: minmax(0, 1fr); }
+    }
+
+    .bewerben__col {
+        background-color: #fff;
+        padding: clamp(1.5rem, 3vw, 3rem);
+    }
+
+    .bewerben__heading {
+        @apply font-bold;
+        color: var(--color-blue);
+        font-size: clamp(1.15rem, 1.6vw, 1.5rem);
+        line-height: 1.2;
+        margin-bottom: var(--space-m);
+    }
+
+    .bewerben__steps {
+        @apply m-0 list-none p-0;
+    }
+    .bewerben__step + .bewerben__step {
+        margin-top: var(--space-m);
+    }
+    .bewerben__step-title {
+        @apply font-bold;
+        color: var(--color-blue);
+        font-size: clamp(1rem, 1.2vw, 1.15rem);
+        margin-bottom: 0.35rem;
+    }
+    .bewerben__step-text {
+        font-size: clamp(0.95rem, 1.1vw, 1.1rem);
     }
 
     /* ---- Standorte map --------------------------------------------------- */

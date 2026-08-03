@@ -1,0 +1,13 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+
+<strong>{data.header}</strong>
+<div><f:format.stripTags>{data.bodytext}</f:format.stripTags></div>
+<ul>
+    <f:for each="{data.steps}" as="step">
+        <li>{step.title}</li>
+    </f:for>
+</ul>
+<div><em>Formular:</em> Powermail (via Konstante lueg.bewerbenForm)</div>
+
+</html>
