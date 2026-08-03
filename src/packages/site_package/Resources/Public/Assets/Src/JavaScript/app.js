@@ -198,11 +198,56 @@ function initMaps() {
     });
 }
 
+/**
+ * Application form pre-select. The "Bewerbungsformular" buttons carry the job
+ * title in data-stelle. On the home page a click scrolls to #bewerben and
+ * pre-selects the Powermail "Stelle" dropdown (no reload); from a subpage the
+ * button links to /?stelle=<job>#bewerben and this runs on load.
+ */
+function initApplyPrefill() {
+    const select = () => document.getElementById('powermail_field_stelle');
+
+    const pick = (title) => {
+        const sel = select();
+        if (!sel || !title) {
+            return;
+        }
+        for (let i = 0; i < sel.options.length; i++) {
+            if (sel.options[i].value === title) {
+                sel.selectedIndex = i;
+                return;
+            }
+        }
+    };
+
+    // Cross-page: ?stelle=<job> in the URL (arrived from a subpage).
+    const match = window.location.search.match(/[?&]stelle=([^&]+)/);
+    if (match) {
+        pick(decodeURIComponent(match[1].replace(/\+/g, ' ')));
+    }
+
+    // Same-page: intercept so we scroll + pre-select without a reload.
+    document.querySelectorAll('a[data-stelle]').forEach((link) => {
+        link.addEventListener('click', (e) => {
+            if (!select()) {
+                return; // form not on this page → let the href navigate
+            }
+            e.preventDefault();
+            pick(link.getAttribute('data-stelle'));
+            const target = document.getElementById('bewerben');
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    });
+}
+
 document.addEventListener('DOMContentLoaded', async () => {
     initHeroCarousel();
     initAccordions();
     initBenefitTiles();
     initMaps();
+    initApplyPrefill();
     const players = await initPodcastPlayers();
     await initPodcastSliders(players);
 });

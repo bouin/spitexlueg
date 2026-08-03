@@ -689,6 +689,93 @@
         font-size: clamp(0.95rem, 1.1vw, 1.1rem);
     }
 
+    /* ---- Powermail form, styled to the design --------------------------- */
+    .bewerben__form .powermail_legend { display: none; }
+
+    .bewerben__form .powermail_fieldwrap {
+        margin-bottom: var(--space-m);
+    }
+
+    /* Honeypot + hidden fields never show. */
+    .bewerben__form [aria-hidden="true"] { display: none !important; }
+
+    /* Field labels: uppercase brand blue, above the field. */
+    .bewerben__form label {
+        @apply block font-bold uppercase;
+        color: var(--color-blue);
+        font-size: clamp(0.7rem, 0.85vw, 0.85rem);
+        letter-spacing: 0.04em;
+        margin-bottom: 0.4rem;
+    }
+
+    /* Text inputs + textarea: underline only, no box. */
+    .bewerben__form .powermail_input,
+    .bewerben__form textarea {
+        @apply w-full;
+        background: transparent;
+        border: 0;
+        border-radius: 0;
+        border-bottom: 1.5px solid color-mix(in srgb, var(--color-blue) 40%, transparent);
+        color: var(--color-blue);
+        font-size: clamp(1rem, 1.2vw, 1.15rem);
+        padding: 0.35rem 0;
+    }
+    .bewerben__form .powermail_input:focus,
+    .bewerben__form textarea:focus {
+        outline: none;
+        border-bottom-color: var(--color-blue);
+    }
+    .bewerben__form textarea { resize: vertical; min-height: 3rem; }
+
+    /* "Stelle" select: pill (the pill shows the value, so hide its label). */
+    .bewerben__form .powermail_fieldwrap_stelle label { display: none; }
+    .bewerben__form .powermail_select {
+        @apply w-full cursor-pointer font-bold uppercase;
+        appearance: none;
+        -webkit-appearance: none;
+        border: 1.5px solid var(--color-blue);
+        border-radius: 999px;
+        color: var(--color-blue);
+        background-color: transparent;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230069b4' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 1.1rem center;
+        background-size: 1rem;
+        font-size: clamp(0.7rem, 0.85vw, 0.85rem);
+        letter-spacing: 0.04em;
+        padding: 0.7rem 2.6rem 0.7rem 1.3rem;
+    }
+
+    /* Submit: pill button, right-aligned, green on hover (like the other pills). */
+    .bewerben__form .powermail_fieldwrap_submit {
+        @apply flex justify-end;
+        margin-top: var(--space-l);
+        margin-bottom: 0;
+    }
+    .bewerben__form input[type="submit"] {
+        @apply cursor-pointer rounded-full font-bold uppercase transition-colors;
+        border: 1.5px solid var(--color-blue);
+        background: transparent;
+        color: var(--color-blue);
+        font-size: clamp(0.7rem, 0.85vw, 0.85rem);
+        letter-spacing: 0.06em;
+        padding: 0.75rem 1.7rem;
+    }
+    .bewerben__form input[type="submit"]:hover {
+        background-color: var(--color-spitex-green);
+        border-color: var(--color-spitex-green);
+        color: #fff;
+    }
+
+    /* Validation messages. */
+    .bewerben__form .powermail_field_error { border-bottom-color: var(--color-coral); }
+    .bewerben__form .parsley-errors-list {
+        @apply m-0 list-none p-0;
+        color: var(--color-coral);
+        font-size: 0.8rem;
+        margin-top: 0.3rem;
+    }
+
     /* ---- Standorte map --------------------------------------------------- */
     /* Peach band; the map canvas is centred inside it, the card pins to its
        top-right corner. */
