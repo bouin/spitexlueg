@@ -1,3 +1,24 @@
+
+config {
+    no_cache = 0
+    uniqueLinkVars = 1
+    pageTitleFirst = 1
+    linkVars = L
+    prefixLocalAnchors = all
+    renderCharset = utf-8
+    metaCharset = utf-8
+    doctype = html5
+    removeDefaultJS = 0
+    compressJs = 0
+    compressCss = 0
+    concatenateJs = 0
+    concatenateCss = 0
+    sendCacheHeaders = 1
+    index_enable = 1
+    spamProtectEmailAddresses = 1
+    spamProtectEmailAddresses_atSubst = (at)
+}
+
 page = PAGE
 page {
     typeNum = 0
@@ -171,3 +192,4 @@ lib.powermailForm {
     settings.main.form = {$lueg.bewerbenForm}
     settings.staticTemplate = 1
 }
+

@@ -758,7 +758,7 @@
         color: var(--color-blue);
         font-size: clamp(1.4rem, 2.4vw, 2.25rem);
         line-height: 1.15;
-        margin: 0 0 var(--space-l);
+        margin: 0 0 10px;
     }
 
     .bewerben__form .powermail_fieldwrap {
@@ -823,7 +823,6 @@
 
     /* "Stelle" select: pill (the pill shows the value, so hide its label). */
     .bewerben__form .powermail_fieldwrap_stelle label { display: none; }
-    .bewerben__form .powermail_fieldwrap_stelle { margin-bottom: var(--space-l); }
     .bewerben__form .powermail_select {
         @apply inline-block w-auto max-w-full cursor-pointer font-bold uppercase;
         appearance: none;
@@ -1397,13 +1396,22 @@
 .text-small {
     font-size: 0.875rem;
 }
+.textpage__inner h2,
+.textpage__inner h3
+{
+    padding-top: 3rem;
+}
+
 .textpage__inner p,
 .textpage__inner h1,
 .textpage__inner h2,
 .textpage__inner h3,
-.textpage__inner h4
+.textpage__inner h4,
+.textpage__inner ul li,
+.textpage__inner a
 {
     padding-bottom: .9rem;
+    font-size: 1.2rem;
 }
 .textpage ul {
     margin: 1.5rem 0 2rem;
@@ -1413,9 +1421,9 @@
 
 .textpage ul li {
     position: relative;
-    margin-bottom: 0.6rem;
+
     padding-left: 1.5rem;
-    line-height: 1.5;
+    line-height: 1.4;
 }
 
 .textpage ul li::before {
