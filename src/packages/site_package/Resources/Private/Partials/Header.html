@@ -27,11 +27,12 @@
     </f:else>
 </f:if>
 
-<header class="site-header flex flex-col {f:if(condition: isHome, then: 'h-svh', else: '')}">
-
-    <f:comment><!-- Hero shows only when there is an image: the home page, or a
-         subpage with its own Media. Subpages without Media start with the menu. --></f:comment>
-    <f:if condition="{heroMedia}">
+<f:comment><!-- Hero shows only when there is an image: the home page, or a
+     subpage with its own Media. Subpages without Media start with the menu.
+     On home the hero fills the screen minus the (sticky) navbar height, so
+     hero + nav = one screen; the navbar then sticks to the top on scroll. --></f:comment>
+<f:if condition="{heroMedia}">
+    <header class="site-header">
         <section class="hero {f:if(condition: isHome, then: 'hero--home', else: 'hero--sub')}">
 
             <f:comment><!-- Slides: all media images, cross-faded by app.js --></f:comment>
@@ -52,10 +53,15 @@
                 </div>
             </f:if>
         </section>
-    </f:if>
+    </header>
+</f:if>
 
-    <f:comment><!-- Navigation bar: natural height, always on screen --></f:comment>
-    <div class="navbar">
+<f:comment><!-- Sentinel marks the navbar's resting position, so JS knows when
+     it has stuck to the top (see initStickyNav in app.js). --></f:comment>
+<div class="navbar-sentinel" data-nav-sentinel aria-hidden="true"></div>
+
+<f:comment><!-- Sticky navigation bar. --></f:comment>
+<div class="navbar" data-navbar>
       <div class="navbar__inner">
 
         <f:comment><!-- Logo: centered, above the navigation --></f:comment>
@@ -87,8 +93,6 @@
             </f:if>
         </div>
       </div>
-    </div>
-
-</header>
+</div>
 
 </html>

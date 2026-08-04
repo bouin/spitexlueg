@@ -74,9 +74,11 @@
         border: 1px solid var(--hero-frame);
     }
 
-    /* Home: grow to fill whatever the navbar leaves over, so image + nav = 100vh. */
+    /* Home hero fills the screen minus the sticky navbar (its height is set as
+       --navbar-h by app.js), so hero + nav = one screen on load. */
     .hero--home {
-        @apply min-h-0 flex-1;
+        height: calc(100svh - var(--navbar-h, 5rem));
+        min-height: 20rem;
     }
 
     /* Subpage: a shorter banner, no full-screen takeover. */
@@ -135,8 +137,17 @@
 
     /* ---- Navigation bar below the hero ---------------------------------- */
     /* shrink-0: keeps its natural height so the hero can take the rest. */
+    /* Sticks to the top on scroll; a subtle shadow appears once stuck (JS adds
+       .is-stuck via the sentinel). */
     .navbar {
-        @apply w-full shrink-0 bg-white;
+        @apply sticky top-0 z-50 w-full bg-white;
+        transition: box-shadow 0.3s ease;
+    }
+    .navbar.is-stuck {
+        box-shadow: 0 6px 24px rgba(0, 0, 0, 0.09);
+    }
+    .navbar-sentinel {
+        height: 0;
     }
 
     /* The white bar is full-bleed, its content is width-constrained.
@@ -211,6 +222,11 @@
     .brand__logo {
         @apply w-auto;
         height: clamp(2.75rem, 4.5vw, 4.75rem);
+        transition: height 0.25s ease;
+    }
+    /* Slightly smaller once the navbar has stuck to the top. */
+    .navbar.is-stuck .brand__logo {
+        height: clamp(2.25rem, 3.4vw, 3.5rem);
     }
 
     /* Mobile header logo is 30% larger (centered above the nav). */
@@ -1277,6 +1293,7 @@
     .footer__claim {
         @apply bg-white;
         padding-block: var(--space-l);
+        padding-top: 0px !important;
     }
 
     .footer__claim-title {
@@ -1349,12 +1366,23 @@
         @apply flex flex-col;
     }
 
+    /* Animated underline that grows from the centre outwards on hover. */
     .footer__link {
-        @apply text-white no-underline transition-opacity;
+        @apply relative inline-block w-fit text-white no-underline;
     }
-
-    .footer__link:hover {
-        @apply opacity-70;
+    .footer__link::after {
+        content: "";
+        @apply absolute inset-x-0;
+        bottom: -0.05em;
+        height: 2px;
+        background-color: currentColor;
+        transform: scaleX(0);
+        transform-origin: center;
+        transition: transform 0.3s ease;
+    }
+    .footer__link:hover::after,
+    .footer__link:focus-visible::after {
+        transform: scaleX(1);
     }
 
     /* Band 3: legal links + logo */
@@ -1374,13 +1402,23 @@
     }
 
     .footer__legal-link {
-        @apply font-bold no-underline transition-opacity;
+        @apply relative inline-block font-bold no-underline;
         color: var(--color-blue);
         font-size: clamp(0.95rem, 1.15vw, 1.15rem);
     }
-
-    .footer__legal-link:hover {
-        @apply opacity-70;
+    .footer__legal-link::after {
+        content: "";
+        @apply absolute inset-x-0;
+        bottom: -0.1em;
+        height: 2px;
+        background-color: currentColor;
+        transform: scaleX(0);
+        transform-origin: center;
+        transition: transform 0.3s ease;
+    }
+    .footer__legal-link:hover::after,
+    .footer__legal-link:focus-visible::after {
+        transform: scaleX(1);
     }
     .richtext p {
         font-weight: 600;
@@ -1439,4 +1477,8 @@
 
 .textpage ul li:last-child {
     margin-bottom: 0;
+}
+.powermail-errors-list li {
+    padding-top: 6px;
+    font-size: 14px;
 }

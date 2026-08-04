@@ -284,12 +284,80 @@ function initBewerbenForm() {
     });
 }
 
+/**
+ * Sticky navigation: publishes the navbar height as --navbar-h (used by the
+ * home hero to fill "screen minus navbar"), and flips .is-stuck once the bar
+ * has stuck to the top — detected via a zero-height sentinel above it.
+ */
+function initStickyNav() {
+    const navbar = document.querySelector('[data-navbar]');
+    if (!navbar) {
+        return;
+    }
+
+    const setHeight = () =>
+        document.documentElement.style.setProperty('--navbar-h', `${navbar.offsetHeight}px`);
+    setHeight();
+    if ('ResizeObserver' in window) {
+        new ResizeObserver(setHeight).observe(navbar);
+    } else {
+        window.addEventListener('resize', setHeight);
+    }
+
+    const sentinel = document.querySelector('[data-nav-sentinel]');
+    if (sentinel && 'IntersectionObserver' in window) {
+        new IntersectionObserver(
+            ([entry]) => navbar.classList.toggle('is-stuck', !entry.isIntersecting),
+            { threshold: 0 }
+        ).observe(sentinel);
+    }
+}
+
+/**
+ * Scrollspy: highlights the pill-nav link whose section is currently centred in
+ * the viewport, by matching each link's #hash to a section id.
+ */
+function initScrollSpy() {
+    const links = Array.from(document.querySelectorAll('.pill-nav__link'));
+    if (!links.length || !('IntersectionObserver' in window)) {
+        return;
+    }
+
+    const linkFor = new Map();
+    links.forEach((link) => {
+        const id = (link.getAttribute('href') || '').split('#')[1];
+        const section = id && document.getElementById(id);
+        if (section) {
+            linkFor.set(section, link);
+        }
+    });
+    if (!linkFor.size) {
+        return;
+    }
+
+    const spy = new IntersectionObserver(
+        (entries) => {
+            entries.forEach((entry) => {
+                if (!entry.isIntersecting) {
+                    return;
+                }
+                links.forEach((link) => link.classList.remove('is-active'));
+                linkFor.get(entry.target)?.classList.add('is-active');
+            });
+        },
+        { rootMargin: '-45% 0px -45% 0px', threshold: 0 }
+    );
+    linkFor.forEach((_, section) => spy.observe(section));
+}
+
 document.addEventListener('DOMContentLoaded', async () => {
     initHeroCarousel();
     initAccordions();
     initBenefitTiles();
     initMaps();
     initBewerbenForm();
+    initStickyNav();
+    initScrollSpy();
     initApplyPrefill();
     const players = await initPodcastPlayers();
     await initPodcastSliders(players);
