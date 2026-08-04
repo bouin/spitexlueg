@@ -34,10 +34,12 @@
             <div class="footer__org">
                 <p class="footer__org-name">Spitex<br>Region Lueg</p>
                 <address class="footer__address">
-                    Geschäftsstelle<br>
-                    Rüegsaustrasse 8<br>
-                    Postfach<br>
-                    3415 Hasle-Rüegsau
+                    <a href="https://maps.app.goo.gl/veSAt6tfsGUZjPXu8" target="_blank" rel="noopener">
+                        Geschäftsstelle<br>
+                        Rüegsaustrasse 8<br>
+                        Postfach<br>
+                        3415 Hasle-Rüegsau
+                    </a>
                 </address>
             </div>
 
@@ -48,8 +50,13 @@
     <div class="footer__meta">
         <div class="footer__inner footer__meta-inner">
             <nav class="footer__legal" aria-label="Rechtliches">
-                <a class="footer__legal-link" href="/#impressum">Impressum</a>
-                <a class="footer__legal-link" href="/#disclaimer">Datenschutz</a>
+                <f:link.page pageUid="10" class="footer__legal-link">
+                    Impressum
+                </f:link.page>
+
+                <f:link.page pageUid="9" class="footer__legal-link">
+                    Datenschutz
+                </f:link.page>
             </nav>
 
             <f:link.page pageUid="{site.rootPageId}" class="brand">

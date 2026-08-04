@@ -8,7 +8,6 @@
         <div class="intro">
             <f:if condition="{data.header}">
                 <h2 class="section__title"><f:transform.html><f:format.stripTags allowedTags="<br>">{data.header}</f:format.stripTags></f:transform.html></h2>
-
             </f:if>
             <f:if condition="{data.bodytext}">
                 <div class="richtext">
@@ -17,37 +16,42 @@
             </f:if>
         </div>
 
-        <f:comment>
-            Job list — sits narrower than the intro by the shared --inset,
-            like the accordion, so the rules line up under the copy.
-            NOT an accordion: every row links out to its own detail page.
-        </f:comment>
-        <f:if condition="{data.stellen}">
-            <ul class="stellen">
-                <f:for each="{data.stellen}" as="stelle">
-                    <li class="stellen__item">
-                        <div class="stellen__body">
-                            <f:if condition="{stelle.tag}">
-                                <span class="stellen__tag">{stelle.tag}</span>
-                            </f:if>
-                            <f:if condition="{stelle.intro}">
-                                <p class="stellen__intro"><f:format.nl2br>{stelle.intro}</f:format.nl2br></p>
-                            </f:if>
-                            <h3 class="stellen__title">{stelle.title}</h3>
-                        </div>
-
-                        <f:link.typolink parameter="{stelle.link}" class="stellen__link">
-                            <span class="stellen__link-label">Mehr erfahren</span>
-                            <span class="stellen__link-icon" aria-hidden="true">
-                                <svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                            </span>
-                        </f:link.typolink>
-                    </li>
-                </f:for>
-            </ul>
-        </f:if>
-
     </div>
+
+    <f:comment>
+        Job list on its own full-width band — the light-blue background starts
+        BELOW the intro (intro stays on white). List sits narrower than the
+        intro by the shared --inset so the rules line up under the copy.
+        NOT an accordion: every row links out to its own detail page.
+    </f:comment>
+    <f:if condition="{data.stellen}">
+        <div class="stellen-band">
+            <div class="section__inner">
+                <ul class="stellen">
+                    <f:for each="{data.stellen}" as="stelle">
+                        <li class="stellen__item">
+                            <div class="stellen__body">
+                                <f:if condition="{stelle.tag}">
+                                    <span class="stellen__tag">{stelle.tag}</span>
+                                </f:if>
+                                <f:if condition="{stelle.intro}">
+                                    <p class="stellen__intro"><f:format.nl2br>{stelle.intro}</f:format.nl2br></p>
+                                </f:if>
+                                <h3 class="stellen__title">{stelle.title}</h3>
+                            </div>
+
+                            <f:link.typolink parameter="{stelle.link}" class="stellen__link">
+                                <span class="stellen__link-label">Mehr erfahren</span>
+                                <span class="stellen__link-icon" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                                </span>
+                            </f:link.typolink>
+                        </li>
+                    </f:for>
+                </ul>
+            </div>
+        </div>
+    </f:if>
 </section>
 
 </html>

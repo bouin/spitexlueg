@@ -267,11 +267,29 @@ function initApplyPrefill() {
     });
 }
 
+/**
+ * Bewerben form: floating labels. A field keeps .has-value while it holds text,
+ * so its label stays lifted after blur (focus is handled by :focus-within).
+ */
+function initBewerbenForm() {
+    document.querySelectorAll('.bewerben__form .powermail_input, .bewerben__form textarea').forEach((field) => {
+        const wrap = field.closest('.powermail_fieldwrap');
+        if (!wrap) {
+            return;
+        }
+        const sync = () => wrap.classList.toggle('has-value', field.value.trim() !== '');
+        field.addEventListener('input', sync);
+        field.addEventListener('change', sync);
+        sync();
+    });
+}
+
 document.addEventListener('DOMContentLoaded', async () => {
     initHeroCarousel();
     initAccordions();
     initBenefitTiles();
     initMaps();
+    initBewerbenForm();
     initApplyPrefill();
     const players = await initPodcastPlayers();
     await initPodcastSliders(players);

@@ -1,0 +1,19 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+
+<f:layout name="Default"/>
+
+<f:comment>
+    Text subpage: renders the single content column (colPos 0) inside a
+    width-constrained, vertically-spaced container. Editors only add text
+    elements; all spacing and the reading width come from here + app.css.
+</f:comment>
+<f:section name="Main">
+    <div class="textpage">
+        <div class="textpage__inner">
+            <f:cObject typoscriptObjectPath="lib.contentBody" />
+        </div>
+    </div>
+</f:section>
+
+</html>

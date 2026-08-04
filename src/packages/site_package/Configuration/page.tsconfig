@@ -38,4 +38,27 @@ mod.web_layout.BackendLayouts {
             }
         }
     }
+
+    # Text subpage: a single column. Add only text elements — the template
+    # (Textseite.html) supplies the container, width and vertical spacing.
+    Textseite {
+        title = Lueg: Textseite (nur Text)
+        icon = EXT:site_package/Resources/Public/Icons/Extension.svg
+        config {
+            backend_layout {
+                colCount = 1
+                rowCount = 1
+                rows {
+                    1 {
+                        columns {
+                            1 {
+                                name = Text
+                                colPos = 0
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

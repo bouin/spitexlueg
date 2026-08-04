@@ -19,12 +19,17 @@
                 </div>
             </f:if>
         </div>
+    </div>
 
-        <f:if condition="{news}">
-            <ul class="stellen">
-                <f:for each="{news}" as="newsItem">
-                    <li class="stellen__item">
-                        <div class="stellen__body">
+    <f:comment><!-- Job list on its own full-width band: blue background starts
+         BELOW the intro (intro stays on white). --></f:comment>
+    <f:if condition="{news}">
+        <div class="stellen-band">
+            <div class="section__inner">
+                <ul class="stellen">
+                    <f:for each="{news}" as="newsItem">
+                        <li class="stellen__item">
+                            <div class="stellen__body">
                             <f:comment><!-- Badge(s): every category assigned to this news in the
                                  backend (e.g. "Lehrstelle") renders as a pill. --></f:comment>
                             <f:for each="{newsItem.categories}" as="category">
@@ -54,12 +59,12 @@
                                 </span>
                             </a>
                         </div>
-                    </li>
-                </f:for>
-            </ul>
-        </f:if>
-
-    </div>
+                        </li>
+                    </f:for>
+                </ul>
+            </div>
+        </div>
+    </f:if>
 </section>
 
 </html>

@@ -281,6 +281,32 @@
         margin-top: 12px;
     }
 
+    /* ---- Text subpage (backend layout "Textseite") ---------------------- */
+    /* The layout supplies the container, width and rhythm; editors only add
+       text elements. Generous top/bottom space, a centred column. */
+    .textpage {
+        padding-block: var(--space-xl);
+    }
+    .textpage__inner {
+        @apply mx-auto w-full;
+        max-width: var(--container);
+        padding-inline: var(--gutter);
+    }
+
+    /* Content blocks (e.g. headline-text) bring their own section padding and
+       inner container — strip both here so the page controls the rhythm. */
+    .textpage .section {
+        padding-block: 0;
+    }
+    .textpage .section__inner {
+        max-width: none;
+        padding-inline: 0;
+    }
+    /* Even spacing between whatever text elements the editor stacks. */
+    .textpage__inner > * + * {
+        margin-top: var(--space-l);
+    }
+
     /* ---- Text section (headline + copy) --------------------------------- */
     /* Gap below the headline — a touch larger than the paragraph rhythm,
        so the headline reads as its own block above the copy. */
@@ -516,8 +542,15 @@
 
     /* ---- Stellen (job openings) ----------------------------------------- */
     /* Full-bleed light-blue band behind the whole section (intro + list). */
+    /* Intro stays on white; the blue band starts below it. */
     .section--stellen {
+        padding-bottom: 0;
+    }
+
+    /* Full-width light-blue band that holds the job list. */
+    .stellen-band {
         background-color: var(--color-stellen-bg);
+        padding-block: clamp(2rem, 4vw, 4rem);
     }
 
     /* List sits narrower than the intro by the shared --inset, like the
@@ -575,7 +608,7 @@
         border: 1.5px solid var(--color-blue);
         color: var(--color-blue);
         gap: 0.7rem;
-        padding: 0.55rem 1.3rem;
+        padding: .55rem 1.3rem .35rem 1.3rem;
     }
     .stellen__link:hover {
         background-color: var(--color-spitex-green);
@@ -672,7 +705,9 @@
         line-height: 1.2;
         margin-bottom: var(--space-m);
     }
-
+    .bewerben__col h3 {
+        color: var(--color-blue);
+    }
     .bewerben__steps {
         @apply m-0 list-none p-0;
     }
@@ -690,22 +725,78 @@
     }
 
     /* ---- Powermail form, styled to the design --------------------------- */
-    .bewerben__form .powermail_legend { display: none; }
+    /* Constrain Powermail's Bootstrap wrappers + the fieldset to the white
+       card. Fieldsets default to min-inline-size: min-content and won't shrink
+       into a grid column, and .container-fluid adds its own padding — both make
+       the form overflow. Reset them all to full-but-shrinkable width. */
+    .bewerben__form .tx-powermail,
+    .bewerben__form .container-fluid,
+    .bewerben__form .powermail_form,
+    .bewerben__form fieldset {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        min-inline-size: 0;
+        margin: 0;
+        padding: 0;
+        border: 0;
+    }
+
+    /* Powermail renders the form name as an <h3> ("Bewerbung") AND the page
+       title as the <legend>. Hide the redundant form-name h3; the legend is
+       the headline. */
+    .bewerben__form .powermail_form > h3 { display: none; }
+
+    /* The page title (rendered as <legend>) is the headline at the top of the
+       white form card. Reset the legend's quirky fieldset styling so it
+       behaves like a normal block heading. */
+    .bewerben__form .powermail_legend {
+        @apply block font-bold;
+        float: none;
+        width: 100%;
+        padding: 0;
+        color: var(--color-blue);
+        font-size: clamp(1.4rem, 2.4vw, 2.25rem);
+        line-height: 1.15;
+        margin: 0 0 var(--space-l);
+    }
 
     .bewerben__form .powermail_fieldwrap {
-        margin-bottom: var(--space-m);
+        margin-bottom: 0.9rem;
     }
 
     /* Honeypot + hidden fields never show. */
     .bewerben__form [aria-hidden="true"] { display: none !important; }
+    .bewerben__form .mandatory { display: none; }
 
-    /* Field labels: uppercase brand blue, above the field. */
-    .bewerben__form label {
-        @apply block font-bold uppercase;
+    /* ---- Floating labels ------------------------------------------------- */
+    /* The label starts on the input line (like a placeholder) and rises +
+       shrinks on focus, or once the field holds a value (JS adds .has-value). */
+    .bewerben__form .powermail_fieldwrap_type_input > div,
+    .bewerben__form .powermail_fieldwrap_type_textarea > div {
+        position: relative;
+        padding-top: 1.4rem;
+    }
+    .bewerben__form .powermail_fieldwrap_type_input label,
+    .bewerben__form .powermail_fieldwrap_type_textarea label {
+        @apply font-bold uppercase;
+        position: absolute;
+        left: 0;
+        top: 1.75rem;
+        margin: 0;
         color: var(--color-blue);
-        font-size: clamp(0.7rem, 0.85vw, 0.85rem);
+        font-size: 1rem;
         letter-spacing: 0.04em;
-        margin-bottom: 0.4rem;
+        pointer-events: none;
+        transform-origin: left top;
+        transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+    .bewerben__form .powermail_fieldwrap_type_input:focus-within label,
+    .bewerben__form .powermail_fieldwrap_type_input.has-value label,
+    .bewerben__form .powermail_fieldwrap_type_textarea:focus-within label,
+    .bewerben__form .powermail_fieldwrap_type_textarea.has-value label {
+        transform: translateY(-1.75rem) scale(0.72);
+        opacity: 1;
     }
 
     /* Text inputs + textarea: underline only, no box. */
@@ -715,7 +806,7 @@
         background: transparent;
         border: 0;
         border-radius: 0;
-        border-bottom: 1.5px solid color-mix(in srgb, var(--color-blue) 40%, transparent);
+        border-bottom: 1.5px solid color-mix(in srgb, var(--color-blue) 100%, transparent);
         color: var(--color-blue);
         font-size: clamp(1rem, 1.2vw, 1.15rem);
         padding: 0.35rem 0;
@@ -725,12 +816,16 @@
         outline: none;
         border-bottom-color: var(--color-blue);
     }
+    .powermail_fieldset {
+        max-width: 100%;
+    }
     .bewerben__form textarea { resize: vertical; min-height: 3rem; }
 
     /* "Stelle" select: pill (the pill shows the value, so hide its label). */
     .bewerben__form .powermail_fieldwrap_stelle label { display: none; }
+    .bewerben__form .powermail_fieldwrap_stelle { margin-bottom: var(--space-l); }
     .bewerben__form .powermail_select {
-        @apply w-full cursor-pointer font-bold uppercase;
+        @apply inline-block w-auto max-w-full cursor-pointer font-bold uppercase;
         appearance: none;
         -webkit-appearance: none;
         border: 1.5px solid var(--color-blue);
@@ -781,16 +876,22 @@
     .bewerben__form input[type="submit"] {
         @apply cursor-pointer rounded-full font-bold uppercase transition-colors;
         border: 1.5px solid var(--color-blue);
-        background: transparent;
+        background-color: transparent;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230069b4' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14M13 6l6 6-6 6'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 1.4rem center;
+        background-size: 1.15rem;
         color: var(--color-blue);
         font-size: clamp(0.7rem, 0.85vw, 0.85rem);
         letter-spacing: 0.06em;
-        padding: 0.75rem 1.7rem;
+        padding: 0.75rem 3.2rem 0.75rem 1.7rem;
     }
     .bewerben__form input[type="submit"]:hover {
         background-color: var(--color-spitex-green);
         border-color: var(--color-spitex-green);
         color: #fff;
+        /* Swap the arrow to white to match the hover text. */
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14M13 6l6 6-6 6'/%3E%3C/svg%3E");
     }
 
     /* Validation messages. */
@@ -1295,4 +1396,39 @@
 }
 .text-small {
     font-size: 0.875rem;
+}
+.textpage__inner p,
+.textpage__inner h1,
+.textpage__inner h2,
+.textpage__inner h3,
+.textpage__inner h4
+{
+    padding-bottom: .9rem;
+}
+.textpage ul {
+    margin: 1.5rem 0 2rem;
+    padding-left: 1rem;
+    list-style: none;
+}
+
+.textpage ul li {
+    position: relative;
+    margin-bottom: 0.6rem;
+    padding-left: 1.5rem;
+    line-height: 1.5;
+}
+
+.textpage ul li::before {
+    content: "";
+    position: absolute;
+    top: 0.65em;
+    left: 0;
+    width: 0.4rem;
+    height: 0.4rem;
+    border-radius: 50%;
+    background-color: #000;
+}
+
+.textpage ul li:last-child {
+    margin-bottom: 0;
 }
