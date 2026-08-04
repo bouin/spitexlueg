@@ -23,6 +23,10 @@ page = PAGE
 page {
     typeNum = 0
 
+    bodyTag >
+    bodyTagCObject = TEXT
+    bodyTagCObject.dataWrap = <body id="top" class="page-{field:uid} parent-page-{field:pid}">
+
     shortcutIcon = fileadmin/favicon/spitex-favicon.png
 
     # Adobe Fonts (Typekit) — loaded before the site CSS so font-family can use it.

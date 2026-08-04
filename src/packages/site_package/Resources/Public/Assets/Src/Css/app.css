@@ -109,7 +109,7 @@
     /* Fluid type: scales with the viewport instead of jumping at breakpoints. */
     .hero__title {
         @apply font-bold uppercase text-white;
-        font-size: clamp(3.25rem, 8.5vw, 8.5rem);
+        font-size: clamp(3.25rem, 8.5vw, 8.9rem);
         line-height: 0.92;
     }
 
@@ -135,6 +135,33 @@
         transform: scale(1.04);
     }
 
+    /* Floating copy of the badge: 30% smaller than the hero one, parked off the
+       right edge, then slides in and hangs once the hero has scrolled away
+       (JS toggles .is-visible). Sits mid-right, below the navbar (z-40 < navbar
+       z-50), so it never covers the logo. */
+    .floating-badge {
+        @apply fixed flex aspect-square items-center justify-center rounded-full text-center font-bold uppercase leading-tight text-white no-underline;
+        background-color: var(--color-badge);
+        top: 50%;
+        right: clamp(0.75rem, 2vw, 2rem);
+        width: clamp(5.25rem, 14.7vw, 14.7rem);
+        font-size: clamp(0.7rem, 2.52vw, 2.6rem);
+        z-index: 40;
+        transform: translateY(-50%) translateX(calc(100% + 2.5rem)) rotate(-10deg);
+        transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+        pointer-events: none;
+    }
+    .floating-badge.is-visible {
+        transform: translateY(-50%) translateX(0) rotate(-10deg);
+        pointer-events: auto;
+    }
+    .floating-badge.is-visible:hover {
+        transform: translateY(-50%) translateX(0) rotate(-10deg) scale(1.05);
+    }
+    @media (prefers-reduced-motion: reduce) {
+        .floating-badge { transition: none; }
+    }
+
     /* ---- Navigation bar below the hero ---------------------------------- */
     /* shrink-0: keeps its natural height so the hero can take the rest. */
     /* Sticks to the top on scroll; a subtle shadow appears once stuck (JS adds
@@ -146,6 +173,7 @@
     .navbar.is-stuck {
         box-shadow: 0 6px 24px rgba(0, 0, 0, 0.09);
     }
+
     .navbar-sentinel {
         height: 0;
     }
@@ -157,6 +185,16 @@
         gap: var(--space-m);
         max-width: var(--container);
         padding: var(--space-m) var(--gutter);
+        transition: padding 0.25s ease, gap 0.25s ease;
+    }
+
+    /* Compact (50px past the stick point): shrink the bar so it covers less.
+       Kept off .is-stuck so the height change never happens right at the stick
+       boundary — that was what made the menu jump. --navbar-h keeps the resting
+       value (app.js stops tracking once compact), so the hero doesn't jump. */
+    .navbar.is-compact .navbar__inner {
+        padding-block: 0.6rem;
+        gap: var(--space-s);
     }
 
     /* Navigation row: pills on the left, language switcher on the right. */
@@ -224,8 +262,8 @@
         height: clamp(2.75rem, 4.5vw, 4.75rem);
         transition: height 0.25s ease;
     }
-    /* Slightly smaller once the navbar has stuck to the top. */
-    .navbar.is-stuck .brand__logo {
+    /* Slightly smaller once the navbar is compact (50px past the stick point). */
+    .navbar.is-compact .brand__logo {
         height: clamp(2.25rem, 3.4vw, 3.5rem);
     }
 
@@ -244,6 +282,9 @@
     /* ---- Content sections ------------------------------------------------ */
     .section {
         padding-block: var(--space-xl);
+        /* Leave room for the sticky navbar when jumped to via #anchor (clicks
+           AND pasted #hash URLs), so the heading isn't hidden under it. */
+        scroll-margin-top: var(--navbar-h-now, 6rem);
     }
 
     .section__inner {
@@ -346,7 +387,8 @@
         @apply grid items-start;
         gap: var(--space-m);
         grid-template-columns: 1fr;
-        margin-bottom: var(--space-l);
+        padding-bottom: var(--space-l);
+        background: white;
     }
 
     @screen lg {
@@ -656,21 +698,36 @@
         margin-inline: var(--inset);
     }
 
+    /* Same pill as "Mehr erfahren", but the arrow points left (back). */
     .stellen-detail__back {
-        @apply inline-flex items-center font-bold uppercase no-underline transition-colors;
+        @apply inline-flex shrink-0 items-center rounded-full font-bold uppercase no-underline transition-colors;
+        border: 1.5px solid var(--color-blue);
         color: var(--color-blue);
-        gap: 0.5rem;
+        gap: 0.7rem;
         font-size: clamp(0.65rem, 0.8vw, 0.8rem);
+        padding: 0.55rem 1.3rem 0.35rem 1.3rem;
         margin-bottom: var(--space-l);
     }
-    .stellen-detail__back:hover { color: var(--color-spitex-green); }
-    .stellen-detail__back svg { width: 1.1em; height: 1.1em; }
+    .stellen-detail__back:hover {
+        background-color: var(--color-spitex-green);
+        border-color: var(--color-spitex-green);
+        @apply text-white;
+    }
+    /* Same arrow size as the "Mehr erfahren" pill (.stellen__link-icon). */
+    .stellen-detail__back svg {
+        width: clamp(1.05rem, 1.4vw, 1.3rem);
+        height: clamp(1.05rem, 1.4vw, 1.3rem);
+        flex-shrink: 0;
+    }
 
+    /* Same height as the .stellen-detail__back pill next to it: same padding,
+       plus a transparent border to match its 1.5px border box. */
     .stellen-detail__tag {
-        @apply mb-4 inline-block rounded-full font-bold uppercase text-white;
+        @apply mb-4 inline-flex items-center rounded-full font-bold uppercase text-white;
         background-color: var(--color-orange);
+        border: 1.5px solid transparent;
         font-size: clamp(0.65rem, 0.8vw, 0.8rem);
-        padding: 0.4em 1em;
+        padding: 0.55rem 1.3rem 0.35rem 1.3rem;
     }
 
     .stellen-detail__title {
@@ -925,7 +982,7 @@
         @apply relative;
         background-color: var(--color-peach);
         padding-block: clamp(2rem, 5vw, 5rem);
-        margin-top: var(--space-l);
+
     }
 
     /* container-type gives us cqw units, so labels and pins scale with the map
@@ -1296,6 +1353,8 @@
         padding-top: 0px !important;
     }
 
+
+
     .footer__claim-title {
         @apply font-bold uppercase;
         color: var(--color-blue);
@@ -1481,4 +1540,18 @@
 .powermail-errors-list li {
     padding-top: 6px;
     font-size: 14px;
+}
+.parent-page-1 .footer__claim {
+    padding-top: 120px !important;
+}
+
+.section--bewerben .section__inner {
+
+    padding-top: 40px !important;
+}
+.section--bewerben {
+    padding-top: 0px !important;
+}
+.section-white-bck {
+    background: white !important;
 }

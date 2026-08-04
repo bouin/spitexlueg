@@ -2,20 +2,24 @@
       data-namespace-typo3-fluid="true">
 
 <section class="section section--bewerben" id="bewerben">
-    <div class="section__inner">
 
-        <f:comment><!-- Intro: title left, description right (shared pattern). --></f:comment>
-        <div class="intro">
-            <f:if condition="{data.header}">
-                <h2 class="section__title"><f:transform.html><f:format.stripTags allowedTags="<br>">{data.header}</f:format.stripTags></f:transform.html></h2>
-            </f:if>
-            <f:if condition="{data.bodytext}">
-                <div class="richtext">
-                    <f:format.html>{data.bodytext}</f:format.html>
-                </div>
-            </f:if>
+    <div class="section-white-bck">
+        <div class="section__inner one">
+            <f:comment><!-- Intro: title left, description right (shared pattern). --></f:comment>
+            <div class="intro">
+                <f:if condition="{data.header}">
+                    <h2 class="section__title"><f:transform.html><f:format.stripTags allowedTags="<br>">{data.header}</f:format.stripTags></f:transform.html></h2>
+                </f:if>
+                <f:if condition="{data.bodytext}">
+                    <div class="richtext">
+                        <f:format.html>{data.bodytext}</f:format.html>
+                    </div>
+                </f:if>
+            </div>
         </div>
+    </div>
 
+    <div class="section__inner">
         <div class="bewerben">
 
             <f:comment><!-- Left: the application process steps (editorial). --></f:comment>

@@ -95,4 +95,11 @@
       </div>
 </div>
 
+<f:comment><!-- Floating copy of the "Freie Stellen" badge: slides in from the
+     right once the hero has scrolled away, then stays (see initFloatingBadge in
+     app.js). Sits mid-right, below the navbar, so it never covers the logo. --></f:comment>
+<f:if condition="{isHome}">
+    <a href="/#freie-stellen" class="floating-badge" data-floating-badge>Freie<br>Stellen</a>
+</f:if>
+
 </html>
