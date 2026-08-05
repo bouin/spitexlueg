@@ -366,7 +366,7 @@
     /* ---- Rich text ------------------------------------------------------- */
     .richtext {
         color: var(--color-blue);
-        font-size: clamp(1.05rem, 1.35vw, 1.4rem);
+        font-size: clamp(1.2rem, 1.35vw, 1.4rem);
         line-height: 1.2 !important;
     }
 
@@ -552,16 +552,24 @@
     }
 
     /* ---- Benefits (tiles) ----------------------------------------------- */
+    /* Responsive ladder: 4 → 3 → 2 → 1 columns as the viewport narrows.
+       Long titles wrap/hyphenate (see .tile__title) so 4 columns no longer clip. */
     .benefits {
         @apply grid;
         gap: var(--space-s);
         grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+    @media (max-width: 1200px) {
+        .benefits { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     }
     @media (max-width: 900px) {
         .benefits { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
     @media (max-width: 520px) {
         .benefits { grid-template-columns: minmax(0, 1fr); }
+        /* Full-width square would be very tall on a phone — make it 40% shorter
+           (height = 60% of width) so the collapsed tile isn't mostly empty. */
+        .tile { aspect-ratio: 1 / 0.6; }
     }
 
     /* Square tiles, all the same height. Space for the revealed text is
@@ -589,9 +597,13 @@
 
     .tile__title {
         @apply font-bold uppercase;
-        font-size: clamp(1.3rem, 1.25vw, 1.3rem);
+        font-size: clamp(1.9rem, 1.25vw, 1.3rem);
         line-height: 1.1;
         margin-top: 0.4rem;
+        /* Long German compounds (FAMILIENFREUNDLICH, PARKMÖGLICHKEITEN) must
+           break instead of overflowing the tile and getting clipped. */
+        overflow-wrap: break-word;
+        hyphens: auto;
     }
 
     /* Reserved area: always in the layout, revealed with a fade + rise. */
@@ -731,10 +743,14 @@
         margin-top: var(--space-s);
     }
 
-    /* Right-hand action buttons: "Mehr erfahren" + "Bewerbungsformular". */
+    /* Right-hand action buttons: "Mehr erfahren" + "Bewerbungsformular".
+       Bottom-aligned so with a tall (multi-line) title they sit at the foot of
+       the row instead of floating top-right and leaving the composition lopsided.
+       (In the single-column mobile layout below 640px this is a no-op.) */
     .stellen__actions {
         @apply flex flex-wrap items-center;
         gap: var(--space-s);
+        align-self: end;
     }
 
     /* Pills — static links (no toggle), no circle around the arrow.
@@ -1212,7 +1228,7 @@
     }
 
     .podcasts__lead {
-        font-size: clamp(1rem, 1.35vw, 1.345rem);
+        font-size: clamp(1.2rem, 1.35vw, 1.345rem);
         max-width: none;
         font-weight: 600;
     }
