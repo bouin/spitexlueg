@@ -567,9 +567,6 @@
     }
     @media (max-width: 520px) {
         .benefits { grid-template-columns: minmax(0, 1fr); }
-        /* Full-width square would be very tall on a phone — make it 40% shorter
-           (height = 60% of width) so the collapsed tile isn't mostly empty. */
-        .tile { aspect-ratio: 1 / 0.6; }
     }
 
     /* Square tiles, all the same height. Space for the revealed text is
@@ -582,6 +579,13 @@
         aspect-ratio: 1;
         padding: clamp(1rem, 1.6vw, 1.5rem);
         gap: 0.6rem;
+    }
+
+    /* Phone: 40% shorter than the square (height = 60% of width) so the
+       full-width collapsed tile isn't mostly empty. MUST come after the base
+       .tile above, or the base aspect-ratio wins the cascade at this width. */
+    @media (max-width: 520px) {
+        .tile { aspect-ratio: 1 / 0.75; }
     }
 
     .tile--sky    { background-color: var(--color-sky); }
@@ -743,14 +747,10 @@
         margin-top: var(--space-s);
     }
 
-    /* Right-hand action buttons: "Mehr erfahren" + "Bewerbungsformular".
-       Bottom-aligned so with a tall (multi-line) title they sit at the foot of
-       the row instead of floating top-right and leaving the composition lopsided.
-       (In the single-column mobile layout below 640px this is a no-op.) */
+    /* Right-hand action buttons: "Mehr erfahren" + "Bewerbungsformular". */
     .stellen__actions {
         @apply flex flex-wrap items-center;
         gap: var(--space-s);
-        align-self: end;
     }
 
     /* Pills — static links (no toggle), no circle around the arrow.
