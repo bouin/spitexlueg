@@ -610,7 +610,7 @@
         /* Long German compounds (FAMILIENFREUNDLICH, PARKMÖGLICHKEITEN) must
            break instead of overflowing the tile and getting clipped. */
         overflow-wrap: break-word;
-        hyphens: auto;
+        /* hyphens: auto; */
     }
     @media screen and (max-width:1300px){
         .tile__title {
