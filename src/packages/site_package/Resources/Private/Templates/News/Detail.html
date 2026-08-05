@@ -7,11 +7,6 @@
         <div class="stellen-detail">
 
             <div class="stellen-detail__meta ">
-                <f:link.page pageUid="1" class="stellen-detail__back" section="freie-stellen">
-                    <svg viewBox="0 0 40.14 29.64" style="width:1.15rem;height:auto;display:block;transform:rotate(180deg)" aria-hidden="true"><polygon points="25.32 0 23.91 1.41 36.31 13.82 0 13.82 0 15.82 36.31 15.82 23.91 28.23 25.32 29.64 40.14 14.82 25.32 0" fill="currentColor"/></svg>
-                    <span>Alle offenen Stellen</span>
-                </f:link.page>
-
                 <f:for each="{newsItem.categories}" as="category">
                     <span class="stellen-detail__tag">{category.title}</span>
                 </f:for>
@@ -33,6 +28,12 @@
                         <svg viewBox="0 0 40.14 29.64" style="width:1.15rem;height:auto;display:block;transform:rotate(90deg)" aria-hidden="true"><polygon points="25.32 0 23.91 1.41 36.31 13.82 0 13.82 0 15.82 36.31 15.82 23.91 28.23 25.32 29.64 40.14 14.82 25.32 0" fill="currentColor"/></svg>
                     </span>
                 </a>
+            </div>
+            <div style="margin-top: 18px">
+                <f:link.page pageUid="1" class="stellen-detail__back" section="freie-stellen">
+                    <svg viewBox="0 0 40.14 29.64" style="width:1.15rem;height:auto;display:block;transform:rotate(180deg)" aria-hidden="true"><polygon points="25.32 0 23.91 1.41 36.31 13.82 0 13.82 0 15.82 36.31 15.82 23.91 28.23 25.32 29.64 40.14 14.82 25.32 0" fill="currentColor"/></svg>
+                    <span>Alle offenen Stellen</span>
+                </f:link.page>
             </div>
 
         </div>
