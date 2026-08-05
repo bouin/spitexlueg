@@ -114,7 +114,7 @@
 
     .hero__inner {
         @apply absolute inset-0 flex flex-col justify-end;
-        padding: clamp(1.5rem, 4vw, 4.5rem);
+        padding: clamp(1rem, 4vw, 4.5rem);
     }
 
     /* Fluid type: scales with the viewport instead of jumping at breakpoints. */
@@ -1703,7 +1703,7 @@
         font-size: 60px;
     }
     .hero__badge {
-        width: clamp(10.5rem, 21vw, 21rem);
+        width: clamp(9.5rem, 21vw, 21rem);
         font-size: 34px;
     }
     .pill-nav {
