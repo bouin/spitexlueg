@@ -712,19 +712,38 @@
             padding-top: 30px;
         }
     }
-
-    .stellen__item {
-        @apply grid items-start;
-        grid-template-columns: minmax(0, 1fr) auto;
-        gap: var(--space-m);
-        padding-block: var(--space-l);
-        border-bottom: 1px solid color-mix(in srgb, var(--color-blue) 25%, transparent);
-    }
-
     /* Divider above the first row, inside the box (matches the design). */
     .stellen__item:first-child {
         border-top: 1px solid color-mix(in srgb, var(--color-blue) 25%, transparent);
     }
+
+    .stellen__item {
+        @apply grid items-start;
+
+        /* Poniżej 1200 px: 60% / 40% */
+        grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+        gap: var(--space-l);
+        padding-block: var(--space-s);
+        border-bottom: 1px solid color-mix(
+                in srgb,
+                var(--color-blue) 25%,
+                transparent
+        );
+    }
+
+    @media (min-width: 1200px) {
+        .stellen__item {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+    }
+
+    @media (max-width: 860px) {
+        .stellen__item {
+            grid-template-columns: minmax(0, 1fr);
+            gap: var(--space-s);
+        }
+    }
+
 
     .stellen__tag {
         @apply mb-4 inline-block rounded-full font-bold uppercase text-white;
@@ -779,13 +798,7 @@
     }
     .stellen__link-icon svg { width: 100%; height: 100%; }
 
-    /* Mobile: stack the button under the copy, aligned left. */
-    @media (max-width: 640px) {
-        .stellen__item {
-            grid-template-columns: minmax(0, 1fr);
-            gap: var(--space-s);
-        }
-    }
+
 
     /* ---- Stellen detail (news detail on /freie) ------------------------- */
     .stellen-detail {
