@@ -186,15 +186,16 @@ lib.powermailStellen {
     }
 }
 
-# ---- Powermail: render a form by uid inside the "bewerben" content block ------
-lib.powermailForm < plugin.tx_powermail
-lib.powermailForm = USER_INT
+# ---- Powermail: render the configured plugin element in the "bewerben" block --
+# We render the real Powermail content element (uid {$lueg.bewerbenElement}) so
+# it brings its own flexform mail configuration — receiver address, receiver
+# name, subject, sender — which a form built from bare TypoScript would lack.
+# dontCheckPid: the element lives in a storage/nested pid, not the current page.
+lib.powermailForm = RECORDS
 lib.powermailForm {
-    userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
-    extensionName = Powermail
-    pluginName = Pi1
-    settings.main.form = {$lueg.bewerbenForm}
-    settings.staticTemplate = 1
+    tables = tt_content
+    source = {$lueg.bewerbenElement}
+    dontCheckPid = 1
 }
 
 lib.sectionMenu = HMENU

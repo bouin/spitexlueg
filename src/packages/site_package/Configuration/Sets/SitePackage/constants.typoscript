@@ -6,6 +6,7 @@ styles {
     }
 }
 
-# UID of the Powermail application form embedded in the "Direkt bewerben" section.
-# There is one application form site-wide; set this to its uid (List › Forms).
-lueg.bewerbenForm = 1
+# UID of the Powermail *content element* embedded in the "Direkt bewerben"
+# section. Configure the form, receiver, subject etc. on that element in the
+# backend (List view); this just renders it. (tt_content uid, not the form uid.)
+lueg.bewerbenElement = 13
