@@ -92,6 +92,19 @@ page {
                 as = site
             }
 
+            # {sectionMenu} — content elements of this page (colPos 0) that have
+            # "Show in section menu" (Index) ticked, in their sorted order. The
+            # Header partial maps each CType to its label + anchor, so the editor
+            # controls WHICH sections appear and in WHAT order via the backend.
+            16 = TYPO3\CMS\Frontend\DataProcessing\DatabaseQueryProcessor
+            16 {
+                table = tt_content
+                pidInList.data = page:uid
+                where = colPos = 0 AND sectionIndex = 1
+                orderBy = sorting
+                as = sectionMenu
+            }
+
             # {languagenavigation} — language switcher.
             15 = TYPO3\CMS\Frontend\DataProcessing\LanguageMenuProcessor
             15 {

@@ -142,7 +142,7 @@
     .floating-badge {
         @apply fixed flex aspect-square items-center justify-center rounded-full text-center font-bold uppercase leading-tight text-white no-underline;
         background-color: var(--color-badge);
-        top: 50%;
+        top: 25%;
         right: clamp(0.75rem, 2vw, 2rem);
         width: clamp(5.25rem, 14.7vw, 14.7rem);
         font-size: clamp(0.7rem, 2.52vw, 2.6rem);
@@ -243,6 +243,12 @@
         color: var(--color-ink);
         font-size: clamp(0.75rem, 0.95vw, 1rem);
         padding: 0.6em 1.4em;
+    }
+    /* Mobile: tighter pills so the wrapped menu takes less room. */
+    @media (max-width: 640px) {
+        .pill-nav__link {
+            padding: 0.2em 0.4em;
+        }
     }
 
     .pill-nav__link:hover,

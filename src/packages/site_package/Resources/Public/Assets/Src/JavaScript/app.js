@@ -336,7 +336,7 @@ function initStickyNav() {
         navbar.classList.toggle('is-compact', top <= -50);
         // Slide the floating badge in once the hero (and its own badge) is gone.
         if (floatingBadge) {
-            floatingBadge.classList.toggle('is-visible', top <= 0);
+            floatingBadge.classList.toggle('is-visible', top <= -200);
         }
     };
     window.addEventListener(

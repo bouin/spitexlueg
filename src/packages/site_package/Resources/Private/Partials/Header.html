@@ -73,12 +73,22 @@
         </f:link.page>
 
         <div class="navbar__bar">
+            <f:comment><!-- Dynamic pill nav: one link per content element on this
+                 page (colPos 0) whose "Index" (sectionIndex) box is ticked, in the
+                 editor's sort order ({sectionMenu}). Each CType maps to its fixed
+                 label + anchor here; sections whose CType has no case are skipped,
+                 so the editor controls WHICH pills show and in WHAT order. --></f:comment>
             <nav class="pill-nav" aria-label="Kampagnen-Navigation">
-                <a class="pill-nav__link" href="/#podcasts">Podcasts</a>
-                <a class="pill-nav__link" href="/#freie-stellen">Freie Stellen</a>
-                <a class="pill-nav__link" href="/#benefits">Benefits</a>
-                <a class="pill-nav__link" href="/#bewerben">Direkt bewerben</a>
-                <a class="pill-nav__link" href="/#standorte">Standorte Spitex Region Lueg</a>
+                <f:for each="{sectionMenu}" as="item">
+                    <f:switch expression="{item.data.CType}">
+                        <f:case value="lueg_podcasts"><a class="pill-nav__link" href="/#podcasts">Podcasts</a></f:case>
+                        <f:case value="news_pi1"><a class="pill-nav__link" href="/#freie-stellen">Freie Stellen</a></f:case>
+                        <f:case value="lueg_benefits"><a class="pill-nav__link" href="/#benefits">Benefits</a></f:case>
+                        <f:case value="lueg_bewerben"><a class="pill-nav__link" href="/#bewerben">Direkt bewerben</a></f:case>
+                        <f:case value="lueg_standorte"><a class="pill-nav__link" href="/#standorte">Standorte</a></f:case>
+                        <f:case value="lueg_ausbildung"><a class="pill-nav__link" href="/#ausbildung">Ausbildung</a></f:case>
+                    </f:switch>
+                </f:for>
             </nav>
 
             <f:if condition="{languagenavigation -> f:count()} > 1">
