@@ -77,7 +77,7 @@
        --navbar-h by app.js), so hero + nav = one screen on load. */
     .hero--home {
         height: calc(100svh - var(--navbar-h, 5rem));
-        min-height: 20rem;
+        min-height: 27rem;
         max-height: 40rem;
     }
 
