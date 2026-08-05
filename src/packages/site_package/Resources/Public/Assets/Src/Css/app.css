@@ -1251,7 +1251,7 @@
     }
 
     .podcast {
-        @apply h-auto w-full;
+        @apply relative h-auto w-full;
     }
 
     /* Arrows — only rendered when there is more than one episode. */
@@ -1299,10 +1299,17 @@
         background: linear-gradient(180deg, rgba(103, 200, 200, 0) 30%, rgba(103, 200, 200, 0.85) 100%);
     }
 
-    /* The claim fades out while playing; the label never does. */
-    .podcast__stage.is-playing::after,
-    .podcast__stage.is-playing .podcast__copy {
+    /* The teal wash fades out while playing; the label never does. */
+    .podcast__stage.is-playing::after {
         @apply opacity-0;
+    }
+    /* Copy now lives OUTSIDE the stage (sibling), so fade it via the sibling
+       combinator — but only on desktop, where it overlays the image. On mobile
+       it sits below the image and must stay visible during playback. */
+    @screen md {
+        .podcast__stage.is-playing ~ .podcast__copy {
+            @apply opacity-0;
+        }
     }
 
     .podcast__copy {

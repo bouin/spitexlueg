@@ -49,15 +49,18 @@
                                             <source src="{file.publicUrl}" type="{file.mimeType}">
                                         </f:for>
                                     </video>
+                                </div>
 
-                                    <div class="podcast__copy">
-                                        <f:if condition="{episode.claim}">
-                                            <p class="podcast__claim font-bold">{episode.claim}</p>
-                                        </f:if>
-                                        <f:if condition="{episode.description}">
-                                            <p class="podcast__description">{episode.description}</p>
-                                        </f:if>
-                                    </div>
+                                <f:comment><!-- Copy sits OUTSIDE the stage so on mobile it can flow
+                                     below the image (the stage is overflow-hidden). On desktop CSS
+                                     re-overlays it on the lower image. --></f:comment>
+                                <div class="podcast__copy">
+                                    <f:if condition="{episode.claim}">
+                                        <p class="podcast__claim font-bold">{episode.claim}</p>
+                                    </f:if>
+                                    <f:if condition="{episode.description}">
+                                        <p class="podcast__description">{episode.description}</p>
+                                    </f:if>
                                 </div>
 
                             </article>
