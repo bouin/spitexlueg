@@ -101,11 +101,15 @@
      app.js sets its height (see initStickyNav). --></f:comment>
 <div class="navbar-spacer" data-nav-spacer aria-hidden="true"></div>
 
-<f:comment><!-- Floating copy of the "Freie Stellen" badge: slides in from the
-     right once the hero has scrolled away, then stays (see initFloatingBadge in
-     app.js). Sits mid-right, below the navbar, so it never covers the logo. --></f:comment>
+<f:comment><!-- "Freie Stellen" call-to-action that appears once the hero has
+     scrolled away (app.js toggles .is-visible on every [data-floating-badge]):
+       • desktop/tablet — a floating circle mid-right, below the navbar
+       • mobile         — a full-width bar pinned to the bottom of the screen,
+                          since a corner circle would cover content on a phone
+     CSS shows exactly one of the two per breakpoint. --></f:comment>
 <f:if condition="{isHome}">
     <a href="/#freie-stellen" class="floating-badge" data-floating-badge>Freie<br>Stellen</a>
+    <a href="/#freie-stellen" class="jobbar" data-floating-badge>Freie Stellen</a>
 </f:if>
 
 </html>

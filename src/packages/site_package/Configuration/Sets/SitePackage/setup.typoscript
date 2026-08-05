@@ -197,45 +197,36 @@ lib.powermailForm {
     settings.staticTemplate = 1
 }
 
-# ---- Pill navigation (rendered in the Header partial via ---------------------
-#      <f:cObject typoscriptObjectPath="lib.sectionMenu"/>) -----------------
-# One pill per content element on this page (colPos 0) whose "Index"
-# (sectionIndex) box is ticked, in the editor's sort order. CASE maps each
-# CType to its fixed label + in-page anchor; a CType with no case renders
-# nothing, so the editor controls WHICH pills appear and in WHAT order simply
-# by (un)ticking "Index" and reordering the elements. The wrapping
-# <nav class="pill-nav"> lives in the Header partial, so this emits only <a>s.
-lib.sectionMenu = CONTENT
+lib.sectionMenu = HMENU
 lib.sectionMenu {
-    table = tt_content
-    select {
-        pidInList.data = page:uid
-        where = colPos = 0 AND sectionIndex = 1
-        orderBy = sorting
-    }
-    renderObj = CASE
-    renderObj {
-        key.field = CType
+    special = directory
+    special.value = 1
 
-        lueg_podcasts = TEXT
-        lueg_podcasts.value = <a class="pill-nav__link" href="/#podcasts">Podcasts</a>
+    1 = TMENU
+    1 {
+        wrap = <nav class="pill-nav" aria-label="Kampagnen-Navigation">|</nav>
 
-        news_pi1 = TEXT
-        news_pi1.value = <a class="pill-nav__link" href="/#freie-stellen">Freie Stellen</a>
+        NO = 1
+        NO {
+            ATagParams = class="pill-nav__link"
+            stdWrap.htmlSpecialChars = 1
 
-        lueg_benefits = TEXT
-        lueg_benefits.value = <a class="pill-nav__link" href="/#benefits">Benefits</a>
+            # Wyjątek dla strony /freie-stellen
+            doNotLinkIt = 1
+            doNotLinkIt {
+                if {
+                    value = /freie-stellen
+                    equals.field = slug
+                }
+            }
 
-        lueg_bewerben = TEXT
-        lueg_bewerben.value = <a class="pill-nav__link" href="/#bewerben">Direkt bewerben</a>
-
-        lueg_standorte = TEXT
-        lueg_standorte.value = <a class="pill-nav__link" href="/#standorte">Standorte</a>
-
-        lueg_ausbildung = TEXT
-        lueg_ausbildung.value = <a class="pill-nav__link" href="/#ausbildung">Ausbildung</a>
-
-        default = TEXT
-        default.value =
+            stdWrap.wrap = <a class="pill-nav__link" href="/#freie-stellen">|</a>
+            stdWrap.wrap {
+                if {
+                    value = /freie-stellen
+                    equals.field = slug
+                }
+            }
+        }
     }
 }

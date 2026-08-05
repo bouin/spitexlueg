@@ -337,7 +337,9 @@ function initStickyNav() {
     //                sticky→fixed swap is seamless (same size, same spot).
     //   top <= -50 — compact: shrink the bar. It's fixed by now, so the shrink
     //                is out of flow and can't jump the content below it.
-    const floatingBadge = document.querySelector('[data-floating-badge]');
+    // Both the desktop circle and the mobile bottom bar carry this attribute;
+    // CSS shows one per breakpoint, so toggling all of them is safe.
+    const floatingBadges = document.querySelectorAll('[data-floating-badge]');
 
     let ticking = false;
     const update = () => {
@@ -354,10 +356,9 @@ function initStickyNav() {
         }
         publishHeights();
 
-        // Slide the floating badge in once the hero (and its own badge) is gone.
-        if (floatingBadge) {
-            floatingBadge.classList.toggle('is-visible', top <= -200);
-        }
+        // Reveal the "Freie Stellen" CTA once the hero (and its own badge) is gone.
+        const showBadge = top <= -200;
+        floatingBadges.forEach((b) => b.classList.toggle('is-visible', showBadge));
     };
     window.addEventListener(
         'scroll',

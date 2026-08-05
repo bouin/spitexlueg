@@ -126,7 +126,6 @@
         transform: rotate(-10deg);
         &:hover {
             transition: all .2s ease-in-out;
-            transform: rotate(-20deg);
         }
         z-index: 9999;
     }
@@ -144,8 +143,8 @@
         background-color: var(--color-badge);
         top: 200px;
         right: clamp(0.75rem, 2vw, 2rem);
-        width: clamp(5.25rem, 14.7vw, 14.7rem);
-        font-size: clamp(0.7rem, 2.52vw, 2.6rem);
+        width: clamp(5.25rem, 10.7vw, 10.7rem);
+        font-size: clamp(0.7rem, 2vw, 2rem);
         z-index: 40;
         transform: translateY(-50%) translateX(calc(100% + 2.5rem)) rotate(-10deg);
         transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
@@ -156,10 +155,38 @@
         pointer-events: auto;
     }
     .floating-badge.is-visible:hover {
-        transform: translateY(-50%) translateX(0) rotate(-10deg) scale(1.05);
+        transform: rotate(0deg) scale(1.04) translateX(0) translateY(-50%);
     }
     @media (prefers-reduced-motion: reduce) {
         .floating-badge { transition: none; }
+    }
+
+    /* Mobile "Freie Stellen" bar: on a phone the floating circle would cover
+       content, so we hide it (see the media query below) and show this instead —
+       a full-width bar pinned to the bottom, same magenta, centered label. It
+       shares .is-visible with the circle, sliding up once the hero is gone.
+       Hidden by default; the mobile media query switches the two. */
+    .jobbar {
+        @apply fixed inset-x-0 bottom-0 z-40 hidden text-center font-bold uppercase text-white no-underline;
+        background-color: var(--color-badge);
+        padding: 0.9rem 1rem;
+        padding-bottom: calc(0.9rem + env(safe-area-inset-bottom));
+        font-size: 1.1rem;
+        letter-spacing: 0.02em;
+        transform: translateY(100%);
+        transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .jobbar.is-visible {
+        transform: translateY(0);
+    }
+    @media (prefers-reduced-motion: reduce) {
+        .jobbar { transition: none; }
+    }
+
+    /* Phone: swap the corner circle for the bottom bar. */
+    @media (max-width: 640px) {
+        .floating-badge { display: none; }
+        .jobbar { display: block; }
     }
 
     /* ---- Navigation bar below the hero ---------------------------------- */
@@ -566,7 +593,7 @@
         @apply min-h-0 flex-1 overflow-hidden;
         margin-top: 0.6rem;
         color: #fff;
-        font-size: clamp(0.8rem, 1vw, 1rem);
+        font-size: clamp(0.8rem, 1rem, 1rem);
         line-height: 1.4;
         opacity: 0;
         transform: translateY(0.6rem);
