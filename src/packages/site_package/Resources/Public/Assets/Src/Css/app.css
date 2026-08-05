@@ -112,7 +112,7 @@
     /* Fluid type: scales with the viewport instead of jumping at breakpoints. */
     .hero__title {
         @apply font-bold uppercase text-white;
-        font-size: clamp(5.25rem, 8.5vw, 8.9rem);
+        font-size: clamp(9.25rem, 8.5vw, 8.9rem);
         line-height: 0.92;
     }
 
@@ -122,8 +122,8 @@
         background-color: var(--color-badge);
         top: clamp(1rem, 3vw, 3.5rem);
         right: clamp(1rem, 3vw, 3.5rem);
-        width: clamp(7.5rem, 21vw, 21rem);
-        font-size: clamp(1rem, 3.6vw, 3.75rem);
+        width: clamp(37%, 21vw, 21rem);
+        font-size: clamp(70px, 3.6vw, 3.75rem);
         line-height: 1.05;
         transition: transform 0.2s ease;
         transform: rotate(-10deg);
@@ -289,7 +289,7 @@
         @apply rounded-full border font-bold uppercase no-underline transition-colors;
         border-color: var(--color-ink);
         color: var(--color-ink);
-        font-size: clamp(0.75rem, 0.95vw, 1rem);
+        font-size: clamp(26px, 0.95vw, 1rem);
         padding: 0.6em 1.4em;
     }
     /* Mobile: tighter pills so the wrapped menu takes less room. */
@@ -331,9 +331,13 @@
 
     /* Mobile header logo is 30% larger (centered above the nav). */
     .navbar .brand__logo {
-        height: clamp(3.6rem, 11vw, 5.5rem);
+        height: clamp(200px, 11vw, 5.5rem);
     }
-
+    @screen sm {
+        .navbar .brand__logo {
+            padding: 22px;
+        }
+    }
     /* Desktop: original logo size, back on the right. */
     @screen lg {
         .navbar .brand__logo {
