@@ -1669,4 +1669,7 @@
         width: clamp(12.5rem, 21vw, 21rem);
         font-size: 34px;
     }
+    .pill-nav {
+        gap: .5rem;
+    }
 }
