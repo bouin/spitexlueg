@@ -1703,8 +1703,7 @@
         font-size: 60px;
     }
     .hero__badge {
-        width: clamp(9.5rem, 21vw, 21rem);
-        font-size: 34px;
+        width: clamp(8.5rem, 21vw, 21rem);
     }
     .pill-nav {
         gap: .5rem;
