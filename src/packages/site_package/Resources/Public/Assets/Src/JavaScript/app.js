@@ -51,7 +51,10 @@ async function initPodcastPlayers() {
             fluid: false,
             controls: true,
             preload: 'none',
-            bigPlayButton: true,
+            // No centre play button — the control bar at the bottom is used.
+            bigPlayButton: false,
+            // Keep the control bar always visible (never auto-hide on inactivity).
+            inactivityTimeout: 0,
         });
 
         const stage = element.closest('.podcast__stage');

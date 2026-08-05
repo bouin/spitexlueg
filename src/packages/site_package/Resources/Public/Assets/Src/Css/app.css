@@ -494,7 +494,7 @@
 
     .accordion__title {
         @apply font-bold uppercase;
-        font-size: clamp(1rem, 1.5vw, 1.5rem);
+        font-size: clamp(1.2rem, 1.5vw, 1.5rem);
 
     }
 
@@ -559,13 +559,13 @@
         gap: var(--space-s);
         grid-template-columns: repeat(4, minmax(0, 1fr));
     }
-    @media (max-width: 1200px) {
+    @media (max-width: 1300px) {
         .benefits { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     }
-    @media (max-width: 900px) {
+    @media (max-width: 1100px) {
         .benefits { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
-    @media (max-width: 520px) {
+    @media (max-width: 720px) {
         .benefits { grid-template-columns: minmax(0, 1fr); }
     }
 
@@ -601,13 +601,19 @@
 
     .tile__title {
         @apply font-bold uppercase;
-        font-size: clamp(1.9rem, 1.25vw, 1.3rem);
+        font-size: clamp(1.3rem, 1.1vw, 1.3rem);
         line-height: 1.1;
         margin-top: 0.4rem;
         /* Long German compounds (FAMILIENFREUNDLICH, PARKMÖGLICHKEITEN) must
            break instead of overflowing the tile and getting clipped. */
         overflow-wrap: break-word;
         hyphens: auto;
+    }
+    @media screen and (max-width:1300px){
+        .tile__title {
+            @apply font-bold uppercase;
+            font-size: clamp(1.9rem, 1.1vw, 1.3rem);
+        }
     }
 
     /* Reserved area: always in the layout, revealed with a fade + rise. */
@@ -723,7 +729,7 @@
         /* Poniżej 1200 px: 60% / 40% */
         grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
         gap: var(--space-l);
-        padding-block: var(--space-s);
+        padding-block: var(--space-m);
         border-bottom: 1px solid color-mix(
                 in srgb,
                 var(--color-blue) 25%,
@@ -1054,7 +1060,7 @@
         @apply cursor-pointer rounded-full font-bold uppercase transition-colors;
         border: 1.5px solid var(--color-blue);
         background-color: transparent;
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230069b4' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14M13 6l6 6-6 6'/%3E%3C/svg%3E");
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40.14 29.64'%3E%3Cpolygon points='25.32 0 23.91 1.41 36.31 13.82 0 13.82 0 15.82 36.31 15.82 23.91 28.23 25.32 29.64 40.14 14.82 25.32 0' fill='%230069b4'/%3E%3C/svg%3E");
         background-repeat: no-repeat;
         background-position: right 1.4rem center;
         background-size: 1.15rem;
@@ -1067,7 +1073,7 @@
         border-color: var(--color-spitex-green);
         color: #fff;
         /* Swap the arrow to white to match the hover text. */
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14M13 6l6 6-6 6'/%3E%3C/svg%3E");
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40.14 29.64'%3E%3Cpolygon points='25.32 0 23.91 1.41 36.31 13.82 0 13.82 0 15.82 36.31 15.82 23.91 28.23 25.32 29.64 40.14 14.82 25.32 0' fill='%23ffffff'/%3E%3C/svg%3E");
     }
 
     /* Validation messages. */
@@ -1227,7 +1233,7 @@
     /* Intro: title left, lead text right. Left edge aligns with every other
        section (the shared gutter), so nothing looks inset. */
     .podcasts__intro {
-        @apply grid items-start;
+        @apply grid items-end;
         gap: var(--space-m);
         grid-template-columns: 1fr;
         margin-bottom: var(--space-l);
@@ -1267,23 +1273,22 @@
         @apply relative h-auto w-full;
     }
 
-    /* Arrows — only rendered when there is more than one episode. */
+    /* Arrows — plain blue glyphs beside the image, no circle (see the design).
+       Only rendered when there is more than one episode. */
     .podcasts__nav {
-        @apply flex shrink-0 items-center justify-center rounded-full border-2 bg-white transition-colors;
-        border-color: var(--color-blue);
+        @apply flex shrink-0 items-center justify-center border-0 bg-transparent transition-opacity;
         color: var(--color-blue);
         width: var(--nav-size);
         aspect-ratio: 1 / 1;
     }
 
     .podcasts__nav svg {
-        width: 55%;
-        height: 55%;
+        width: 100%;
+        height: 100%;
     }
 
     .podcasts__nav:hover {
-        background-color: var(--color-blue);
-        @apply text-white;
+        opacity: 0.55;
     }
 
     /* Swiper sets .is-disabled (see navigation.disabledClass in app.js). */
@@ -1293,40 +1298,48 @@
     }
 
     /* Stage: player plus overlays. */
-    /* Matches the 1920x1280 poster crop, so nothing is letterboxed. */
+    /* Matches the 1920x1080 (16:9) poster crop, so nothing is letterboxed. */
     .podcast__stage {
         @apply relative overflow-hidden;
         background-color: var(--color-teal);
-        aspect-ratio: 3 / 2;
+        aspect-ratio: 16 / 9;
     }
 
     .podcast__player.video-js {
         @apply absolute inset-0 h-full w-full;
     }
 
-    /* Teal wash over the lower half so claim/description stay readable.
-       Hidden once playback starts (see app.js). */
+    /* Teal (#7FCACA) gradient wash over the image — transparent at the top,
+       building to teal at the foot. Sits below the SVG label (z-20) and the
+       floating control bar (z-30), so neither is tinted. */
     .podcast__stage::after {
         content: "";
-        @apply pointer-events-none absolute inset-0 z-0 transition-opacity;
-        background: linear-gradient(180deg, rgba(103, 200, 200, 0) 30%, rgba(103, 200, 200, 0.85) 100%);
+        @apply pointer-events-none absolute inset-0 z-0;
+        background: linear-gradient(180deg, rgba(127, 202, 202, 0) 0%, rgba(127, 202, 202, 0.85) 100%);
     }
 
-    /* The teal wash fades out while playing; the label never does. */
-    .podcast__stage.is-playing::after {
-        @apply opacity-0;
+    /* Control bar styled like the videojs.org homepage "default": a rounded,
+       translucent bar floating a little inside the video edges. Kept visible
+       from the start and never auto-hidden. */
+    .podcast__player.video-js .vjs-control-bar {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        z-index: 30;
+        left: 1rem;
+        right: 1rem;
+        bottom: 1rem;
+        width: auto;
+        height: 3em;
+        padding-inline: 0.5rem;
+        border-radius: 1.5em;
+        background-color: #73859f80;
+        -webkit-backdrop-filter: blur(8px);
+        backdrop-filter: blur(8px);
     }
-    /* Copy now lives OUTSIDE the stage (sibling), so fade it via the sibling
-       combinator — but only on desktop, where it overlays the image. On mobile
-       it sits below the image and must stay visible during playback. */
-    @screen md {
-        .podcast__stage.is-playing ~ .podcast__copy {
-            @apply opacity-0;
-        }
-    }
-
-    .podcast__copy {
-        transition: opacity 0.3s ease;
+    /* Round the video itself too, matching the floating bar. */
+    .podcast__stage {
+        border-radius: 1rem;
     }
 
     /* Wrapper so the label can be positioned against the slider itself,
@@ -1335,157 +1348,38 @@
         @apply relative min-w-0 flex-1;
     }
 
-    /* Teal "PODCAST" label — a rounded blob in the top left corner.
-       Layered above the slider and always visible: it neither travels with
-       the slides nor fades out during playback. */
+    /* "LUEG PODCAST" artwork, centred over the image (same on every slide). */
     .podcast__label {
-        @apply pointer-events-none absolute left-0 top-0 z-30 flex flex-col items-center justify-center text-center text-white;
-        background-color: var(--color-teal);
-        aspect-ratio: 1 / 0.76;
-        border-radius: 0 0 60% 60%;
-        padding: 0.3em 1.3em 1.4em;
+        @apply pointer-events-none absolute inset-0 z-20 flex items-center justify-center;
+    }
+    .podcast__label img {
+        width: min(55%, 22rem);
+        height: auto;
     }
 
-    .podcast__label-title {
-        @apply font-bold uppercase;
-        font-size: clamp(1rem, 1.7vw, 1.8rem);
-        line-height: 1;
-    }
-
-    .podcast__label-sub {
-        font-size: clamp(0.7rem, 0.95vw, 1rem);
-        line-height: 1.2;
-        margin-top: 0.4em;
-    }
-
-    /* Claim and description sit on the tinted lower half of the image. */
+    /* Caption below the image: bold claim + lighter description, blue on white.
+       One layout for every screen size (no desktop/mobile split). */
     .podcast__copy {
-        @apply pointer-events-none absolute inset-x-0 bottom-0 z-10 flex flex-col text-white;
-        gap: var(--space-l);
-        padding: var(--space-m);
-    }
-
-    /* Keep the copy to 30% of the stage. The padding is inside the box, so it
-       is added on top to make the text itself 30% wide. */
-    @screen md {
-        .podcast__copy {
-            max-width: calc(40% + 2 * var(--space-l));
-        }
+        @apply flex flex-col;
+        gap: 0.15rem;
+        padding-top: var(--space-s);
+        color: var(--color-blue);
     }
 
     .podcast__claim {
-        @apply font-semibold;
-        font-size: clamp(1.5rem, 3.2vw, 3.25rem);
-        line-height: 1.1;
+        @apply font-bold;
+        font-size: clamp(1.1rem, 1.6vw, 1.5rem);
+        line-height: 1.2;
     }
 
     .podcast__description {
-        @apply font-semibold;
-        font-size: clamp(1rem, 1.5vw, 1.5rem);
+        font-size: clamp(0.95rem, 1.3vw, 1.25rem);
+        line-height: 1.3;
     }
 
-    /* ---- Podcasts: mobile layout (matches the design) -------------------- */
-    /* Image on top with prev/next overlaid in its bottom corners, then the copy
-       BELOW the image in blue on the white section background. */
-    @media (max-width: 640px) {
-        .podcasts,
-        .podcasts:not(.podcasts--slider) {
-            display: block;
-            padding-inline: 0;
-        }
-
-        /* The image (stage) is 3:2 and spans the full slider width (100vw minus
-           the two section gutters), so its bottom sits that far below the top of
-           .podcasts — anchor the arrows there, in the bottom corners. */
-        .podcasts__nav {
-            position: absolute;
-            top: calc((100vw - 2 * var(--gutter)) * 2 / 3 - var(--nav-size) - 0.6rem);
-            z-index: 30;
-            background: transparent;
-            border-color: #fff;
-            color: #fff;
-        }
-        .podcasts__nav--prev { left: 0.6rem; }
-        .podcasts__nav--next { right: 0.6rem; }
-
-        /* Copy flows below the image, blue on white. column-reverse puts the
-           short description (eyebrow) above the big claim, as in the design. */
-        .podcast__copy {
-            position: static;
-            max-width: none;
-            flex-direction: column-reverse;
-            gap: var(--space-s);
-            padding: var(--space-m) 0 0;
-            color: var(--color-blue);
-            pointer-events: auto;
-            opacity: 1;
-        }
-    }
-
-    /* ---- Play button ------------------------------------------------------ */
-    /* video.js ships a rounded rectangle with a border; the campaign uses a
-       plain white triangle, so strip the chrome and keep just the glyph. */
-    .podcast__player.video-js .vjs-big-play-button {
-        @apply absolute z-20 border-0 bg-transparent p-0 text-white shadow-none;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        /* video.js centres with negative margins; the transform does it here. */
-        margin: 0;
-        width: auto;
-        height: auto;
-        line-height: 1;
-        font-size: clamp(3rem, 6vw, 6rem);
-        /* Slight overshoot on the way back makes the scale feel springy. */
-        transition:
-            transform 0.4s cubic-bezier(0.34, 1.4, 0.64, 1),
-            opacity 0.25s ease;
-    }
-
-    /* video.js tints the button when the *player* is hovered
-       (.video-js:hover .vjs-big-play-button). Same specificity as the rule
-       above and later in the file, so it has to be overridden explicitly —
-       otherwise a dark blue box shows up around the triangle. */
-    .podcast__player.video-js:hover .vjs-big-play-button,
-    .podcast__player.video-js .vjs-big-play-button:focus,
-    .podcast__player.video-js .vjs-big-play-button:hover {
-        @apply border-0 bg-transparent shadow-none outline-none;
-    }
-
-    /* Shrink a touch on hover instead of growing. */
-    .podcast__player.video-js .vjs-big-play-button:hover,
-    .podcast__player.video-js .vjs-big-play-button:focus-visible {
-        transform: translate(-50%, -50%) scale(0.9);
-        opacity: 0.92;
-    }
-
-    .podcast__player.video-js .vjs-big-play-button:active {
-        transform: translate(-50%, -50%) scale(0.84);
-        transition-duration: 0.12s;
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-        .podcast__player.video-js .vjs-big-play-button {
-            transition: opacity 0.25s ease;
-        }
-
-        .podcast__player.video-js .vjs-big-play-button:hover,
-        .podcast__player.video-js .vjs-big-play-button:focus-visible,
-        .podcast__player.video-js .vjs-big-play-button:active {
-            transform: translate(-50%, -50%);
-        }
-    }
-
-    .podcast__player.video-js .vjs-big-play-button .vjs-icon-placeholder::before {
-        @apply static;
-        /* Solid triangle instead of video.js' outlined play glyph. */
-        content: "";
-        display: block;
-        width: 1em;
-        height: 1.15em;
-        background-color: currentColor;
-        clip-path: polygon(8% 0%, 100% 50%, 8% 100%);
-    }
+    /* Podcast player uses the default video.js skin (control bar at the bottom,
+       always visible — see initPodcastPlayers: bigPlayButton off, inactivity
+       timeout 0). No custom big-play-button styling. */
 
     /* ---- Footer ---------------------------------------------------------- */
     /* Reserve room for the fixed mobile "Freie Stellen" bar so it can't cover
@@ -1715,4 +1609,7 @@
     display: flex;
     align-items: start;
     gap: var(--space-s);
+}
+.video-js .vjs-slider {
+    background-color: white !important;
 }

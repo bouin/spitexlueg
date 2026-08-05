@@ -26,7 +26,7 @@
                 <f:if condition="{episodeCount} > 1">
                     <button type="button" class="podcasts__nav podcasts__nav--prev"
                             data-podcast-prev aria-label="Vorherige Folge">
-                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        <svg viewBox="0 0 40.14 29.64" style="width:100%;height:auto;display:block;transform:rotate(180deg)" aria-hidden="true"><polygon points="25.32 0 23.91 1.41 36.31 13.82 0 13.82 0 15.82 36.31 15.82 23.91 28.23 25.32 29.64 40.14 14.82 25.32 0" fill="currentColor"/></svg>
                     </button>
                 </f:if>
 
@@ -44,16 +44,19 @@
                                         preload="none"
                                         playsinline
                                         data-podcast-player
-                                        <f:if condition="{episode.poster.0}">poster="{f:uri.image(image: episode.poster.0, width: '1920c', height: '1280c')}"</f:if>>
+                                        <f:if condition="{episode.poster.0}">poster="{f:uri.image(image: episode.poster.0, width: '1920c', height: '1080c')}"</f:if>>
                                         <f:for each="{episode.mediafile}" as="file">
                                             <source src="{file.publicUrl}" type="{file.mimeType}">
                                         </f:for>
                                     </video>
+
+                                    <f:comment><!-- "LUEG PODCAST" artwork, centred over the image. --></f:comment>
+                                    <span class="podcast__label" aria-hidden="true">
+                                        <img src="{f:uri.resource(path: 'Images/lueg-podcast.svg', extensionName: 'SitePackage')}" alt="">
+                                    </span>
                                 </div>
 
-                                <f:comment><!-- Copy sits OUTSIDE the stage so on mobile it can flow
-                                     below the image (the stage is overflow-hidden). On desktop CSS
-                                     re-overlays it on the lower image. --></f:comment>
+                                <f:comment><!-- Copy sits below the image (the caption). --></f:comment>
                                 <div class="podcast__copy">
                                     <f:if condition="{episode.claim}">
                                         <p class="podcast__claim font-bold">{episode.claim}</p>
@@ -68,21 +71,12 @@
                     </div>
                 </div>
 
-                    <f:comment>
-                        The label sits above the slider, not inside a slide: its text is the
-                        same for every episode, so it stays put while slides move and never
-                        disappears — not while swiping and not during playback.
-                    </f:comment>
-                    <div class="podcast__label">
-                        <span class="podcast__label-title">Podcast</span>
-                        <span class="podcast__label-sub">Spitex Region Lueg</span>
-                    </div>
                 </div>
 
                 <f:if condition="{episodeCount} > 1">
                     <button type="button" class="podcasts__nav podcasts__nav--next"
                             data-podcast-next aria-label="Nächste Folge">
-                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        <svg viewBox="0 0 40.14 29.64" style="width:100%;height:auto;display:block" aria-hidden="true"><polygon points="25.32 0 23.91 1.41 36.31 13.82 0 13.82 0 15.82 36.31 15.82 23.91 28.23 25.32 29.64 40.14 14.82 25.32 0" fill="currentColor"/></svg>
                     </button>
                 </f:if>
 
