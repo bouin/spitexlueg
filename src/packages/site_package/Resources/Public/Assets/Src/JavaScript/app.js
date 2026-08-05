@@ -295,45 +295,65 @@ function initStickyNav() {
         return;
     }
 
-    // Publish the navbar's RESTING height only. While compact the bar shrinks,
-    // and tracking that would resize the home hero (calc(100svh - --navbar-h))
-    // and jump the page — so skip updates once compact.
-    const setHeight = () => {
-        const height = navbar.offsetHeight;
-        // Always current — used by sections' scroll-margin-top so anchor links
-        // (and pasted #hash URLs) don't hide the heading under the sticky bar.
-        document.documentElement.style.setProperty('--navbar-h-now', `${height}px`);
-        // Resting only — the home hero (calc(100svh - --navbar-h)) must not
-        // resize when the bar shrinks, or the page jumps.
-        if (!navbar.classList.contains('is-compact')) {
-            document.documentElement.style.setProperty('--navbar-h', `${height}px`);
-        }
+    const sentinel = document.querySelector('[data-nav-sentinel]');
+    const spacer = document.querySelector('[data-nav-spacer]');
+
+    // The bar's RESTING height — captured whenever it is at full size (not
+    // compact), so we can size the spacer and publish --navbar-h from it even
+    // while the bar is shrunk. Starts as the current height.
+    let restingHeight = navbar.offsetHeight;
+
+    const publishHeights = () => {
+        // Current visible height → sections' scroll-margin-top, so anchor links
+        // (and pasted #hash URLs) don't hide the heading under the fixed bar.
+        document.documentElement.style.setProperty('--navbar-h-now', `${navbar.offsetHeight}px`);
+        // Resting height → the home hero (calc(100svh - --navbar-h)); must not
+        // follow the shrink or the hero would resize and the page would jump.
+        document.documentElement.style.setProperty('--navbar-h', `${restingHeight}px`);
     };
-    setHeight();
+
+    const measureResting = () => {
+        // Only trust the height as "resting" when the bar is at full size.
+        if (!navbar.classList.contains('is-compact')) {
+            restingHeight = navbar.offsetHeight;
+        }
+        publishHeights();
+    };
+    measureResting();
     if ('ResizeObserver' in window) {
-        new ResizeObserver(setHeight).observe(navbar);
+        new ResizeObserver(measureResting).observe(navbar);
     } else {
-        window.addEventListener('resize', setHeight);
+        window.addEventListener('resize', measureResting);
     }
 
-    const sentinel = document.querySelector('[data-nav-sentinel]');
     if (!sentinel) {
         return;
     }
 
-    // Two thresholds off the sentinel's position (which stays put regardless of
-    // the navbar shrinking, so there's no feedback loop):
-    //   is-stuck   at 0px  — the shadow appears (no layout change)
-    //   is-compact at 50px — padding/logo shrink, well past the stick point so
-    //                        the height change never fights the sticking.
+    // Off the sentinel's position (fixed in the flow — the navbar going fixed
+    // and shrinking never moves it, so there's no feedback loop):
+    //   top <= 0   — stuck: switch to position:fixed and let the spacer hold the
+    //                bar's old height. Height is still resting here, so the
+    //                sticky→fixed swap is seamless (same size, same spot).
+    //   top <= -50 — compact: shrink the bar. It's fixed by now, so the shrink
+    //                is out of flow and can't jump the content below it.
     const floatingBadge = document.querySelector('[data-floating-badge]');
 
     let ticking = false;
     const update = () => {
         ticking = false;
         const top = sentinel.getBoundingClientRect().top;
-        navbar.classList.toggle('is-stuck', top <= 0);
+        const stuck = top <= 0;
+
+        navbar.classList.toggle('is-stuck', stuck);
+        navbar.classList.toggle('is-fixed', stuck);
         navbar.classList.toggle('is-compact', top <= -50);
+        // Reserve the bar's resting height only while it's out of flow.
+        if (spacer) {
+            spacer.style.height = stuck ? `${restingHeight}px` : '0px';
+        }
+        publishHeights();
+
         // Slide the floating badge in once the hero (and its own badge) is gone.
         if (floatingBadge) {
             floatingBadge.classList.toggle('is-visible', top <= -200);

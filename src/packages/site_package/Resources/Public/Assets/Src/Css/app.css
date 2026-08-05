@@ -109,7 +109,7 @@
     /* Fluid type: scales with the viewport instead of jumping at breakpoints. */
     .hero__title {
         @apply font-bold uppercase text-white;
-        font-size: clamp(3.25rem, 8.5vw, 8.9rem);
+        font-size: clamp(5.25rem, 8.5vw, 8.9rem);
         line-height: 0.92;
     }
 
@@ -142,7 +142,7 @@
     .floating-badge {
         @apply fixed flex aspect-square items-center justify-center rounded-full text-center font-bold uppercase leading-tight text-white no-underline;
         background-color: var(--color-badge);
-        top: 25%;
+        top: 200px;
         right: clamp(0.75rem, 2vw, 2rem);
         width: clamp(5.25rem, 14.7vw, 14.7rem);
         font-size: clamp(0.7rem, 2.52vw, 2.6rem);
@@ -174,7 +174,24 @@
         box-shadow: 0 6px 24px rgba(0, 0, 0, 0.09);
     }
 
+    /* Once stuck, the bar switches from sticky (in flow) to fixed (out of flow)
+       so its later shrink can't reflow — and jump — the content below it. The
+       spacer below reserves its resting height while it's fixed, so nothing
+       moves at the switch. JS toggles .is-fixed and sizes the spacer. */
+    .navbar.is-fixed {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+    }
+
     .navbar-sentinel {
+        height: 0;
+    }
+
+    /* Holds the fixed navbar's place in the flow (JS sets its height). */
+    .navbar-spacer {
         height: 0;
     }
 
@@ -189,9 +206,8 @@
     }
 
     /* Compact (50px past the stick point): shrink the bar so it covers less.
-       Kept off .is-stuck so the height change never happens right at the stick
-       boundary — that was what made the menu jump. --navbar-h keeps the resting
-       value (app.js stops tracking once compact), so the hero doesn't jump. */
+       Safe to animate because by now the bar is .is-fixed (out of flow) with the
+       spacer holding its old height, so shrinking it reflows nothing below. */
     .navbar.is-compact .navbar__inner {
         padding-block: 0.6rem;
         gap: var(--space-s);
@@ -233,8 +249,10 @@
         @apply opacity-100;
     }
 
+    /* Stacked layout (below lg): the logo is centered, so center the pills too.
+       Desktop resets this to a left-aligned auto-width row (see @screen lg). */
     .pill-nav {
-        @apply flex flex-wrap items-center gap-3;
+        @apply flex w-full flex-wrap items-center justify-center gap-3;
     }
 
     .pill-nav__link {
@@ -256,6 +274,14 @@
         background-color: var(--color-spitex-green);
         border-color: var(--color-spitex-green);
         @apply text-white;
+    }
+
+    /* Desktop: pills sit left in an auto-width row (must come AFTER the base
+       .pill-nav rule so it wins the cascade at lg widths). */
+    @screen lg {
+        .pill-nav {
+            @apply w-auto justify-start;
+        }
     }
 
     /* ---- Logo ------------------------------------------------------------ */
@@ -302,7 +328,7 @@
     .section__title {
         @apply font-bold uppercase;
         color: var(--color-blue);
-        font-size: clamp(1.75rem, 3.4vw, 3.25rem);
+        font-size: clamp(1.9rem, 3.4vw, 3.25rem);
         line-height: 1.05;
     }
 
@@ -410,6 +436,11 @@
         @apply flex flex-col;
         gap: var(--space-s);
         margin-inline: var(--inset);
+    }
+    @media screen and (max-width: 660px){
+        .accordion {
+            margin-inline: 0px !important;
+        }
     }
 
     /* Colours cycle: orange, sky, purple, then repeat. */
@@ -525,7 +556,7 @@
 
     .tile__title {
         @apply font-bold uppercase;
-        font-size: clamp(0.95rem, 1.25vw, 1.3rem);
+        font-size: clamp(1.3rem, 1.25vw, 1.3rem);
         line-height: 1.1;
         margin-top: 0.4rem;
     }
@@ -579,7 +610,7 @@
         @apply overflow-hidden whitespace-nowrap font-bold uppercase;
         padding-left: 0.6rem;
         max-width: 12rem;
-        font-size: clamp(0.6rem, 0.75vw, 0.75rem);
+        font-size: clamp(0.8rem, 0.8vw, 0.75rem);
         transition: max-width 0.5s var(--gum), opacity 0.3s ease, padding 0.5s var(--gum);
     }
     .tile.is-open .tile__button-label {
@@ -624,6 +655,14 @@
         @apply m-0 list-none p-0;
         margin-inline: var(--inset);
     }
+    @media screen and (max-width: 660px){
+        .stellen {
+            margin-inline: 0px;
+        }
+        .stellen__actions {
+            padding-top: 30px;
+        }
+    }
 
     .stellen__item {
         @apply grid items-start;
@@ -654,7 +693,7 @@
     .stellen__title {
         @apply font-bold uppercase;
         color: var(--color-blue);
-        font-size: clamp(1.35rem, 2.4vw, 2.25rem);
+        font-size: clamp(1.9rem, 2.4vw, 2.25rem);
         line-height: 1.1;
         margin-top: var(--space-s);
     }
@@ -682,7 +721,7 @@
 
     .stellen__link-label {
         @apply whitespace-nowrap font-bold uppercase;
-        font-size: clamp(0.65rem, 0.8vw, 0.8rem);
+        font-size: clamp(0.8rem, 0.8vw, 0.8rem);
     }
 
     .stellen__link-icon {
@@ -865,7 +904,6 @@
         margin: 0;
         color: var(--color-blue);
         font-size: 1rem;
-        letter-spacing: 0.04em;
         pointer-events: none;
         transform-origin: left top;
         transition: transform 0.2s ease, opacity 0.2s ease;
@@ -914,8 +952,7 @@
         background-repeat: no-repeat;
         background-position: right 1.1rem center;
         background-size: 1rem;
-        font-size: clamp(0.7rem, 0.85vw, 0.85rem);
-        letter-spacing: 0.04em;
+        font-size: clamp(0.8rem, 0.85vw, 0.85rem);
         padding: 0.7rem 2.6rem 0.7rem 1.3rem;
         transition: color 0.4s ease, border-color 0.4s ease, background-color 0.4s ease;
     }
@@ -960,8 +997,7 @@
         background-position: right 1.4rem center;
         background-size: 1.15rem;
         color: var(--color-blue);
-        font-size: clamp(0.7rem, 0.85vw, 0.85rem);
-        letter-spacing: 0.06em;
+        font-size: clamp(0.9rem, 0.85vw, 0.85rem);
         padding: 0.75rem 3.2rem 0.75rem 1.7rem;
     }
     .bewerben__form input[type="submit"]:hover {

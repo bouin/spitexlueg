@@ -92,19 +92,6 @@ page {
                 as = site
             }
 
-            # {sectionMenu} — content elements of this page (colPos 0) that have
-            # "Show in section menu" (Index) ticked, in their sorted order. The
-            # Header partial maps each CType to its label + anchor, so the editor
-            # controls WHICH sections appear and in WHAT order via the backend.
-            16 = TYPO3\CMS\Frontend\DataProcessing\DatabaseQueryProcessor
-            16 {
-                table = tt_content
-                pidInList.data = page:uid
-                where = colPos = 0 AND sectionIndex = 1
-                orderBy = sorting
-                as = sectionMenu
-            }
-
             # {languagenavigation} — language switcher.
             15 = TYPO3\CMS\Frontend\DataProcessing\LanguageMenuProcessor
             15 {
@@ -210,3 +197,45 @@ lib.powermailForm {
     settings.staticTemplate = 1
 }
 
+# ---- Pill navigation (rendered in the Header partial via ---------------------
+#      <f:cObject typoscriptObjectPath="lib.sectionMenu"/>) -----------------
+# One pill per content element on this page (colPos 0) whose "Index"
+# (sectionIndex) box is ticked, in the editor's sort order. CASE maps each
+# CType to its fixed label + in-page anchor; a CType with no case renders
+# nothing, so the editor controls WHICH pills appear and in WHAT order simply
+# by (un)ticking "Index" and reordering the elements. The wrapping
+# <nav class="pill-nav"> lives in the Header partial, so this emits only <a>s.
+lib.sectionMenu = CONTENT
+lib.sectionMenu {
+    table = tt_content
+    select {
+        pidInList.data = page:uid
+        where = colPos = 0 AND sectionIndex = 1
+        orderBy = sorting
+    }
+    renderObj = CASE
+    renderObj {
+        key.field = CType
+
+        lueg_podcasts = TEXT
+        lueg_podcasts.value = <a class="pill-nav__link" href="/#podcasts">Podcasts</a>
+
+        news_pi1 = TEXT
+        news_pi1.value = <a class="pill-nav__link" href="/#freie-stellen">Freie Stellen</a>
+
+        lueg_benefits = TEXT
+        lueg_benefits.value = <a class="pill-nav__link" href="/#benefits">Benefits</a>
+
+        lueg_bewerben = TEXT
+        lueg_bewerben.value = <a class="pill-nav__link" href="/#bewerben">Direkt bewerben</a>
+
+        lueg_standorte = TEXT
+        lueg_standorte.value = <a class="pill-nav__link" href="/#standorte">Standorte</a>
+
+        lueg_ausbildung = TEXT
+        lueg_ausbildung.value = <a class="pill-nav__link" href="/#ausbildung">Ausbildung</a>
+
+        default = TEXT
+        default.value =
+    }
+}

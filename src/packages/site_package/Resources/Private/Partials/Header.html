@@ -79,16 +79,7 @@
                  label + anchor here; sections whose CType has no case are skipped,
                  so the editor controls WHICH pills show and in WHAT order. --></f:comment>
             <nav class="pill-nav" aria-label="Kampagnen-Navigation">
-                <f:for each="{sectionMenu}" as="item">
-                    <f:switch expression="{item.data.CType}">
-                        <f:case value="lueg_podcasts"><a class="pill-nav__link" href="/#podcasts">Podcasts</a></f:case>
-                        <f:case value="news_pi1"><a class="pill-nav__link" href="/#freie-stellen">Freie Stellen</a></f:case>
-                        <f:case value="lueg_benefits"><a class="pill-nav__link" href="/#benefits">Benefits</a></f:case>
-                        <f:case value="lueg_bewerben"><a class="pill-nav__link" href="/#bewerben">Direkt bewerben</a></f:case>
-                        <f:case value="lueg_standorte"><a class="pill-nav__link" href="/#standorte">Standorte</a></f:case>
-                        <f:case value="lueg_ausbildung"><a class="pill-nav__link" href="/#ausbildung">Ausbildung</a></f:case>
-                    </f:switch>
-                </f:for>
+                <f:cObject typoscriptObjectPath="lib.sectionMenu"/>
             </nav>
 
             <f:if condition="{languagenavigation -> f:count()} > 1">
@@ -104,6 +95,11 @@
         </div>
       </div>
 </div>
+
+<f:comment><!-- Reserves the navbar's height in the flow while it is fixed (once
+     stuck), so switching sticky→fixed and shrinking it never jumps the page.
+     app.js sets its height (see initStickyNav). --></f:comment>
+<div class="navbar-spacer" data-nav-spacer aria-hidden="true"></div>
 
 <f:comment><!-- Floating copy of the "Freie Stellen" badge: slides in from the
      right once the hero has scrolled away, then stays (see initFloatingBadge in
