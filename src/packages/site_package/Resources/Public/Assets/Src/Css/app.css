@@ -720,9 +720,12 @@
         border-top: 1px solid color-mix(in srgb, var(--color-blue) 25%, transparent);
     }
 
+    .stellen__body {
+        max-width: 85%;
+    }
+
     .stellen__item {
         @apply grid items-start;
-
         /* Stack elements vertically */
         grid-template-columns: minmax(0, 1fr);
         gap: var(--space-s);
@@ -738,6 +741,9 @@
         .stellen__item {
             grid-template-columns: minmax(0, 1fr);
             gap: var(--space-s);
+        }
+        .stellen__body {
+            max-width: 100%;
         }
         .stellen-detail {
             margin-inline: 0px !important;
@@ -1318,7 +1324,7 @@
        building to teal at the foot. Sits below the SVG label (z-20) and the
        floating control bar (z-30), so neither is tinted. */
     .podcast__stage::after {
-        content: "";
+        content: none;
         @apply pointer-events-none absolute inset-0 z-0;
         top: 20%;
         background: linear-gradient(180deg, rgba(127, 202, 202, 0) 0%, rgba(127, 202, 202, 0.85) 100%);
@@ -1402,6 +1408,7 @@
     /* "LUEG PODCAST" artwork, centred over the image (same on every slide). */
     .podcast__label {
         @apply pointer-events-none absolute inset-0 z-20 flex items-center justify-center;
+        display: none;
     }
     .podcast__label img {
         width: min(55%, 22rem);
