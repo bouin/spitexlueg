@@ -21,9 +21,8 @@
 
     <div class="section__inner">
         <div class="bewerben">
-
             <f:comment><!-- Left: the application process steps (editorial). --></f:comment>
-            <div class="bewerben__col bewerben__process">
+            <div class="bewerben__col bewerben__process mobile-hide">
                 <f:if condition="{data.steps_heading}">
                     <h3 class="bewerben__heading">{data.steps_heading}</h3>
                 </f:if>
@@ -42,6 +41,22 @@
             <f:comment><!-- Right: the Powermail application form (uid via constant lueg.bewerbenForm). --></f:comment>
             <div class="bewerben__col bewerben__form">
                 <f:cObject typoscriptObjectPath="lib.powermailForm" />
+            </div>
+
+            <div class="bewerben__col bewerben__process mobile-show">
+                <f:if condition="{data.steps_heading}">
+                    <h3 class="bewerben__heading">{data.steps_heading}</h3>
+                </f:if>
+                <ol class="bewerben__steps">
+                    <f:for each="{data.steps}" as="step" iteration="it">
+                        <li class="bewerben__step">
+                            <h4 class="bewerben__step-title">{it.cycle}. {step.title}</h4>
+                            <div class="bewerben__step-text richtext">
+                                <f:format.html>{step.text}</f:format.html>
+                            </div>
+                        </li>
+                    </f:for>
+                </ol>
             </div>
 
         </div>

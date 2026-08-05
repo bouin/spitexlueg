@@ -118,21 +118,17 @@
     }
 
     /* ---- "Freie Stellen" badge ------------------------------------------ */
+    /* freejobs.svg IS the badge (magenta circle + text, pre-tilted ~10deg),
+       so this only positions/sizes it — no background, text or rotation. */
     .hero__badge {
-        @apply absolute flex aspect-square items-center justify-center rounded-full text-center font-bold uppercase text-white no-underline;
-        background-color: var(--color-badge);
+        @apply absolute block no-underline;
         top: clamp(1rem, 3vw, 3.5rem);
         right: clamp(1rem, 3vw, 3.5rem);
-        width: clamp(7.5rem, 21vw, 21rem);
-        font-size: clamp(1rem, 3.6vw, 3.75rem);
-        line-height: 1.05;
+        width: clamp(7.5rem, 210px, 21rem);
         transition: transform 0.2s ease;
-        transform: rotate(-10deg);
-        &:hover {
-            transition: all .2s ease-in-out;
-        }
         z-index: 9999;
     }
+    .hero__badge img { @apply block h-auto w-full; }
 
     .hero__badge:hover {
         transform: scale(1.04);
@@ -143,23 +139,22 @@
        (JS toggles .is-visible). Sits mid-right, below the navbar (z-40 < navbar
        z-50), so it never covers the logo. */
     .floating-badge {
-        @apply fixed flex aspect-square items-center justify-center rounded-full text-center font-bold uppercase leading-tight text-white no-underline;
-        background-color: var(--color-badge);
+        @apply fixed block no-underline;
         top: 200px;
         right: clamp(0.75rem, 2vw, 2rem);
         width: clamp(5.25rem, 10.7vw, 10.7rem);
-        font-size: clamp(0.7rem, 2vw, 2rem);
         z-index: 40;
-        transform: translateY(-50%) translateX(calc(100% + 2.5rem)) rotate(-10deg);
+        transform: translateY(-50%) translateX(calc(100% + 2.5rem));
         transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
         pointer-events: none;
     }
+    .floating-badge img { @apply block h-auto w-full; }
     .floating-badge.is-visible {
-        transform: translateY(-50%) translateX(0) rotate(-10deg);
+        transform: translateY(-50%) translateX(0);
         pointer-events: auto;
     }
     .floating-badge.is-visible:hover {
-        transform: rotate(0deg) scale(1.04) translateX(0) translateY(-50%);
+        transform: translateY(-50%) translateX(0) scale(1.04);
     }
     @media (prefers-reduced-motion: reduce) {
         .floating-badge { transition: none; }
@@ -339,7 +334,7 @@
     /* Desktop: original logo size, back on the right. */
     @screen lg {
         .navbar .brand__logo {
-            height: clamp(2.75rem, 4.5vw, 4.75rem);
+            height: clamp(2.75rem, 66px, 4.75rem);
         }
     }
 
@@ -613,7 +608,7 @@
     @media screen and (max-width:1300px){
         .tile__title {
             @apply font-bold uppercase;
-            font-size: clamp(1.9rem, 1.1vw, 1.3rem);
+            font-size: clamp(1.7rem, 1.1vw, 1.3rem);
         }
     }
 
@@ -624,7 +619,7 @@
         color: #fff;
         font-size: clamp(0.8rem, 1rem, 1rem);
         line-height: 1.4;
-        opacity: 0;
+        opacity: 1;
         transform: translateY(0.6rem);
         transition: opacity 0.4s ease 0.15s, transform 0.45s var(--gum) 0.15s;
     }
@@ -639,6 +634,7 @@
     .tile__foot {
         @apply relative;
         height: var(--btn-h);
+        display: none !important;
     }
 
     /* Position via `left` (not transform), so transform is free for the
@@ -1673,6 +1669,12 @@
         gap: .5rem;
     }
 }
+.mobile-show {
+    display: none;
+}
+.mobile-hide {
+    display: block;
+}
 @media screen and (max-width: 720px){
     .tile {
         aspect-ratio: 1 / .5;
@@ -1680,5 +1682,22 @@
     .tile.is-open .tile__button {
         left: calc(98% - var(--btn-h));
         padding-inline: .35rem;
+    }
+}
+
+@media screen and (max-width: 640px){
+    .tile {
+        aspect-ratio: 1;
+    }
+}
+.tile__foot {;
+    display: none !important;
+}
+@media screen and (max-width: 820px){
+    .mobile-show {
+        display: block;
+    }
+    .mobile-hide {
+        display: none;
     }
 }
