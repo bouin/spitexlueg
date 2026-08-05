@@ -1371,6 +1371,44 @@
         font-size: clamp(1rem, 1.5vw, 1.5rem);
     }
 
+    /* ---- Podcasts: mobile layout (matches the design) -------------------- */
+    /* Image on top with prev/next overlaid in its bottom corners, then the copy
+       BELOW the image in blue on the white section background. */
+    @media (max-width: 640px) {
+        .podcasts,
+        .podcasts:not(.podcasts--slider) {
+            display: block;
+            padding-inline: 0;
+        }
+
+        /* The image (stage) is 3:2 and spans the full slider width (100vw minus
+           the two section gutters), so its bottom sits that far below the top of
+           .podcasts — anchor the arrows there, in the bottom corners. */
+        .podcasts__nav {
+            position: absolute;
+            top: calc((100vw - 2 * var(--gutter)) * 2 / 3 - var(--nav-size) - 0.6rem);
+            z-index: 30;
+            background: transparent;
+            border-color: #fff;
+            color: #fff;
+        }
+        .podcasts__nav--prev { left: 0.6rem; }
+        .podcasts__nav--next { right: 0.6rem; }
+
+        /* Copy flows below the image, blue on white. column-reverse puts the
+           short description (eyebrow) above the big claim, as in the design. */
+        .podcast__copy {
+            position: static;
+            max-width: none;
+            flex-direction: column-reverse;
+            gap: var(--space-s);
+            padding: var(--space-m) 0 0;
+            color: var(--color-blue);
+            pointer-events: auto;
+            opacity: 1;
+        }
+    }
+
     /* ---- Play button ------------------------------------------------------ */
     /* video.js ships a rounded rectangle with a border; the campaign uses a
        plain white triangle, so strip the chrome and keep just the glyph. */
