@@ -1347,25 +1347,44 @@
         @apply relative min-w-0 flex-1;
     }
 
-    /* Small screens (<=660px): beside the image the arrows steal too much width.
-       Put them in their own row ABOVE the image (in flow, not absolute), both
-       left and close together, then let the image take the full width below.
-       Placed AFTER the .podcasts__stagewrap base rule so flex-basis:100% wins
-       the cascade (otherwise flex-1 keeps the image on the arrows' row). */
+    /* Pagination dots — hidden on desktop (arrows are used there). Subtle blue
+       bullets; the active one is solid. */
+    .podcasts__dots {
+        display: none;
+    }
+    .podcasts__dots .swiper-pagination-bullet {
+        width: 0.5rem;
+        height: 0.5rem;
+        background: var(--color-blue);
+        opacity: 0.3;
+        margin: 0 0.3rem !important;
+        transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+    .podcasts__dots .swiper-pagination-bullet-active {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+
+    /* Small screens (<=660px): on a phone you swipe, so the arrows just steal
+       space — hide them and show the subtle dots above the image instead. Placed
+       AFTER the .podcasts__stagewrap base rule so flex-basis wins the cascade. */
     @media (max-width: 660px) {
         .podcasts,
         .podcasts:not(.podcasts--slider) {
             display: flex;
             flex-wrap: wrap;
             align-items: center;
-            justify-content: flex-start;
+            justify-content: center;
             gap: 0.5rem;
             padding-inline: 0;
         }
-        .podcasts__nav {
-            position: static;
-            width: 2.25rem;
+        .podcasts__nav { display: none; }
+        .podcasts__dots {
+            display: flex;
+            justify-content: center;
             order: 0;
+            flex: 0 0 100%;
+            margin-bottom: 0.25rem;
         }
         .podcasts__stagewrap {
             order: 1;

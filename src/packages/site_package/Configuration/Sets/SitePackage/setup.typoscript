@@ -218,11 +218,11 @@ lib.sectionMenu {
             ATagParams = class="pill-nav__link"
             stdWrap.htmlSpecialChars = 1
 
-            # Wyjątek dla strony /freie-stellen
+            //freie-jobs
             doNotLinkIt = 1
             doNotLinkIt {
                 if {
-                    value = /freie-stellen
+                    value = /freie-jobs
                     equals.field = slug
                 }
             }
@@ -230,7 +230,7 @@ lib.sectionMenu {
             stdWrap.wrap = <a class="pill-nav__link" href="/#freie-stellen">|</a>
             stdWrap.wrap {
                 if {
-                    value = /freie-stellen
+                    value = /freie-jobs
                     equals.field = slug
                 }
             }

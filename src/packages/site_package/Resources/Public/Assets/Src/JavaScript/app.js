@@ -88,29 +88,35 @@ async function initPodcastSliders(players) {
         return;
     }
 
-    const [{ default: Swiper }, { Navigation, Keyboard, A11y }] = await Promise.all([
+    const [{ default: Swiper }, { Navigation, Pagination, Keyboard, A11y }] = await Promise.all([
         import('swiper'),
         import('swiper/modules'),
         import('swiper/css'),
+        import('swiper/css/pagination'),
     ]);
 
     sliders.forEach((element) => {
         const frame = element.closest('[data-podcast-slider]');
         const prev = frame?.querySelector('[data-podcast-prev]');
         const next = frame?.querySelector('[data-podcast-next]');
+        const pagination = frame?.querySelector('[data-podcast-pagination]');
 
         if (!prev || !next) {
             return;
         }
 
         new Swiper(element, {
-            modules: [Navigation, Keyboard, A11y],
+            modules: [Navigation, Pagination, Keyboard, A11y],
             slidesPerView: 1,
             speed: 500,
             navigation: {
                 prevEl: prev,
                 nextEl: next,
                 disabledClass: 'is-disabled',
+            },
+            pagination: {
+                el: pagination,
+                clickable: true,
             },
             keyboard: { enabled: true },
             a11y: {
