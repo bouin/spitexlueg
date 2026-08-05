@@ -1673,3 +1673,12 @@
         gap: .5rem;
     }
 }
+@media screen and (max-width: 720px){
+    .tile {
+        aspect-ratio: 1 / .5;
+    }
+    .tile.is-open .tile__button {
+        left: calc(98% - var(--btn-h));
+        padding-inline: .35rem;
+    }
+}
