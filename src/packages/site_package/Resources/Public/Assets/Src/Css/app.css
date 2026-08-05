@@ -78,7 +78,7 @@
     .hero--home {
         height: calc(100svh - var(--navbar-h, 5rem));
         min-height: 27rem;
-        max-height: 56rem;
+        
     }
 
     /* Subpage: a shorter banner, no full-screen takeover. */
@@ -103,6 +103,13 @@
 
     .hero__slide.is-active {
         @apply opacity-100;
+    }
+
+    /* Two-image hero (no carousel): first image is desktop, second is mobile. */
+    .hero__slide--mobile { display: none; }
+    @media (max-width: 767px) {
+        .hero__slide--desktop { display: none; }
+        .hero__slide--mobile { display: block; }
     }
 
     .hero__inner {
@@ -1693,7 +1700,7 @@
     }
     .hero__title {
         font-size: 87px;
-        font-size: 63px;
+        font-size: 60px;
     }
     .hero__badge {
         width: clamp(10.5rem, 21vw, 21rem);

@@ -35,15 +35,33 @@
     <header class="site-header">
         <section class="hero {f:if(condition: isHome, then: 'hero--home', else: 'hero--sub')}">
 
-            <f:comment><!-- Slides: all media images, cross-faded by app.js --></f:comment>
-            <div class="hero__slides" data-hero-carousel>
-                <f:for each="{heroMedia}" as="image" iteration="iterix">
-                    <div class="hero__slide{f:if(condition: iterix.isFirst, then: ' is-active')}"
-                         style="background-image: url('<f:uri.image image="{image}" width="1920c" height="1280c"/>');"
-                         role="img"
-                         aria-label="{image.alternative}"></div>
-                </f:for>
-            </div>
+            <f:variable name="heroCount" value="{heroMedia -> f:count()}"/>
+            <f:if condition="{heroCount} == 2">
+                <f:then>
+                    <f:comment><!-- Exactly two images: NOT a carousel. The first is the
+                         desktop image, the second the mobile one; CSS shows one per
+                         breakpoint (.hero__slide--desktop / --mobile). --></f:comment>
+                    <div class="hero__slides">
+                        <div class="hero__slide hero__slide--desktop is-active"
+                             style="background-image: url('<f:uri.image image="{heroMedia.0}" width="1920c" height="1280c"/>');"
+                             role="img" aria-label="{heroMedia.0.alternative}"></div>
+                        <div class="hero__slide hero__slide--mobile is-active"
+                             style="background-image: url('<f:uri.image image="{heroMedia.1}" width="1280c" height="1600c"/>');"
+                             role="img" aria-label="{heroMedia.1.alternative}"></div>
+                    </div>
+                </f:then>
+                <f:else>
+                    <f:comment><!-- One or three+ images: cross-faded carousel (app.js). --></f:comment>
+                    <div class="hero__slides" data-hero-carousel>
+                        <f:for each="{heroMedia}" as="image" iteration="iterix">
+                            <div class="hero__slide{f:if(condition: iterix.isFirst, then: ' is-active')}"
+                                 style="background-image: url('<f:uri.image image="{image}" width="1920c" height="1280c"/>');"
+                                 role="img"
+                                 aria-label="{image.alternative}"></div>
+                        </f:for>
+                    </div>
+                </f:else>
+            </f:if>
 
             <a href="/#freie-stellen" class="hero__badge"><img src="{f:uri.resource(path: 'Images/freejobs.svg', extensionName: 'SitePackage')}" alt="Üsi freie Jobs"></a>
 
