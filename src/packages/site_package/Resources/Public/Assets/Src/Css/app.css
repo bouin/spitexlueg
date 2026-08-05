@@ -71,7 +71,6 @@
     .hero {
         @apply relative w-full overflow-hidden;
         background-color: var(--color-lilac);
-        border: 1px solid var(--hero-frame);
     }
 
     /* Home hero fills the screen minus the sticky navbar (its height is set as
@@ -83,15 +82,19 @@
 
     /* Subpage: a shorter banner, no full-screen takeover. */
     .hero--sub {
-        height: 38svh;
-        min-height: 14rem;
+        height: 43svh;
+        min-height: 500px;
     }
 
     /* Slides are cross-faded by app.js (see [data-hero-carousel]). */
     .hero__slides {
         @apply absolute inset-0;
     }
-
+    #c14 p,
+    #c14 * {
+        color: var(--color-blue);
+        font-size: 2.3rem;
+    }
     .hero__slide {
         @apply absolute inset-0 bg-cover bg-center bg-no-repeat opacity-0;
         transition: opacity 1s ease-in-out;
@@ -443,13 +446,15 @@
     /* ---- Intro (title left, description right) --------------------------- */
     /* Reusable two-column intro used above elements like the accordion. */
     .intro {
-        @apply grid items-start;
+        @apply grid items-end;
         gap: var(--space-m);
         grid-template-columns: 1fr;
         padding-bottom: var(--space-l);
         background: white;
     }
-
+    .intro .richtext {
+        padding-bottom: 5px;
+    }
     @screen lg {
         .intro {
             grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);

@@ -6,14 +6,16 @@
     <div class="section__inner">
         <div class="stellen-detail">
 
-            <f:link.page pageUid="1" class="stellen-detail__back">
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                <span>Alle offenen Stellen</span>
-            </f:link.page>
+            <div class="stellen-detail__meta ">
+                <f:link.page pageUid="1" class="stellen-detail__back" section="freie-stellen">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    <span>Alle offenen Stellen</span>
+                </f:link.page>
 
-            <f:for each="{newsItem.categories}" as="category">
-                <span class="stellen-detail__tag">{category.title}</span>
-            </f:for>
+                <f:for each="{newsItem.categories}" as="category">
+                    <span class="stellen-detail__tag">{category.title}</span>
+                </f:for>
+            </div>
 
             <h1 class="stellen-detail__title">{newsItem.title}</h1>
 
