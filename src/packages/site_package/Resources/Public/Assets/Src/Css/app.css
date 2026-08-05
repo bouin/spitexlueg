@@ -1408,6 +1408,13 @@
     }
 
     /* ---- Footer ---------------------------------------------------------- */
+    /* Reserve room for the fixed mobile "Freie Stellen" bar so it can't cover
+       the last footer band. app.js publishes --jobbar-h (the bar's height); it
+       is 0 on desktop where the bar is display:none, so this adds nothing there. */
+    .footer {
+        padding-bottom: var(--jobbar-h, 0px);
+    }
+
     /* Shared width-constrained container for all three footer bands. */
     .footer__inner {
         @apply mx-auto w-full;
@@ -1623,4 +1630,9 @@
 }
 .section-white-bck {
     background: white !important;
+}
+.stellen-detail__meta {
+    display: flex;
+    align-items: start;
+    gap: var(--space-s);
 }

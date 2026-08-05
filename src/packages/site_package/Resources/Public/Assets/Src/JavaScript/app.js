@@ -410,6 +410,29 @@ function initScrollSpy() {
     linkFor.forEach((_, section) => spy.observe(section));
 }
 
+/**
+ * Publishes the mobile "Freie Stellen" bar's height as --jobbar-h, so the
+ * footer can reserve that much space and the fixed bar never covers its last
+ * band. On desktop the bar is display:none (height 0), so the footer gets no
+ * extra padding there.
+ */
+function initJobbar() {
+    const bar = document.querySelector('.jobbar');
+    if (!bar) {
+        return;
+    }
+    const setHeight = () => {
+        document.documentElement.style.setProperty('--jobbar-h', `${bar.offsetHeight}px`);
+    };
+    setHeight();
+    if ('ResizeObserver' in window) {
+        new ResizeObserver(setHeight).observe(bar);
+    }
+    // Also on resize/orientation, which is when the breakpoint (and thus the
+    // bar's display) and the safe-area inset actually change.
+    window.addEventListener('resize', setHeight);
+}
+
 document.addEventListener('DOMContentLoaded', async () => {
     initHeroCarousel();
     initAccordions();
@@ -418,6 +441,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     initBewerbenForm();
     initStickyNav();
     initScrollSpy();
+    initJobbar();
     initApplyPrefill();
     const players = await initPodcastPlayers();
     await initPodcastSliders(players);
