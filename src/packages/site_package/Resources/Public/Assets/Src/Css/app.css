@@ -78,6 +78,7 @@
     .hero--home {
         height: calc(100svh - var(--navbar-h, 5rem));
         min-height: 20rem;
+        max-height: 40rem;
     }
 
     /* Subpage: a shorter banner, no full-screen takeover. */
@@ -1315,6 +1316,7 @@
     .podcast__stage::after {
         content: "";
         @apply pointer-events-none absolute inset-0 z-0;
+        top: 20%;
         background: linear-gradient(180deg, rgba(127, 202, 202, 0) 0%, rgba(127, 202, 202, 0.85) 100%);
     }
 
@@ -1346,6 +1348,32 @@
        not against the frame that also holds the arrows. */
     .podcasts__stagewrap {
         @apply relative min-w-0 flex-1;
+    }
+
+    /* Small screens (<=660px): beside the image the arrows steal too much width.
+       Put them in their own row ABOVE the image (in flow, not absolute), both
+       left and close together, then let the image take the full width below.
+       Placed AFTER the .podcasts__stagewrap base rule so flex-basis:100% wins
+       the cascade (otherwise flex-1 keeps the image on the arrows' row). */
+    @media (max-width: 660px) {
+        .podcasts,
+        .podcasts:not(.podcasts--slider) {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 0.5rem;
+            padding-inline: 0;
+        }
+        .podcasts__nav {
+            position: static;
+            width: 2.25rem;
+            order: 0;
+        }
+        .podcasts__stagewrap {
+            order: 1;
+            flex: 0 0 100%;
+        }
     }
 
     /* "LUEG PODCAST" artwork, centred over the image (same on every slide). */
@@ -1444,6 +1472,17 @@
     .footer__person-body,
     .footer__org {
         @apply text-white;
+    }
+
+    /* Stacked layout (below lg): once the org block drops under the person
+       block, centre it. On lg it sits in its own column, aligned left. */
+    .footer__org {
+        text-align: center;
+    }
+    @screen lg {
+        .footer__org {
+            text-align: left;
+        }
     }
 
     .footer__name,
@@ -1612,4 +1651,21 @@
 }
 .video-js .vjs-slider {
     background-color: white !important;
+}
+@media screen and (max-width: 566px){
+    .navbar__inner {
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+    }
+    .podcast__label img {
+        width: min(30%, 8rem);
+        height: auto;
+    }
+    .hero__title {
+        font-size: 87px;
+    }
+    .hero__badge {
+        width: clamp(12.5rem, 21vw, 21rem);
+        font-size: 34px;
+    }
 }
