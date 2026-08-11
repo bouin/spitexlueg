@@ -281,16 +281,28 @@ function initApplyPrefill() {
  * so its label stays lifted after blur (focus is handled by :focus-within).
  */
 function initBewerbenForm() {
-    document.querySelectorAll('.bewerben__form .powermail_input, .bewerben__form textarea').forEach((field) => {
+    const fields = document.querySelectorAll('.bewerben__form .powermail_input, .bewerben__form textarea');
+
+    const syncField = (field) => {
         const wrap = field.closest('.powermail_fieldwrap');
-        if (!wrap) {
-            return;
+        if (wrap) {
+            wrap.classList.toggle('has-value', field.value.trim() !== '');
         }
-        const sync = () => wrap.classList.toggle('has-value', field.value.trim() !== '');
-        field.addEventListener('input', sync);
-        field.addEventListener('change', sync);
-        sync();
+    };
+
+    fields.forEach((field) => {
+        field.addEventListener('input', () => syncField(field));
+        field.addEventListener('change', () => syncField(field));
+        syncField(field);
     });
+
+    // Back/forward navigation restores the page from the bfcache WITHOUT firing
+    // DOMContentLoaded again, yet the inputs keep their values — so the labels
+    // would sit un-lifted on top of the filled text. Re-sync on pageshow (and
+    // once after load, in case the browser autofilled) to keep them lifted.
+    const syncAll = () => fields.forEach(syncField);
+    window.addEventListener('pageshow', syncAll);
+    window.addEventListener('load', syncAll);
 }
 
 /**
