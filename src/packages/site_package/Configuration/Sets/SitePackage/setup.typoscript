@@ -169,15 +169,11 @@ plugin.tx_news {
 
 # ---- Powermail: dynamic "Stelle" select options from the News (Jobs) ---------
 # Referenced by the select field's "create_from_typoscript" = lib.powermailStellen.
-# Outputs one option per line ("Spontantbewerbung" first, then every open job).
+# Outputs one option per line: every open job first, then "Spontanbewerbung" last.
 lib.powermailStellen = COA
 lib.powermailStellen {
-    10 = TEXT
-    10.value = Spontantbewerbung
-    10.noTrimWrap = ||[\n]|
-
-    20 = CONTENT
-    20 {
+    10 = CONTENT
+    10 {
         table = tx_news_domain_model_news
         select {
             pidInList = 8
@@ -190,6 +186,10 @@ lib.powermailStellen {
             noTrimWrap = ||[\n]|
         }
     }
+
+    20 = TEXT
+    20.value = Spontanbewerbung
+    20.noTrimWrap = ||[\n]|
 }
 
 # ---- Powermail: render the configured plugin element in the "bewerben" block --
