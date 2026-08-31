@@ -913,6 +913,14 @@
     .bewerben__col h3 {
         color: var(--color-blue);
     }
+    /* Numbered process headings render smaller than the body by default —
+       match them to the text size (kept bold + blue). */
+    .bewerben__process :is(h2, h3, h4) {
+        @apply font-bold;
+        color: var(--color-blue);
+        font-size: clamp(1.2rem, 1.35vw, 1.4rem);
+        line-height: 1.2;
+    }
     .bewerben__steps {
         @apply m-0 list-none p-0;
     }
