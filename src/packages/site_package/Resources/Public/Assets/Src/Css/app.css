@@ -856,6 +856,24 @@
         margin-top: var(--space-l);
     }
 
+    /* Fixed contact block on every job detail. */
+    .stellen-detail__contact {
+        margin-top: var(--space-l);
+        color: var(--color-blue);
+    }
+    .stellen-detail__contact-title {
+        @apply font-bold uppercase;
+        font-size: clamp(1.1rem, 1.6vw, 1.5rem);
+        margin-bottom: 0.4rem;
+    }
+    .stellen-detail__contact-lines a {
+        color: var(--color-blue);
+        text-decoration: none;
+    }
+    .stellen-detail__contact-lines a:hover {
+        text-decoration: underline;
+    }
+
     /* Body copy reuses the shared .richtext scale; headings get brand blue. */
     .stellen-detail__body h3 {
         @apply font-bold uppercase;
