@@ -164,6 +164,11 @@ plugin.tx_news {
         detailPid = 3
         list.paginate.itemsPerPage = 50
         list.hidePagination = 1
+        # Jobs are ordered by the manual backend sorting (drag up/down in the
+        # Jobs folder). Needs EXT:news manualSorting=1 in the extension config
+        # (settings.php / Install Tool) so the sorting field + arrows exist.
+        orderBy = sorting
+        orderDirection = asc
     }
 }
 
