@@ -21,8 +21,8 @@
             <f:comment><!-- Bewerbungsformular: same pill as the list. Carries the job title
                  in data-stelle so the Powermail select can be pre-selected. No target yet. --></f:comment>
             <div class="stellen-detail__apply">
-                <a class="stellen__link" data-stelle="{newsItem.title}" data-stelle-uid="{newsItem.uid}"
-                   href="/#stelle={newsItem.uid}">
+                <a class="stellen__link" data-stelle="{newsItem.title}" data-stelle-slug="{newsItem.pathSegment}"
+                   href="/#stelle={newsItem.pathSegment}">
                     <span class="stellen__link-label">Bewerbungsformular</span>
                     <span class="stellen__link-icon" aria-hidden="true">
                         <svg viewBox="0 0 40.14 29.64" style="width:1.15rem;height:auto;display:block;transform:rotate(90deg)" aria-hidden="true"><polygon points="25.32 0 23.91 1.41 36.31 13.82 0 13.82 0 15.82 36.31 15.82 23.91 28.23 25.32 29.64 40.14 14.82 25.32 0" fill="currentColor"/></svg>

@@ -257,19 +257,18 @@ function initApplyPrefill() {
         window.setTimeout(flash, 500);
     };
 
-    // Cross-page: #stelle=<uid> in the hash (arrived from a job page). The UID
-    // keeps the link short; resolve it to the job title via the list's apply
-    // buttons. A hash is never sent to the server, so it avoids a query-param
-    // 404. Falls back to treating the value as the title (old title-based links).
+    // Cross-page: #stelle=<slug> in the hash (arrived from a job page). The slug
+    // keeps the link short, readable and shareable; resolve it to the job title
+    // via the list's apply buttons. A hash is never sent to the server, so it
+    // avoids a query-param 404. Falls back to treating the value as the title
+    // directly, so old title-based links keep working.
     const match = window.location.hash.match(/stelle=([^&]+)/);
     if (match) {
         const value = decodeURIComponent(match[1].replace(/\+/g, ' '));
         let title = value;
-        if (/^\d+$/.test(value)) {
-            const btn = document.querySelector('[data-stelle-uid="' + value + '"]');
-            if (btn) {
-                title = btn.getAttribute('data-stelle');
-            }
+        const btn = document.querySelector('[data-stelle-slug="' + value.replace(/"/g, '') + '"]');
+        if (btn) {
+            title = btn.getAttribute('data-stelle');
         }
         apply(title);
     }
