@@ -8,44 +8,60 @@ imports:
 editor:
   config:
     # Visible toolbar. Use '|' for a separator and '-' for a line break.
+    # NOTE: "heading" is the block-format dropdown (Paragraph / Überschrift 2…).
+    # Without it the editor gives no way to see or set whether a line is a
+    # paragraph or a heading — which is exactly what we want available here.
     toolbar:
       items:
         - undo
         - redo
         - "|"
+        - heading
+        - style
+        - "|"
         - bold
         - italic
-        - "|"
-        - style
+        - underline
+        - strikethrough
+        - subscript
+        - superscript
         - "|"
         - link
         - "|"
         - bulletedList
         - numberedList
-        - "|"
         - blockQuote
+        - alignment
+        - "|"
+        - indent
+        - outdent
         - "|"
         - insertTable
+        - horizontalLine
+        - specialCharacters
         - "|"
+        - findAndReplace
         - removeFormat
         - "|"
         - sourceEditing
 
+    # Block/paragraph formats shown in the "heading" dropdown. Each maps to its
+    # real HTML tag, so the editor label matches the output (p, h1, h2, h3, h4).
+    heading:
+      options:
+        - { model: "paragraph", title: "Paragraph" }
+        - { model: "heading1", view: "h1", title: "Überschrift 1 (H1)" }
+        - { model: "heading2", view: "h2", title: "Überschrift 2 (H2)" }
+        - { model: "heading3", view: "h3", title: "Überschrift 3 (H3)" }
+        - { model: "heading4", view: "h4", title: "Überschrift 4 (H4)" }
+
+    # Extra inline styles available in the "style" dropdown (next to "heading").
     style:
       definitions:
         - name: "Small text"
           element: "p"
           classes:
             - "text-small"
-
-    # Block/paragraph formats available in the "Styles"/heading dropdown.
-    heading:
-      options:
-        - { model: "paragraph", title: "Paragraph" }
-        - { model: "heading1", view: "h2", title: "Heading 1" }
-        - { model: "heading2", view: "h2", title: "Heading 2" }
-        - { model: "heading3", view: "h3", title: "Heading 3" }
-        - { model: "heading4", view: "h4", title: "Heading 4" }
 
     # Only allow safe, semantic links.
     link:
@@ -57,3 +73,4 @@ editor:
         - tableColumn
         - tableRow
         - mergeTableCells
+        - toggleTableCaption
