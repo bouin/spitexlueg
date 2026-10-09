@@ -11,12 +11,8 @@ styles {
 # backend (List view); this just renders it. (tt_content uid, not the form uid.)
 lueg.bewerbenElement = 13
 
-# Powermail: force the notification mail's "From" to our own domain so mail
-# providers (Gmail & co.) stop flagging it as spoofed — by default the "From"
-# is the applicant's own address. These override Powermail's empty defaults
-# because this set (lueg/site-package) is last in the site's dependencies.
-# NOTE: this only fixes the visible From. For mails to actually land (no spam
-# warning) the host must allow sending from luegjobs.ch (SPF + DKIM, or SMTP
-# through a real luegjobs.ch mailbox).
-plugin.tx_powermail.settings.receiver.overwrite.senderEmail = noreply@luegjobs.ch
-plugin.tx_powermail.settings.receiver.overwrite.senderName = Spitex Region Lueg
+# NOTE: the Powermail notification-mail "From" override is NOT done in TypoScript.
+# The flexform-configured form drops the plugin.tx_powermail...receiver.overwrite
+# subtree before it reaches the mail service, so no TypoScript/constant override
+# takes effect. It is handled in PHP instead — see
+# Classes/EventListener/PowermailReceiverMailFrom.php.
