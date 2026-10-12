@@ -9,6 +9,9 @@
 # TYPO3 system config (contains encryption key / credentials) — keep only site config
 /config/*
 !/config/sites/
+# Site config is managed per environment (edited via backend / on the server);
+# don't let git overwrite it on deploy.
+/config/sites/lueg/config.yaml
 
 # Node / frontend build (root and inside packages)
 node_modules/
