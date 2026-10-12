@@ -27,6 +27,28 @@ page {
     bodyTagCObject = TEXT
     bodyTagCObject.dataWrap = <body id="top" class="page-{field:uid} parent-page-{field:pid}">
 
+    headerData.10 = TEXT
+    headerData.10.value (
+        <!-- Google Tag Manager -->
+        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-TBDLG9XB');</script>
+        <!-- End Google Tag Manager -->
+    )
+
+    # Google Tag Manager (noscript) — Google requires this immediately after the
+    # opening <body>. page.1 is rendered before the main content (page.10), so it
+    # lands as the first thing inside <body>.
+    1 = TEXT
+    1.value (
+        <!-- Google Tag Manager (noscript) -->
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TBDLG9XB"
+        height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+        <!-- End Google Tag Manager (noscript) -->
+    )
+
     shortcutIcon = fileadmin/favicon/spitex-favicon.png
 
     # Responsive: without this, phones render at ~980px desktop width and shrink
@@ -208,6 +230,12 @@ lib.powermailForm {
     source = {$lueg.bewerbenElement}
     dontCheckPid = 1
 }
+
+# Powermail: don't append the "Marketing Informationen" block (pagefunnel /
+# page views, referer, browser language, …) to the notification mail. The
+# receiver mail only renders that block while settings.marketing.information is
+# truthy (see IsMarketingInformationActiveViewHelper).
+plugin.tx_powermail.settings.marketing.information = 0
 
 lib.sectionMenu = HMENU
 lib.sectionMenu {
