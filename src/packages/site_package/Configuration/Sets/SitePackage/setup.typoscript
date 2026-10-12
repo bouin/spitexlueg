@@ -194,6 +194,27 @@ plugin.tx_news {
     }
 }
 
+# ---- XML sitemap (EXT:seo + EXT:news) ----------------------------------------
+# The sitemap sets are pulled in via config.yaml (georgringer/news-sitemap →
+# typo3/seo-sitemap). Those read their locations from site-settings placeholders,
+# which don't resolve reliably here, so we set the final values directly (this
+# set loads last and wins).
+plugin.tx_seo.config.xmlSitemap.sitemaps {
+    # Job offers (news records) in the sitemap: stored in the "Jobs" folder
+    # (pid 8), linked through the detail page (uid 3).
+    news.config {
+        pid = 8
+        recursive = 1
+        url.pageId = 3
+    }
+
+    # Pages sitemap: drop the detail-container page (uid 3, "/freie-jobs" — it
+    # 404s when opened without a job and must NOT get no_index, or every job
+    # detail rendered through it would be de-indexed) and the thank-you page
+    # (uid 12). The actual job URLs come from the "news" sitemap above.
+    pages.config.excludePagesRecursive = 3,12
+}
+
 # ---- Powermail: dynamic "Stelle" select options from the News (Jobs) ---------
 # Referenced by the select field's "create_from_typoscript" = lib.powermailStellen.
 # Outputs one option per line: every open job first, then "Spontanbewerbung" last.

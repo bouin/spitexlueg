@@ -4,3 +4,7 @@ dependencies:
   - typo3/fluid-styled-content
   - georgringer/news
   - in2code/powermail-main
+  # Provides the XML sitemap (/sitemap.xml). news-sitemap pulls in typo3/seo-sitemap
+  # (pages sitemap) and adds the job detail pages (news records) to it. Without a
+  # sitemap set the sitemap page type (1533906435) has no TypoScript and errors out.
+  - georgringer/news-sitemap
